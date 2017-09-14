@@ -6,6 +6,9 @@ import static org.hamcrest.number.IsCloseTo.closeTo;
 
 /**
  * Class Класс для тестирования класса Treangle.
+ * @author kuznetsov.
+ * @since 15.09.17.
+ * @version 0.1.
  */
 public class TriangleTest {
     @Test

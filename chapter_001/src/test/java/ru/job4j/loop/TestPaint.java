@@ -11,7 +11,13 @@ import static org.junit.Assert.assertThat;
  */
 
 public class TestPaint {
+    /**
+     * @param line - line separator.
+     */
     private final String line = System.getProperty("line.separator");
+    /**
+     * Testing class Paint.
+     */
     @Test
     public void whenPiramidWithHeightThreeThenThreeRows() {
         Paint paint = new Paint();
@@ -19,6 +25,9 @@ public class TestPaint {
         String expected = String.format("  ^  %s ^^^ %s^^^^^%s", line, line, line);
         assertThat(result, is(expected));
     }
+    /**
+     * Testing class Paint.
+     */
     @Test
     public void whenPiramidWithHeightTwoThenTowRows() {
         Paint paint = new Paint();
@@ -26,5 +35,4 @@ public class TestPaint {
         String expected = String.format(" ^ %s^^^%s", line, line, line);
         assertThat(result, is(expected));
     }
-
 }

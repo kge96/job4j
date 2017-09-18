@@ -11,6 +11,9 @@ import static org.junit.Assert.assertThat;
  * @version 0.2.
  */
 public class MaxTest {
+    /**
+     * Testing class Max.
+     */
     @Test
     public void whenOneAndTwoThenFive() {
         Max maxim = new Max();
@@ -18,6 +21,9 @@ public class MaxTest {
         int expected = 2;
         assertThat(result, is(expected));
     }
+    /**
+     * Testing class Max.
+     */
     @Test
     public void whenOneAndFiveAndTwoThenFive() {
         Max maxim = new Max();

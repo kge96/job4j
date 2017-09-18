@@ -12,6 +12,9 @@ import static org.junit.Assert.assertThat;
  * @version 0.1.
  */
 public class CounterTest {
+    /**
+     * Testing class Counter.
+     */
     @Test
     public void whenOneAndTenThenThirty() {
         Counter c1 = new Counter();
@@ -19,6 +22,9 @@ public class CounterTest {
         int expected = 30;
         assertThat(result, is(expected));
     }
+    /**
+     * Testing class Counter.
+     */
     @Test
     public void whenTenAndOneThenThirty() {
         Counter c1 = new Counter();
@@ -26,6 +32,9 @@ public class CounterTest {
         int expected = 30;
         assertThat(result, is(expected));
     }
+    /**
+     * Testing class Counter.
+     */
     @Test
     public void whenOneAndTwoThenTwo() {
         Counter c1 = new Counter();
@@ -33,6 +42,9 @@ public class CounterTest {
         int expected = 2;
         assertThat(result, is(expected));
     }
+    /**
+     * Testing class Counter.
+     */
     @Test
     public void whenFiveAndMinesFiveThenThirty() {
         Counter c1 = new Counter();
@@ -40,6 +52,9 @@ public class CounterTest {
         int expected = -24;
         assertThat(result, is(expected));
     }
+    /**
+     * Testing class Counter.
+     */
     @Test
     public void whenZeroAndOneThenZero() {
         Counter c1 = new Counter();

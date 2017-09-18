@@ -11,6 +11,9 @@ import static org.junit.Assert.assertThat;
  * @version 0.1.
  */
 public class PointTest {
+    /**
+     * Testing class Point.
+     */
     @Test
     public void whenPointOnLineThenTrue() {
         Point a = new Point(1, 1);

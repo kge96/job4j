@@ -14,6 +14,10 @@ public class BoardTest {
      * line - определяет переход на новую строку в зависимости от ОС.
      */
     private final String line = System.getProperty("line.separator");
+
+    /**
+     * Testing class Board.
+     */
     @Test
     public void whenBoardPaintWithWidthThreeAndHeightThreeThenStringWithThreeColsAndRows() {
         Board board = new Board();
@@ -21,6 +25,9 @@ public class BoardTest {
         String expected = String.format("x x%s x %sx x%s", line, line, line);
         assertThat(result, is(expected));
     }
+    /**
+     * Testing class Board.
+     */
     @Test
     public void whenPaintBoardWithWidthFiveAndHeightFourThenStringWithFiveColsAndFourRows() {
         Board board = new Board();

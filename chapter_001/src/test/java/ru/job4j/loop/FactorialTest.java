@@ -11,6 +11,9 @@ import static org.junit.Assert.assertThat;
  * @version 0.1.
  */
 public class FactorialTest {
+    /**
+     * Testing class Factorial.
+     */
     @Test
     public void whenCalculateFactorialForFiveThenOneHundreedTwenty() {
         Factorial f1 = new Factorial();
@@ -18,6 +21,9 @@ public class FactorialTest {
         long expected = 120;
         assertThat(result, is(expected));
     }
+    /**
+     * Testing class Factorial.
+     */
     @Test
     public void whenCalculateFactorialForZeroThenOne() {
         Factorial f1 = new Factorial();
@@ -25,6 +31,9 @@ public class FactorialTest {
         long expected = 1;
         assertThat(result, is(expected));
     }
+    /**
+     * Testing class Factorial.
+     */
     @Test
     public void whenCalculateFactorialForMinusSixThenMinusOne() {
         Factorial f1 = new Factorial();

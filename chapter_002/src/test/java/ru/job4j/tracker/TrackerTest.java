@@ -49,7 +49,7 @@ public class TrackerTest {
      * Testing delete elemetn from Tracker.
      */
     @Test
-    public void whenDeleteItemThenPositionInArrayNull() {
+    public void whenDeleteItemThenLeftDisplacementItems() {
         Item item0 = new Item("test0", "testMethods1");
         Item item1 = new Item("test1", "testMethods2");
         Item item2 = new Item("test2", "testMethods1");
@@ -60,7 +60,7 @@ public class TrackerTest {
         tracker.add(item2);
         tracker.add(item3);
         tracker.delete(item2);
-        assertThat(tracker.getItems()[2] + "", is("null"));
+        assertThat(tracker.findAll()[2].getName() + "", is("test3"));
     }
 
     /**
@@ -70,17 +70,17 @@ public class TrackerTest {
     public void whenSearchElementByNameThenReturnArrayElementsWithNames() {
         Item item0 = new Item("test0", "testMethods1");
         Item item1 = new Item("test1", "testMethods2");
-        Item item2 = new Item("test2", "testMethods1");
+        Item item2 = new Item("test0", "testMethods1");
         Item item3 = new Item("test3", "testMethods2");
-        Item item5 = new Item("test5", "testMethods2");
+        Item item5 = new Item("test0", "testMethods2");
         Tracker tracker = new Tracker();
         tracker.add(item0);
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
         tracker.add(item5);
-        tracker.delete(item2);
-        assertThat(tracker.findByName("testMethods2").length, is(3));
+        int result = tracker.findByName("test0").length;
+        assertThat(result, is(3));
     }
 
     /**
@@ -125,7 +125,7 @@ public class TrackerTest {
         tracker.add(item3);
         tracker.add(item4);
         tracker.add(item5);
-        tracker.delete(item2);
-        assertThat(tracker.findById("test3").getId(), is("test3"));
+        String result = item3.getId();
+        assertThat(tracker.findById(result), is(item3));
     }
 }

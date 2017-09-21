@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
+import java.util.Random;
+
 /**
  * Class for created Tracker.
  * @author gkuznetsov.
@@ -11,10 +14,16 @@ public class Tracker {
      * Items of application.
      */
     private Item[] items = new Item[100];
+
     /**
      * Position in which add application.
      */
     private int position = 0;
+
+    /**
+     * Random number.
+     */
+    private static final Random RN = new Random();
 
     /**
      * This method add new element in array Items.
@@ -22,6 +31,7 @@ public class Tracker {
      * @return Item.
      */
     public Item add(Item item) {
+        item.setId(String.valueOf(this.generateId()));
         this.items[position++] = item;
         return item;
     }
@@ -37,7 +47,6 @@ public class Tracker {
             } else if (items[i].getId().equals(item.getId())) {
                 items[i] = item;
             }
-
         }
     }
 
@@ -46,16 +55,19 @@ public class Tracker {
      * @param item - element.
      */
     public void delete(Item item) {
-        for (int i = 0; i < this.items.length; i++) {
-            if (items[i] == null) {
-                continue;
-            }
-
+        for (int i = 0; i <= position; i++) {
             if (items[i].getId().equals(item.getId())) {
                 items[i] = null;
+                break;
             }
-
         }
+        for (int i = 0; i <= position; i++) {
+            if (items[i] == null && items[i + 1] != null && i != items.length - 1) {
+                items[i] = items[i + 1];
+                items[i + 1] = null;
+            }
+        }
+        --position;
     }
 
     /**
@@ -63,22 +75,11 @@ public class Tracker {
      * @return Item[].
      */
     public Item[] findAll() {
-        Item[] newItem;
-        int itemPosition = 0;
-        int itemCounter = 0;
-
-        for (Item itm : items) {
-            if (itm != null) {
-                itemCounter++;
-            }
+        Item[] result = new Item[position];
+        for (int i = 0; i != this.position; i++) {
+            result[i] = this.items[i];
         }
-        newItem = new Item[itemCounter];
-        for (int i = 0; i < newItem.length; i++) {
-            if (items[i] != null) {
-                newItem[itemPosition++] = items[i];
-            }
-        }
-        return newItem;
+        return result;
     }
 
     /**
@@ -87,30 +88,14 @@ public class Tracker {
      * @return Item[].
      */
     public Item[] findByName(String key) {
-        Item[] result;
-        int itemPosition = 0;
-        int itemCounter = 0;
-
-        for (Item itm : items) {
-            if (itm == null) {
-                continue;
-            }
-
-            if (itm.getName().equals(key)) {
-                itemCounter++;
+        Item[] result = new Item[position];
+        int count = 0;
+        for (int i = 0; i != this.position; i++) {
+            if (this.items[i].getName().equals(key)) {
+                result[count++] = items[i];
             }
         }
-        result = new Item[itemCounter];
-        for (int i = 0; i < this.items.length; i++) {
-            if (items[i] == null) {
-                continue;
-            }
-
-            if (items[i].getName().equals(key)) {
-                result[itemPosition++] = items[i];
-            }
-        }
-        return result;
+        return Arrays.copyOf(result, count);
     }
 
     /**
@@ -119,16 +104,14 @@ public class Tracker {
      * @return Item.
      */
     public Item findById(String id) {
-        for (int i = 0; i < this.items.length; i++) {
-            if (items[i] == null) {
-                continue;
-            }
-
-            if (items[i].getId().equals(id)) {
-                return items[i];
+        Item result = null;
+        for (Item itm : items) {
+            if (itm != null && itm.getId().equals(id)) {
+                result = itm;
+                break;
             }
         }
-        return null;
+        return result;
     }
 
     /**
@@ -137,5 +120,13 @@ public class Tracker {
      */
     public Item[] getItems() {
         return this.items;
+    }
+
+    /**
+     * Generate ID for item.
+     * @return String.
+     */
+    private String generateId() {
+        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }
 }

@@ -31,12 +31,12 @@ public class Item {
 
     /**
      * Constructor.
-     * @param id - application id.
+     * @param desc - application id.
      * @param name - application name.
      */
-    public Item(String id, String name) {
-        this.id = id;
+    public Item(String name, String desc) {
         this.name = name;
+        this.desc = desc;
         this.created = System.currentTimeMillis();
     }
     /**

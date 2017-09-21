@@ -1,7 +1,6 @@
 package ru.job4j.tracker;
 
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * Class for created Tracker.
@@ -21,17 +20,11 @@ public class Tracker {
     private int position = 0;
 
     /**
-     * Random number.
-     */
-    private static final Random RN = new Random();
-
-    /**
      * This method add new element in array Items.
      * @param item - element.
      * @return Item.
      */
     public Item add(Item item) {
-        item.setId(String.valueOf(this.generateId()));
         this.items[position++] = item;
         return item;
     }
@@ -41,11 +34,10 @@ public class Tracker {
      * @param item - element.
      */
     public void update(Item item) {
-        for (int i = 0; i < this.items.length; i++) {
-            if (items[i] == null) {
-                continue;
-            } else if (items[i].getId().equals(item.getId())) {
-                items[i] = item;
+        String id = item.getId();
+        for (int i = 0; i < position; i++) {
+            if (this.items[i].getId().equals(id)) {
+                this.items[i] = item;
             }
         }
     }
@@ -122,11 +114,5 @@ public class Tracker {
         return this.items;
     }
 
-    /**
-     * Generate ID for item.
-     * @return String.
-     */
-    private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
-    }
+
 }

@@ -40,6 +40,7 @@ public class StartUI {
      * Input.
      */
     private Input input;
+    private Tracker tracker;
     /**
      * Programm menu.
      */
@@ -57,8 +58,9 @@ public class StartUI {
      * Starting program.
      * @param input - input.
      */
-    public StartUI(Input input) {
+    public StartUI(Input input, Tracker tracker) {
         this.input = input;
+        this.tracker = tracker;
     }
 
     /**
@@ -92,15 +94,14 @@ public class StartUI {
      * Initialization program.
      */
     public void init() {
-        Tracker tracker = new Tracker();
         MenuTracker menuTracker = new MenuTracker();
         int answer = -1;
         while (answer != 6) {
-                answer = checkAnswer(input.ask(menu));
+                answer = checkAnswer(this.input.ask(menu));
                 if (answer == -1 || answer == 6) {
                     continue;
                 }
-                menuTracker.select(answer).execute(tracker, input);
+                menuTracker.select(answer).execute(this.tracker, this.input);
         }
     }
 
@@ -109,7 +110,7 @@ public class StartUI {
      * @param args - args.
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput()).init();
+        new StartUI(new ConsoleInput(), new Tracker()).init();
     }
 }
 

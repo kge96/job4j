@@ -27,7 +27,7 @@ public class EditItemAction implements Action {
             String newName = input.ask("Enter new user name");
             String newDesc = input.ask("Enter new item description");
             Item newItem = new Item(newName, newDesc);
-            item.setId(id);
+            newItem.setId(item.getId());
             tracker.update(newItem);
         }
     }

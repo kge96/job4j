@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.Random;
+
 /**
  * Class for create item of application.
  * @author gkuznetsov.
@@ -30,6 +32,10 @@ public class Item {
     private String[] comments;
 
     /**
+     * Random number.
+     */
+    private static final Random RN = new Random();
+    /**
      * Constructor.
      * @param desc - application id.
      * @param name - application name.
@@ -38,6 +44,7 @@ public class Item {
         this.name = name;
         this.desc = desc;
         this.created = System.currentTimeMillis();
+        this.id = String.valueOf(this.generateId());
     }
     /**
      * This method set description.
@@ -101,5 +108,12 @@ public class Item {
      */
     public String[] getComments() {
         return this.comments;
+    }
+    /**
+     * Generate ID for item.
+     * @return String.
+     */
+    private String generateId() {
+        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }
 }

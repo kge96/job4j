@@ -35,6 +35,24 @@ public class StubInput implements Input {
     public String ask(String question) {
         return answers[position++];
     }
+    /**
+     * Ask question and return answer.
+     * @param question - question.
+     * @param range - range of menu.
+     * @return String.
+     */
+    @Override
+    public int ask(String question, int[] range) {
+        int key = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+        return exist ? key : -1;
+    }
 
     /**
      * No operation.
@@ -42,6 +60,6 @@ public class StubInput implements Input {
      */
     @Override
     public void print(String message) {
-        //NOP
+        System.out.println(message);
     }
 }

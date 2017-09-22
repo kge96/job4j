@@ -25,6 +25,28 @@ public class ConsoleInput implements Input {
         System.out.println(question);
         return scanner.nextLine();
     }
+    /**
+     * Ask question and return answer.
+     * @param question - question.
+     * @param range - range of menu.
+     * @return String.
+     */
+    @Override
+    public int ask(String question, int[] range) throws MenuOutException {
+        int key = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int value : range) {
+           if (value == key) {
+               exist = true;
+               break;
+           }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
+    }
 
     /**
      * Print message at console.

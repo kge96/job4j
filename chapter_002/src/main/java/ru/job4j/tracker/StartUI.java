@@ -9,6 +9,10 @@ package ru.job4j.tracker;
 
 public class StartUI {
     /**
+     * Rage of menu numbers value.
+     */
+    private int[] ranges;
+    /**
      * Input.
      */
     private Input input;
@@ -32,15 +36,21 @@ public class StartUI {
     public void init() {
         MenuTracker menuTracker = new MenuTracker(this.input, this.tracker);
         int sizeMenu = menuTracker.fillActions();
+        ranges = new int[sizeMenu + 1];
+        for (int i = 0; i < ranges.length; i++) {
+            ranges[i] = i;
+        }
 
         do {
             menuTracker.showMenu();
             System.out.println(sizeMenu + ". Exit Program.");
-            int key = Integer.valueOf(input.ask("select:"));
-            if (key == 6) {
+            int selected = input.ask("select:", ranges);
+
+            if (selected == sizeMenu) {
                 break;
             }
-            menuTracker.select(key);
+
+            menuTracker.select(selected);
         } while (!"y".equals(this.input.ask("Exit?(y):")));
     }
     /**
@@ -48,7 +58,7 @@ public class StartUI {
      * @param args - args.
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }
 

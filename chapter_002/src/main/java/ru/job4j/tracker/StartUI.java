@@ -35,7 +35,27 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menuTracker = new MenuTracker(this.input, this.tracker);
-        int sizeMenu = menuTracker.fillActions();
+        menuTracker.fillActions();
+        UserAction findByIdAction = new BaseAction("Find item by ID", 5) {
+            @Override
+            public int key() {
+                return 5;
+            }
+
+            @Override
+            public void execute(Input input, Tracker tracker) {
+                String id = input.ask("Enter item ID: ");
+                Item item = tracker.findById(id);
+                if (item == null) {
+                    input.print("Item not found\n");
+                } else {
+                    input.print("Was founded:\n" + "ID: " + item.getId() + "; Name: " + item.getName() + "; Description: " + item.getDesc() + ";");
+                }
+            }
+        };
+        menuTracker.addAction(findByIdAction);
+
+        int sizeMenu = menuTracker.getMenuSize();
         ranges = new int[sizeMenu + 1];
         for (int i = 0; i < ranges.length; i++) {
             ranges[i] = i;
@@ -43,7 +63,7 @@ public class StartUI {
 
         do {
             menuTracker.showMenu();
-            System.out.println(sizeMenu + ". Exit Program.");
+            System.out.println(sizeMenu + ". Exit program.");
             int selected = input.ask("select:", ranges);
 
             if (selected == sizeMenu) {

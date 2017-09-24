@@ -21,7 +21,18 @@ public class MenuTracker {
      * Action storage.
      */
     private UserAction[] actions = new UserAction[6];
+    /**
+     * Operation position in array.
+     */
+    private int position = 0;
 
+    /**
+     * Return size of array operation.
+     * @return int.
+     */
+    public int getMenuSize() {
+        return actions.length;
+    }
     /**
      * Constructor.
      *
@@ -35,18 +46,23 @@ public class MenuTracker {
 
     /**
      * Fill the array storage with data.
-     *
-     * @return int - storage size.
      */
-    public int fillActions() {
-        this.actions[0] = new AddItem();
-        this.actions[1] = new ShowAllItems();
-        this.actions[2] = new EditItem();
-        this.actions[3] = new DeleteItem();
-        this.actions[4] = new FindItemByName();
-        this.actions[5] = new FindItemByID();
+    public void fillActions() {
+        this.actions[position++] = new AddItem("Add item", 0);
+        this.actions[position++] = new ShowAllItems("Show all items", 1);
+        this.actions[position++] = new EditItem("Edit item", 2);
+        this.actions[position++] = new DeleteItem("Delete item", 3);
+        this.actions[position++] = new FindItemByName("Find items by name", 4);
+//        this.actions[position++] = new FindItemByID("Find item by ID", position);
 
-        return actions.length;
+    }
+
+    /**
+     * Add new action.
+     * @param action - action.
+     */
+    public void addAction(UserAction action) {
+        this.actions[position++] = action;
     }
 
     /**
@@ -72,7 +88,22 @@ public class MenuTracker {
     /**
      * Inner class for add item.
      */
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
+        /**
+         * Operation number.
+         */
+        private int key;
+
+        /**
+         * Constructor.
+         * @param name - operation name.
+         * @param key - operation number.
+         */
+        AddItem(String name, int key) {
+            super(name, key);
+            this.key = key;
+        }
+
         /**
          * Get operation index.
          *
@@ -80,7 +111,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return 0;
+            return this.key;
         }
 
         /**
@@ -100,22 +131,27 @@ public class MenuTracker {
                 input.print("Error! Item " + item.getName() + "was not added!!!\n");
             }
         }
-
-        /**
-         * Print operation name in menu.
-         *
-         * @return String.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add new item.");
-        }
     }
 
     /**
      * Inner class for show all items.
      */
-    private class ShowAllItems implements UserAction {
+    private class ShowAllItems extends BaseAction {
+        /**
+         * Operation number.
+         */
+        private int key;
+
+        /**
+         * Constructor.
+         * @param name - operation name.
+         * @param key - operation number.
+         */
+        ShowAllItems(String name, int key) {
+            super(name, key);
+            this.key = key;
+        }
+
         /**
          * Get operation index.
          *
@@ -123,7 +159,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return 1;
+            return this.key;
         }
 
         /**
@@ -159,7 +195,22 @@ public class MenuTracker {
     /**
      * Inner class for edit item.
      */
-    private class EditItem implements UserAction {
+    private class EditItem extends BaseAction {
+        /**
+         * Operation number.
+         */
+        private int key;
+
+        /**
+         * Constructor.
+         * @param name - operation name.
+         * @param key - operation number.
+         */
+        EditItem(String name, int key) {
+            super(name, key);
+            this.key = key;
+        }
+
         /**
          * Get operation index.
          *
@@ -167,7 +218,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return 2;
+            return this.key;
         }
 
         /**
@@ -205,7 +256,21 @@ public class MenuTracker {
     /**
      * Inner class for delete item.
      */
-    private class DeleteItem implements UserAction {
+    private class DeleteItem extends BaseAction {
+        /**
+         * Operation number.
+         */
+        private int key;
+        /**
+         * Constructor.
+         * @param name - operation name.
+         * @param key - operation number.
+         */
+        DeleteItem(String name, int key) {
+            super(name, key);
+            this.key = key;
+        }
+
         /**
          * Get operation index.
          *
@@ -213,7 +278,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return 3;
+            return this.key;
         }
 
         /**
@@ -247,7 +312,20 @@ public class MenuTracker {
     /**
      * Inner class for searching item by name.
      */
-    private class FindItemByName implements UserAction {
+    private class FindItemByName extends BaseAction {
+        /**
+         * Operation number.
+         */
+        private int key;
+        /**
+         * Constructor.
+         * @param name - operation name.
+         * @param key - operation number.
+         */
+        FindItemByName(String name, int key) {
+            super(name, key);
+            this.key = key;
+        }
         /**
          * Get operation index.
          *
@@ -255,7 +333,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return 4;
+            return this.key;
         }
 
         /**
@@ -292,7 +370,20 @@ public class MenuTracker {
     /**
      * Inner class for item searching by ID.
      */
-    private class FindItemByID implements UserAction {
+    private class FindItemByID extends BaseAction {
+        /**
+         * Operation number.
+         */
+        private int key;
+        /**
+         * Constructor.
+         * @param name - operation name.
+         * @param key - operation number.
+         */
+        FindItemByID(String name, int key) {
+            super(name, key);
+            this.key = key;
+        }
         /**
          * Get operation index.
          *
@@ -300,7 +391,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return 5;
+            return  this.key;
         }
 
         /**

@@ -21,9 +21,9 @@ public class SpeedTest {
 
         SpeedTest sp = new SpeedTest();
 
-        System.out.println(String.format("Linked list addition - %s ms", sp.add(linkedList, 900_000)));
-        System.out.println(String.format("Array list addition - %s ms", sp.add(arrayList, 900_000)));
-        System.out.println(String.format("Tree set addition - %s ms\n", sp.add(treeSet, 900_000)));
+        System.out.println(String.format("Linked list addition - %s ms", sp.add(linkedList, 200_000)));
+        System.out.println(String.format("Array list addition - %s ms", sp.add(arrayList, 2_000_000)));
+        System.out.println(String.format("Tree set addition - %s ms\n", sp.add(treeSet, 2_000_000)));
 
         System.out.println(String.format("Array list deleting - %s ms", sp.delete(arrayList, 9_000)));
         System.out.println(String.format("Linked list deleting - %s ms", sp.delete(linkedList, 9_000)));

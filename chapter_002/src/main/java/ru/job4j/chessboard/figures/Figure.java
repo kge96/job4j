@@ -14,7 +14,7 @@ public abstract class Figure {
     /**
      * Position of this figure on the chess board.
      */
-    final Cell position;
+     final Cell position;
 
     /**
      * Constructor.

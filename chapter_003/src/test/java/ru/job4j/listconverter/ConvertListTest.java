@@ -25,7 +25,7 @@ public class ConvertListTest {
     @Test
     public void whenConvertArrayThenReturnArrayList() {
         ConvertList cl = new ConvertList();
-        int[][] arr = {{1, 2, 3},{4, 5, 6},{7, 8}};
+        int[][] arr = {{1, 2, 3}, {4, 5, 6}, {7, 8}};
         List<Integer> result = cl.toList(arr);
         List<Integer> expected = new LinkedList<>();
         for (int i = 1; i < 9; i++) {
@@ -44,7 +44,7 @@ public class ConvertListTest {
         for (int i = 1; i < 9; i++) {
             list.add(i);
         }
-        int[][] expected = {{1, 2, 3},{4, 5, 6},{7, 8, 0}};
+        int[][] expected = {{1, 2, 3}, {4, 5, 6}, {7, 8, 0}};
         int[][] result = cl.toArray(list, 3);
         assertThat(result, is(expected));
     }
@@ -58,7 +58,7 @@ public class ConvertListTest {
         for (int i = 1; i < 8; i++) {
             list.add(i);
         }
-        int[][] expected = {{1, 2, 3},{4, 5, 6},{7, 0, 0}};
+        int[][] expected = {{1, 2, 3}, {4, 5, 6}, {7, 0, 0}};
         int[][] result = cl.toArray(list, 3);
         assertThat(result, is(expected));
     }
@@ -105,7 +105,21 @@ public class ConvertListTest {
         for (int i = 1; i < 6; i++) {
             list.add(i);
         }
-        int[][] expected = {{1, 2, 3},{4, 5, 0}};
+        int[][] expected = {{1, 2}, {3, 4}, {5, 0}};
+        int[][] result = cl.toArray(list, 3);
+        assertThat(result, is(expected));
+    }
+    /**
+     * Testing convertation ArrayList to array.
+     */
+    @Test
+    public void whenConvertArrayListThenReturnArray3() {
+        ConvertList cl = new ConvertList();
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i < 4; i++) {
+            list.add(i);
+        }
+        int[][] expected = {{1}, {2}, {3}};
         int[][] result = cl.toArray(list, 3);
         assertThat(result, is(expected));
     }

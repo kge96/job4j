@@ -42,7 +42,7 @@ public class ConvertList {
             cols = list.size()/rows + 1;
         }
 
-        int[][] array = new int[cols][rows];
+        int[][] array = new int[rows][cols];
         int index = 0;
         for (int[] outer : array) {
             for (int i = 0; i < outer.length; i++) {

@@ -62,4 +62,37 @@ public class ConvertListTest {
         int[][] result = cl.toArray(list, 3);
         assertThat(result, is(expected));
     }
+
+    /**
+     * Testing convert list of integer arrays to list of integer values from arrays.
+     */
+    @Test
+    public void whenConvertListOfArraysThenListOfIntegerValues() {
+        ConvertList convertList = new ConvertList();
+        ArrayList<int[]> list = new ArrayList<>();
+        list.add(new int[]{1, 2});
+        list.add(new int[]{3, 4, 5});
+        List result = convertList.convert(list);
+        List<Integer> expected = new ArrayList<>();
+        for(int i = 1; i < 6; i++) {
+            expected.add(i);
+        }
+        assertThat(result, is(expected));
+    }
+    /**
+     * Testing convert list of integer arrays to list of integer values from arrays.
+     */
+    @Test
+    public void whenConvertListOfArraysThenListOfIntegerValues2() {
+        ConvertList convertList = new ConvertList();
+        ArrayList<int[]> list = new ArrayList<>();
+        list.add(new int[]{1});
+        list.add(new int[]{});
+        List result = convertList.convert(list);
+        List<Integer> expected = new ArrayList<>();
+        for(int i = 1; i < 2; i++) {
+            expected.add(i);
+        }
+        assertThat(result, is(expected));
+    }
 }

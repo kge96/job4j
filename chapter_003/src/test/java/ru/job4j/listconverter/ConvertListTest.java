@@ -95,4 +95,18 @@ public class ConvertListTest {
         }
         assertThat(result, is(expected));
     }
+    /**
+     * Testing convertation ArrayList to array.
+     */
+    @Test
+    public void whenConvertArrayListThenReturnArray2() {
+        ConvertList cl = new ConvertList();
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i < 6; i++) {
+            list.add(i);
+        }
+        int[][] expected = {{1, 2, 3},{4, 5, 0}};
+        int[][] result = cl.toArray(list, 3);
+        assertThat(result, is(expected));
+    }
 }

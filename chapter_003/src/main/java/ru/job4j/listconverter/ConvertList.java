@@ -45,7 +45,7 @@ public class ConvertList {
         int[][] array = new int[cols][rows];
         int index = 0;
         for (int[] outer : array) {
-            for (int i = 0; i < array.length; i++) {
+            for (int i = 0; i < outer.length; i++) {
                 if (index > list.size() - 1) {
                     outer[i] = 0;
                 } else {

@@ -56,7 +56,7 @@ public class Tracker {
     public void delete(Item item) {
         Iterator<Item> it = items.iterator();
         while (it.hasNext()) {
-            if(it.next().getId().equals(item.getId())) {
+            if (it.next().getId().equals(item.getId())) {
                 it.remove();
                 break;
             }

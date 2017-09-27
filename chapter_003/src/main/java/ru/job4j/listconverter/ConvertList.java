@@ -43,13 +43,15 @@ public class ConvertList {
         }
 
         int[][] array = new int[rows][cols];
-        int index = 0;
+        int listIndex = 0;
+        int arrIndex;
         for (int[] outer : array) {
-            for (int i = 0; i < outer.length; i++) {
-                if (index > list.size() - 1) {
-                    outer[i] = 0;
+            arrIndex = 0;
+            for (int i : outer) {
+                if (listIndex > list.size() - 1) {
+                    outer[arrIndex++] = 0;
                 } else {
-                   outer[i] = list.get(index++);
+                    outer[arrIndex++] = list.get(listIndex++);
                 }
             }
         }

@@ -1,6 +1,9 @@
 package ru.job4j.listtomapconverter;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Class for sorting.
@@ -25,16 +28,11 @@ public class SortUser {
 
     /**
      * Sorted list by name.
-     * @param list - origin list.
-     * @return List - sorted list.
+     * @param list origin list.
+     * @return List.
      */
-    public List<User>sortNameLength(List<User> list) {
-       list.sort(new Comparator<User>() {
-           @Override
-           public int compare(User o1, User o2) {
-               return o2.getName().compareTo(o1.getName());
-           }
-       });
+    public List<User> sortNameLength(List<User> list) {
+       list.sort((o1, o2) -> o2.getName().compareTo(o1.getName()));
         return list;
     }
 

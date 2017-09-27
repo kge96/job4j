@@ -74,7 +74,7 @@ public class ConvertListTest {
         list.add(new int[]{3, 4, 5});
         List result = convertList.convert(list);
         List<Integer> expected = new ArrayList<>();
-        for(int i = 1; i < 6; i++) {
+        for (int i = 1; i < 6; i++) {
             expected.add(i);
         }
         assertThat(result, is(expected));
@@ -90,7 +90,7 @@ public class ConvertListTest {
         list.add(new int[]{});
         List result = convertList.convert(list);
         List<Integer> expected = new ArrayList<>();
-        for(int i = 1; i < 2; i++) {
+        for (int i = 1; i < 2; i++) {
             expected.add(i);
         }
         assertThat(result, is(expected));

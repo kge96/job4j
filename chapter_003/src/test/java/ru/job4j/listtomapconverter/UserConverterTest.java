@@ -2,7 +2,14 @@ package ru.job4j.listtomapconverter;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Set;
+
+
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -23,7 +30,7 @@ public class UserConverterTest {
         for (int i = 1; i < 6; i++) {
             String name = String.format("Name %s", i);
             String city = String.format("City %s", i);
-            userList.add(new User(i,i+20, name, city));
+            userList.add(new User(i, i + 20, name, city));
         }
         UserConvert convert = new UserConvert();
         Map<Integer, User> result = convert.process(userList);
@@ -32,7 +39,7 @@ public class UserConverterTest {
         for (int i = 1; i < 6; i++) {
             String name = String.format("Name %s", i);
             String city = String.format("City %s", i);
-            expected.put(i, new User(i,i+20, name, city));
+            expected.put(i, new User(i, i + 20, name, city));
         }
         assertThat(result, is(expected));
     }
@@ -45,7 +52,7 @@ public class UserConverterTest {
         for (int i = 1; i < 6; i++) {
             String name = String.format("Name %s", i);
             String city = String.format("City %s", i);
-            userList.add(new User(i, i+20, name, city));
+            userList.add(new User(i, i + 20, name, city));
         }
         UserConvert convert = new UserConvert();
         Map<Integer, User> result = convert.process(userList);
@@ -54,7 +61,7 @@ public class UserConverterTest {
         for (int i = 1; i < 6; i++) {
             String name = String.format("Name %s", i);
             String city = String.format("City %s", i);
-            expected.put(i, new User(i,i+20, name, city));
+            expected.put(i, new User(i, i + 20, name, city));
         }
         assertThat(result, is(expected));
     }
@@ -67,12 +74,12 @@ public class UserConverterTest {
         for (int i = 1; i < 4; i++) {
             String name = String.format("Name %s", i);
             String city = String.format("City %s", i);
-            userList.add(new User(i,i+20, name, city));
+            userList.add(new User(i, i + 20, name, city));
         }
         for (int i = 1; i < 4; i++) {
             String name = String.format("Name %s", i + 2);
             String city = String.format("City %s", i + 2);
-            userList.add(new User(i,i+20, name, city));
+            userList.add(new User(i, i + 20, name, city));
         }
         UserConvert convert = new UserConvert();
         Map<Integer, User> result = convert.process(userList);
@@ -81,7 +88,7 @@ public class UserConverterTest {
         for (int i = 1; i < 4; i++) {
             String name = String.format("Name %s", i + 2);
             String city = String.format("City %s", i + 2);
-            expected.put(i, new User(i,i+20, name, city));
+            expected.put(i, new User(i, i + 20, name, city));
         }
         assertThat(result, is(expected));
     }
@@ -90,12 +97,12 @@ public class UserConverterTest {
      * Testing user sort.
      */
     @Test
-    public void whenUserListtoSortThenSortedTreeSet() {
+    public void whenUserListToSortThenSortedTreeSet() {
         List<User> userList = new LinkedList<>();
         for (int i = 1; i < 6; i++) {
             String name = String.format("Name %s", i);
             String city = String.format("City %s", i);
-            userList.add(new User(i,i+20, name, city));
+            userList.add(new User(i, i + 20, name, city));
         }
         userList.add(new User(0, 15, "Vasya", "Bobruisk"));
         SortUser sortUser = new SortUser();

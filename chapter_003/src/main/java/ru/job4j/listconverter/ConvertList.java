@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Class
+ * Class for converting list.
  *
  * @author gkuznetsov.
  * @version 0.1.
@@ -20,7 +20,7 @@ public class ConvertList {
     public List<Integer> toList(int[][] array) {
         List<Integer> list = new ArrayList<>();
         for (int[] outer : array) {
-            for(int inner : outer) {
+            for (int inner : outer) {
                 list.add(inner);
             }
         }
@@ -33,13 +33,13 @@ public class ConvertList {
      * @param rows - count of lines in array.
      * @return int[][] - array.
      */
-    public int[][] toArray (List<Integer> list, int rows) {
+    public int[][] toArray(List<Integer> list, int rows) {
         int cols;
 
         if (list.size() % rows == 0) {
-            cols = list.size()/rows;
+            cols = list.size() / rows;
         } else {
-            cols = list.size()/rows + 1;
+            cols = list.size() / rows + 1;
         }
 
         int[][] array = new int[rows][cols];

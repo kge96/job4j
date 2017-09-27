@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Class
+ * Class for convert user List to user Map.
  *
  * @author gkuznetsov.
  * @version 0.1.

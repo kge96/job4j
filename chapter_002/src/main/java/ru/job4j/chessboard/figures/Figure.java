@@ -12,10 +12,17 @@ import ru.job4j.chessboard.chessexeptions.ImpossibleMoveException;
  */
 public abstract class Figure {
     /**
+     * Get cell.
+     * @return Cell.
+     */
+    public Cell getCell() {
+        return position;
+    }
+
+    /**
      * Position of this figure on the chess board.
      */
-     final Cell position;
-
+     private final Cell position;
     /**
      * Constructor.
      * @param position - figure position.

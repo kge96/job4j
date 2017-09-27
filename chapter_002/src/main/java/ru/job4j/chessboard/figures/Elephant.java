@@ -29,11 +29,11 @@ public class Elephant extends Figure {
      */
     @Override
     public Cell[] way(Cell dist) throws ImpossibleMoveException {
-        int thisX = this.position.getPosition()[0];
-        int thisY = this.position.getPosition()[1];
+        int thisX = this.getCell().getPosition()[0];
+        int thisY = this.getCell().getPosition()[1];
         int distX = dist.getPosition()[0];
         int distY = dist.getPosition()[1];
-        Board board = this.position.getBoard();
+        Board board = this.getCell().getBoard();
         Cell[] cells;
 
         boolean canGo = Math.abs(thisX - distX) == Math.abs(thisY - distY);

@@ -21,7 +21,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "User 1", "description for user 1", "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("User 1"));
+        assertThat(tracker.findAll().get(0).getName(), is("User 1"));
     }
 
     /**
@@ -47,7 +47,7 @@ public class StartUITest {
         String id = item.getId();
         Input input = new StubInput(new String[]{"3", id, "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("User-2"));
+        assertThat(tracker.findAll().get(0).getName(), is("User-2"));
     }
 
     /**
@@ -60,7 +60,7 @@ public class StartUITest {
         String id = item.getId();
         Input input = new StubInput(new String[]{"4", id, "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getId(), is(id));
+        assertThat(tracker.findAll().get(0).getId(), is(id));
     }
 
     /**
@@ -75,6 +75,6 @@ public class StartUITest {
         tracker.add(new Item("User-123", "Description"));
         Input input = new StubInput(new String[]{"5", "User-121", "y"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findByName("User-121")[1].getName(), is("User-121"));
+        assertThat(tracker.findByName("User-121").get(1).getName(), is("User-121"));
     }
 }

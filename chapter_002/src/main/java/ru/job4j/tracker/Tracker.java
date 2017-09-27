@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Class for created Tracker.
@@ -12,12 +13,8 @@ public class Tracker {
     /**
      * Items of application.
      */
-    private Item[] items = new Item[100];
+    private ArrayList<Item> items = new ArrayList<>();
 
-    /**
-     * Position in which add application.
-     */
-    private int position = 0;
 
     /**
      * This method add new element in array Items.
@@ -25,7 +22,7 @@ public class Tracker {
      * @return Item.
      */
     public Item add(Item item) {
-        this.items[position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -35,11 +32,21 @@ public class Tracker {
      */
     public void update(Item item) {
         String id = item.getId();
-        for (int i = 0; i < position; i++) {
-            if (this.items[i].getId().equals(id)) {
-                this.items[i] = item;
+        for (int i = 0; i < items.size(); i++) {
+            if (this.items.get(i).getId().equals(id)) {
+                items.set(i, item);
+                break;
             }
         }
+
+//        for (int i = 0; i < position; i++) {
+////            if (this.items[i].getId().equals(id)) {
+////                this.items[i] = item;
+////            }
+//            if (this.items.get(i).getId().equals(id)) {
+//                this.items.add(i, item);
+//            }
+//        }
     }
 
     /**
@@ -47,29 +54,25 @@ public class Tracker {
      * @param item - element.
      */
     public void delete(Item item) {
-        for (int i = 0; i <= position; i++) {
-            if (items[i].getId().equals(item.getId())) {
-                items[i] = null;
+        Iterator<Item> it = items.iterator();
+        while (it.hasNext()) {
+            if(it.next().getId().equals(item.getId())) {
+                it.remove();
                 break;
             }
         }
-        for (int i = 0; i <= position; i++) {
-            if (items[i] == null && items[i + 1] != null && i != items.length - 1) {
-                items[i] = items[i + 1];
-                items[i + 1] = null;
-            }
-        }
-        --position;
     }
 
     /**
      * This method find all elements.
      * @return Item[].
      */
-    public Item[] findAll() {
-        Item[] result = new Item[position];
-        for (int i = 0; i != this.position; i++) {
-            result[i] = this.items[i];
+    public ArrayList<Item> findAll() {
+        ArrayList<Item> result = new ArrayList<>();
+        for (Item itm : items) {
+            if (itm != null) {
+                result.add(itm);
+            }
         }
         return result;
     }
@@ -79,15 +82,14 @@ public class Tracker {
      * @param key - name of element.
      * @return Item[].
      */
-    public Item[] findByName(String key) {
-        Item[] result = new Item[position];
-        int count = 0;
-        for (int i = 0; i != this.position; i++) {
-            if (this.items[i].getName().equals(key)) {
-                result[count++] = items[i];
+    public ArrayList<Item> findByName(String key) {
+        ArrayList<Item> result = new ArrayList<>();
+        for (Item itm : items) {
+            if (itm.getName().equals(key)) {
+                result.add(itm);
             }
         }
-        return Arrays.copyOf(result, count);
+        return result;
     }
 
     /**
@@ -105,14 +107,4 @@ public class Tracker {
         }
         return result;
     }
-
-    /**
-     * This method return application array with null elements.
-     * @return Item[].
-     */
-    public Item[] getItems() {
-        return this.items;
-    }
-
-
 }

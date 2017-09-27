@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
 
+import java.util.ArrayList;
+
 /**
  * Class for select action.
  *
@@ -20,18 +22,18 @@ public class MenuTracker {
     /**
      * Action storage.
      */
-    private UserAction[] actions = new UserAction[6];
+    private ArrayList<UserAction> actions = new ArrayList<>();
     /**
      * Operation position in array.
      */
-    private int position = 0;
+    //private int position = 0;
 
     /**
      * Return size of array operation.
      * @return int.
      */
     public int getMenuSize() {
-        return actions.length;
+        return actions.size();
     }
     /**
      * Constructor.
@@ -48,12 +50,12 @@ public class MenuTracker {
      * Fill the array storage with data.
      */
     public void fillActions() {
-        this.actions[position++] = new AddItem("Add item", 0);
-        this.actions[position++] = new ShowAllItems("Show all items", 1);
-        this.actions[position++] = new EditItem("Edit item", 2);
-        this.actions[position++] = new DeleteItem("Delete item", 3);
-        this.actions[position++] = new FindItemByName("Find items by name", 4);
-//        this.actions[position++] = new FindItemByID("Find item by ID", position);
+        this.actions.add(new AddItem("Add item", 0));
+        this.actions.add(new ShowAllItems("Show all items", 1));
+        this.actions.add(new EditItem("Edit item", 2));
+        this.actions.add(new DeleteItem("Delete item", 3));
+        this.actions.add(new FindItemByName("Find items by name", 4));
+//        this.actions.add(new FindItemByID("Find item by ID", position));
 
     }
 
@@ -62,7 +64,7 @@ public class MenuTracker {
      * @param action - action.
      */
     public void addAction(UserAction action) {
-        this.actions[position++] = action;
+        this.actions.add(action);
     }
 
     /**
@@ -71,7 +73,7 @@ public class MenuTracker {
      * @param key - index of action.
      */
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     /**
@@ -170,13 +172,13 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            Item[] elements = tracker.findAll();
-            if (elements.length == 0) {
+            ArrayList<Item> items = tracker.findAll();
+            if (items.size() == 0) {
                 input.print("Does't find any items\n");
             } else {
-                input.print("Was find " + elements.length + " items:\n");
+                input.print("Was find " + items.size() + " items:\n");
             }
-            for (Item item : elements) {
+            for (Item item : items) {
                 input.print(String.format("ID: %s;  Name: %s; Description: %s;", item.getId(), item.getName(), item.getDesc()));
             }
         }
@@ -345,11 +347,11 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Enter user name: ");
-            Item[] items = tracker.findByName(name);
-            if (items.length == 0) {
+            ArrayList<Item> items = tracker.findByName(name);
+            if (items.size() == 0) {
                 input.print("Item not found\n");
             } else {
-                input.print("Was founded " + items.length + " items: ");
+                input.print("Was founded " + items.size() + " items: ");
                 for (Item item : items) {
                     input.print(String.format("ID: %s;  Name: %s; Description: %s;", item.getId(), item.getName(), item.getDesc()));
                 }

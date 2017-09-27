@@ -103,4 +103,34 @@ public class UserConverterTest {
 
         assertThat(result.iterator().next().getAge(), is(15));
     }
+    /**
+     * Testing user sort by name.
+     */
+    @Test
+    public void whenSortListByNameLengthThenSortedListByName() {
+        List<User> userList = new LinkedList<>();
+        userList.add(new User(0, 15, "Kit", "Bobruisk"));
+        userList.add(new User(1, 45, "Gorg", "Bobruisk"));
+        userList.add(new User(2, 38, "Alexander", "Bobruisk"));
+        userList.add(new User(3, 22, "Boris", "Bobruisk"));
+        SortUser sortUser = new SortUser();
+
+        List<User> result = sortUser.sortNameLength(userList);
+        assertThat(result.get(0).getName(), is("Kit"));
+    }
+    /**
+     * Testing user sort by name than age.
+     */
+    @Test
+    public void whenSortListByNameLengthAndAgeThenSortedListByName() {
+        List<User> userList = new LinkedList<>();
+        userList.add(new User(1, 45, "Ivan", "Bobruisk"));
+        userList.add(new User(2, 38, "Sergey", "Bobruisk"));
+        userList.add(new User(0, 15, "Ivan", "Bobruisk"));
+        userList.add(new User(3, 22, "Sergey", "Bobruisk"));
+        SortUser sortUser = new SortUser();
+        List<User> result = sortUser.sortByAllFields(userList);
+        assertThat(result.get(0).getId(), is(0));
+    }
 }
+

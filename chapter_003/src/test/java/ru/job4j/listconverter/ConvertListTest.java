@@ -123,4 +123,24 @@ public class ConvertListTest {
         int[][] result = cl.toArray(list, 3);
         assertThat(result, is(expected));
     }
+    /**
+     * Testing convertation LinkedList with null value to array.
+     */
+    @Test
+    public void whenConvertLinkedListWithNullValueThenReturnArray() {
+        ConvertList cl = new ConvertList();
+        List<Integer> list = new ArrayList<>();
+       list.add(1);
+       list.add(null);
+       list.add(3);
+       list.add(4);
+       list.add(null);
+       list.add(6);
+       list.add(7);
+       list.add(8);
+        int[][] expected = {{1, 0, 3}, {4, 0, 6}, {7, 8, 0}};
+        int[][] result = cl.toArray(list, 3);
+        assertThat(result, is(expected));
+    }
+
 }

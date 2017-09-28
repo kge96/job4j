@@ -1,7 +1,7 @@
-package ru.job4j.Bank;
+package ru.job4j.bank;
 
 /**
- * Class
+ * Class for create user account.
  *
  * @author gkuznetsov.
  * @version 0.1.
@@ -11,11 +11,11 @@ public class Account {
     /**
      * Amount of money.
      */
-    double value;
+    private double value;
     /**
-     * Bank account requisites.
+     * bank account requisites.
      */
-    long requisites;
+    private long requisites;
 
     /**
      * Constructor.
@@ -35,13 +35,17 @@ public class Account {
         return value;
     }
 
+    /**
+     * Set amount of money.
+     * @param value - value.
+     */
     public void setValue(double value) {
         this.value = value;
     }
 
     /**
-     * Get account requisites
-
+     * Get account requisites.
+     *
      * @return long.
      */
     public long getRequisites() {

@@ -1,12 +1,7 @@
-package ru.job4j.BankDataTest;
+package ru.job4j.bank;
 
 import org.junit.Test;
-import ru.job4j.Bank.Account;
-import ru.job4j.Bank.BankData;
-import ru.job4j.Bank.User;
 
-import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

@@ -1,6 +1,11 @@
-package ru.job4j.Bank;
+package ru.job4j.bank;
 
-import java.util.*;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.LinkedList;
 
 /**
  * Class for data management.
@@ -17,7 +22,7 @@ public class BankData {
     /**
      * Data storage iterator.
      */
-    private Iterator <Map.Entry<User, List<Account>>> itr = dataBank.entrySet().iterator();
+    private Iterator<Map.Entry<User, List<Account>>> itr = dataBank.entrySet().iterator();
 
 
     /**

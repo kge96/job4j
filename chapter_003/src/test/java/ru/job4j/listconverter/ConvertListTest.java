@@ -142,5 +142,4 @@ public class ConvertListTest {
         int[][] result = cl.toArray(list, 3);
         assertThat(result, is(expected));
     }
-
 }

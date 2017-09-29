@@ -45,7 +45,7 @@ public class User implements Comparable<User> {
      * @return int.
      */
     public int getId() {
-        return id;
+        return this.id;
     }
 
     /**
@@ -53,7 +53,7 @@ public class User implements Comparable<User> {
      * @return String.
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -61,7 +61,7 @@ public class User implements Comparable<User> {
      * @return int.
      */
     public int getAge() {
-        return age;
+        return this.age;
     }
 
     /**
@@ -69,12 +69,23 @@ public class User implements Comparable<User> {
      * @return String.
      */
     public String getCity() {
-        return city;
+        return this.city;
     }
 
     /**
-     *Equals.
+     * Comparator.
      * @param o - object.
+     * @return int.
+     */
+    @Override
+    public int compareTo(User o) {
+        int result = Integer.compare(this.age, o.getAge());
+        return (result == 0) ? Integer.compare(this.id, o.getId()) : result;
+    }
+
+    /**
+     * Compare objects.
+     * @param o - original object.
      * @return boolean.
      */
     @Override
@@ -85,33 +96,23 @@ public class User implements Comparable<User> {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         User user = (User) o;
 
-        if (id != user.id) {
+        if (this.id != user.getId()) {
             return false;
         }
-        if (!name.equals(user.name)) {
-            return false;
-        }
-        return city.equals(user.city);
+        return this.name != null ? this.name.equals(user.getName()) : user.getName() == null;
     }
 
     /**
-     * Comparator.
-     * @param o - object.
+     * Hash code.
      * @return int.
      */
-    @Override
-    public int compareTo(User o) {
-        return (this.age < o.getAge()) ? -1 : (this.age > o.age) ? 1 : 0;
-    }
-
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + age;
         return result;
     }
 }

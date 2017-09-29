@@ -71,7 +71,6 @@ public class ConvertList {
             for (int i : arr) {
                 result.add(i);
             }
-
         }
         return result;
     }

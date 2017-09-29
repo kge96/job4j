@@ -139,5 +139,23 @@ public class UserConverterTest {
         List<User> result = sortUser.sortByAllFields(userList);
         assertThat(result.get(0).getId(), is(0));
     }
+    /**
+     * Testing user sort by age. If equals sort by name.
+     */
+    @Test
+    public void whenSortListByNameLengthAndAgeThenSortedListByName2() {
+        List<User> userList = new LinkedList<>();
+        userList.add(new User(1, 15, "Ivan", "Bobruisk"));
+        userList.add(new User(2, 38, "Sergey", "Bobruisk"));
+        userList.add(new User(3, 45, "Ivan", "Bobruisk"));
+        userList.add(new User(4, 15, "Gans", "Bobruis"));
+
+        System.out.println(userList.size());
+
+        SortUser sortUser = new SortUser();
+        Set<User> result = sortUser.sort(userList);
+
+        assertThat(result.iterator().next(), is(userList.get(0)));
+    }
 }
 

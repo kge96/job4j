@@ -84,30 +84,8 @@ public class BankData {
      */
     public boolean transferMoney(User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) {
         boolean result = false;
-        Account src = null;
-        Account dst = null;
-
-        if (srcUser.equals(dstUser)) {
-            for (Account account : this.dataBank.get(srcUser)) {
-                if (account.equals(srcAccount)) {
-                    src = account;
-                }
-                if (account.equals(dstAccount)) {
-                    dst = account;
-                }
-            }
-        } else {
-            for (Account account : this.dataBank.get(srcUser)) {
-                if (account.equals(srcAccount)) {
-                    src = account;
-                }
-            }
-            for (Account account : this.dataBank.get(dstUser)) {
-                if (account.equals(dstAccount)) {
-                    dst = account;
-                }
-            }
-        }
+        Account src = findAccount(srcUser, srcAccount);
+        Account dst = findAccount(dstUser, dstAccount);
 
         if (src != null && dst != null && src.getValue() > amount) {
             src.setValue(src.getValue() - amount);
@@ -123,5 +101,23 @@ public class BankData {
      */
     public Map<User, List<Account>> getDataBank() {
         return this.dataBank;
+    }
+
+    /**
+     * Find user account.
+     * @param user - the user whose account it is necessary to find.
+     * @param account - the account which necessary to find.
+     * @return Account.
+     */
+    public Account findAccount(User user, Account account) {
+        List<Account> userAccounts = this.dataBank.get(user);
+        Account result = null;
+        for (Account elem : userAccounts) {
+            if (account.equals(elem)) {
+                result = elem;
+                break;
+            }
+        }
+        return result;
     }
 }

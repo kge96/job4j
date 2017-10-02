@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
  */
 public class TwodimensionalArrayIteratorTest {
     /**
-     * Testing method next().
+     * Testing next() method.
      */
     @Test
     public void whenGetNextCallShouldPointerForward() {
@@ -30,7 +30,7 @@ public class TwodimensionalArrayIteratorTest {
     }
 
     /**
-     * Testing method hasNext().
+     * Testing hasNext() method.
      */
     @Test
     public void whenCheckNextPositionShouldReturnContantValue() {

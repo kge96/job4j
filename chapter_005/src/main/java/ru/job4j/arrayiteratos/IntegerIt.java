@@ -44,4 +44,5 @@ public class IntegerIt implements Iterator<Integer> {
     public Integer next() {
         return array[index++];
     }
+
 }

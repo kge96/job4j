@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
  */
 public class StoreTest {
     /**
-     * Testing add element.
+     * Testing SimpleContainer element.
      */
     @Test
     public void whenAddNewItemInUserStorageThenItAdded() {

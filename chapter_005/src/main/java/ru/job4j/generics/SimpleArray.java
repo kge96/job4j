@@ -43,7 +43,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
     /**
      * Add elem to array.
-     * @param value - value which need add to array.
+     * @param value - value which need SimpleContainer to array.
      */
     public void add(T value) {
         if (this.index > this.array.length - 1) {

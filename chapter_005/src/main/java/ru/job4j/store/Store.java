@@ -10,7 +10,7 @@ package ru.job4j.store;
  */
 public interface Store<T extends Base> {
     /**
-     * Must add new item.
+     * Must SimpleContainer new item.
      * @param model - item.
      * @return T - adder element.
      */

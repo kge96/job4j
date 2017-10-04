@@ -1,6 +1,8 @@
 package ru.job4j.generics;
 
+
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * Class for creating simple array.
@@ -10,7 +12,7 @@ import java.util.Arrays;
  * @since 02.10.2017.
  * @param <T> - type of element.
  */
-public class SimpleArray<T> {
+public class SimpleArray<T> implements Iterable<T> {
     /**
      * Array.
      */
@@ -19,6 +21,10 @@ public class SimpleArray<T> {
      * An index of elements in array.
      */
     private int index = 0;
+    /**
+     * Iterator index.
+     */
+    private int itr = 0;
 
     /**
      * Constructor.
@@ -26,6 +32,7 @@ public class SimpleArray<T> {
     public SimpleArray() {
         this.array = new Object[2];
     }
+
     /**
      * Constructor.
      * @param size - size of array.
@@ -51,7 +58,7 @@ public class SimpleArray<T> {
      * @param value - element value.
      */
     public void update(int index, T value) {
-       array[index] = value;
+        array[index] = value;
     }
 
     /**
@@ -83,4 +90,37 @@ public class SimpleArray<T> {
         return this.array.length;
     }
 
+    /**
+     * Get index of specified element.
+     * @param elem - element which index you need.
+     * @return int.
+     */
+    public int getIndex(T elem) {
+        for (Object item : array) {
+            if (elem.equals(item)) {
+                return Arrays.asList(array).indexOf(elem);
+            }
+        }
+       return -1;
+    }
+
+    /**
+     * Iterator for SimpleArray.
+     * @return Iterator.
+     */
+    @Override
+    public Iterator<T> iterator() {
+        Object[] data = this.array;
+        return new Iterator<T>() {
+            @Override
+            public boolean hasNext() {
+                return data.length > itr;
+            }
+
+            @Override
+            public T next() {
+                return (T) data[itr++];
+            }
+        };
+    }
 }

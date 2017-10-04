@@ -45,7 +45,6 @@ public class SimpleArrayTest {
         array.add(18);
         array.add(15);
         array.delete(1);
-        System.out.println(array.size());
         assertThat(array.get(1), is(15));
     }
 

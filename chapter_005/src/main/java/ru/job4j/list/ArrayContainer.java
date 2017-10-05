@@ -11,7 +11,7 @@ import java.util.Iterator;
  * @since 04.10.2017.
  * @param <E> - element type.
  */
-public class DynamicArray<E> implements SimpleContainer<E> {
+public class ArrayContainer<E> implements SimpleContainer<E> {
     /**
      * Elements storage.
      */

@@ -7,19 +7,19 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Class for testing DynamicArray.
+ * Class for testing ArrayContainer.
  *
  * @author gkuznetsov.
  * @version 0.1.
  * @since 04.10.2017.
  */
-public class DynamicArrayTest {
+public class ArrayContainerTest {
     /**
      * Testing add string element.
      */
     @Test
     public void whenAddNewStringElementThenItAdded() {
-        DynamicArray<String> stringArray = new DynamicArray<>();
+        ArrayContainer<String> stringArray = new ArrayContainer<>();
         stringArray.add("A");
         stringArray.add("B");
         stringArray.add("C");
@@ -35,7 +35,7 @@ public class DynamicArrayTest {
      */
     @Test
     public void whenAddNewIntegerElementThenItAdded() {
-        DynamicArray<Integer> intArray = new DynamicArray<>();
+        ArrayContainer<Integer> intArray = new ArrayContainer<>();
         intArray.add(1);
         intArray.add(2);
         intArray.add(3);
@@ -52,7 +52,7 @@ public class DynamicArrayTest {
      */
     @Test
     public void whenGetIntegerElementByForeEachThenItGetting() {
-        DynamicArray<Integer> intArray = new DynamicArray<>();
+        ArrayContainer<Integer> intArray = new ArrayContainer<>();
         for (int i = 1; i < 8; i++) {
             intArray.add(i);
         }
@@ -70,7 +70,7 @@ public class DynamicArrayTest {
      */
     @Test
     public void whenGetStringElementByForeEachThenItGetting() {
-        DynamicArray<String> stringArray = new DynamicArray<>();
+        ArrayContainer<String> stringArray = new ArrayContainer<>();
         stringArray.add("A");
         stringArray.add("B");
         stringArray.add("C");

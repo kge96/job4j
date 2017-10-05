@@ -17,19 +17,31 @@ public class IteratorConverter {
      */
     public Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         return new Iterator<Integer>() {
-            private Iterator<Integer> currentIt = null;
+            private Iterator<Integer> currentIt = it.next();
 
+            /**
+             * Return true if next element form array is exist.
+             * @return boolean.
+             */
             @Override
             public boolean hasNext() {
-                return it.hasNext();
+                return currentIt.hasNext();
             }
 
+            /**
+             * Return next element.
+             * @return
+             */
             @Override
             public Integer next() {
-                if (this.currentIt == null || !currentIt.hasNext()) {
-                    currentIt = it.next();
-                }
+                if (it.hasNext() && currentIt.hasNext()) {
                     return currentIt.next();
+                }
+                if (!currentIt.hasNext() && it.hasNext()) {
+                    currentIt = it.next();
+                    return currentIt.next();
+                }
+                return null;
             }
         };
 

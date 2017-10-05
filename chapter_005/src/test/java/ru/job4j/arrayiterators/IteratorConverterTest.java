@@ -31,11 +31,11 @@ public class IteratorConverterTest {
         Iterator[] its = {it1, it2, it3};
         Iterator<Iterator<Integer>> itStorage = new IteratorsStorage(its);
         Iterator<Integer> resultIterator = new IteratorConverter().convert(itStorage);
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 20; i++) {
             resultIterator.next();
         }
         int result = resultIterator.next();
-        assertThat(result, is(5));
+        assertThat(result, is(4));
     }
     /**
      * Testing iterator converter.
@@ -50,6 +50,26 @@ public class IteratorConverterTest {
         convert.next();
         int result = convert.next();
         assertThat(result, is(2));
+    }
+    /**
+     * Testing iterator converter.
+     */
+    @Test
+    public void whenItHasThreeInnerIt3() {
+        Iterator it1 = new IntegerIt(new int[]{1, 2, 3});
+        Iterator it2 = new IntegerIt(new int[]{4, 5, 6});
+        Iterator it3 = new IntegerIt(new int[]{7, 8, 9});
+        Iterator[] its = {it1, it2, it3};
+
+        Iterator<Iterator<Integer>> itStorage = new IteratorsStorage(its);
+
+        Iterator<Integer> resultIterator = new IteratorConverter().convert(itStorage);
+
+        for (int i = 0; i < 8; i++) {
+            System.out.println(resultIterator.next());
+        }
+        int result = resultIterator.next();
+        assertThat(result, is(9));
     }
 }
 

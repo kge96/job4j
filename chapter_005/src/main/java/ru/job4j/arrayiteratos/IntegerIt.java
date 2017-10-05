@@ -1,6 +1,7 @@
 package ru.job4j.arrayiteratos;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Class for creating iterator.
@@ -42,7 +43,10 @@ public class IntegerIt implements Iterator<Integer> {
      */
     @Override
     public Integer next() {
-        return array[index++];
+        if (hasNext()) {
+            return array[index++];
+        } else {
+            throw new NoSuchElementException("Exception from IntegerIT");
+        }
     }
-
 }

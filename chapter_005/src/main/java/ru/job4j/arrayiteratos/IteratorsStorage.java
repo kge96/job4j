@@ -42,6 +42,9 @@ public class IteratorsStorage implements Iterator<Iterator<Integer>> {
      */
     @Override
     public Iterator<Integer> next() {
+        if (index == integerIts.length - 1) {
+            return integerIts[index];
+        }
         return integerIts[index++];
     }
 }

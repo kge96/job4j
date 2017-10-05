@@ -61,10 +61,59 @@ public class LinkedContainer<E> implements SimpleContainer<E> {
              elem = elem.getNext();
             nodeCount++;
         }
-
         return elem.getValue();
     }
 
+    /**
+     * Remove element from collection.
+     * @param value - deleted values.
+     * @return boolean.
+     */
+    public boolean remove(E value) {
+        Node<E> node = get(value);
+        if (node != null) {
+            if (node.getPrev() != null) {
+                node.getPrev().setNext(node.getNext());
+            } else {
+                firstNode = firstNode.getNext();
+            }
+            if (node.getNext() != null) {
+                node.getNext().setPrev(node.getPrev());
+            }
+
+            size--;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Find Node by value.
+     * @param value - value.
+     * @return Node.
+     */
+    public Node<E> get(E value) {
+        Node<E> node = firstNode;
+        int nodeCount = 0;
+        while (nodeCount <= size) {
+            if (node.getValue().equals(value)) {
+                return node;
+            } else {
+                node = node.getNext();
+                nodeCount++;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get size of collection.
+     * @return int - size.
+     */
+    public int getSize() {
+        return size;
+    }
     /**
      * Iterator for this collection.
      * @return Iterator.
@@ -93,7 +142,7 @@ public class LinkedContainer<E> implements SimpleContainer<E> {
      * Class for creating instance of element.
      * @param <E> - type of element.
      */
-   private class Node<E> {
+   protected class Node<E> {
         /**
          * Link to the next node element.
          */

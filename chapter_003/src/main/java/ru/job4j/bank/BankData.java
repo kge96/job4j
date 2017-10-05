@@ -30,10 +30,9 @@ public class BankData {
      * @param user - user.
      */
     public void addUser(User user) {
-        if (this.dataBank.containsKey(user)) {
-            return;
+        if (!this.dataBank.containsKey(user)) {
+            this.dataBank.put(user, new LinkedList<>());
         }
-        this.dataBank.put(user, new LinkedList<>());
     }
 
     /**
@@ -50,8 +49,7 @@ public class BankData {
      * @param account - account.
      */
     public void addAccountToUser(User user, Account account) {
-        List<Account> accountList = this.dataBank.get(user);
-        accountList.add(account);
+        this.dataBank.get(user).add(account);
     }
 
     /**
@@ -60,8 +58,7 @@ public class BankData {
      * @param account - account.
      */
     public void deleteAccountFromUser(User user, Account account) {
-        List<Account> accountList = this.dataBank.get(user);
-        accountList.remove(account);
+        this.dataBank.get(user).remove(account);
     }
 
     /**

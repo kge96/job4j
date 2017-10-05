@@ -1,6 +1,7 @@
 package ru.job4j.arrayiteratos;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Class for creating simple numbers iterator.
@@ -35,6 +36,7 @@ public class SimpleIt implements Iterator {
     public boolean hasNext() {
         for (int i = index; i < array.length; i++) {
             if (isPrime(array[i])) {
+                index = i;
                 return true;
             }
         }
@@ -47,10 +49,11 @@ public class SimpleIt implements Iterator {
      */
     @Override
     public Object next() {
-        while (!isPrime(array[index]) && index < array.length - 1) {
-            index++;
+        if (hasNext()) {
+            return array[index++];
+        } else {
+            throw new NoSuchElementException();
         }
-        return array[index++];
     }
 
     /**

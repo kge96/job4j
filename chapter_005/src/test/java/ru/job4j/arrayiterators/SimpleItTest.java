@@ -9,7 +9,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Class for testing SimpleIt.
+ * Te
  *
  * @author gkuznetsov.
  * @version 0.1.

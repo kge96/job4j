@@ -29,6 +29,7 @@ public class UserTest {
         for (Map.Entry<User, Object> user : hmap.entrySet()) {
             System.out.println(user.getKey().hashCode());
         }
+        System.out.println(hmap);
     }
 
 }

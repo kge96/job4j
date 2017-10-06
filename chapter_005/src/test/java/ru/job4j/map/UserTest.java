@@ -30,6 +30,7 @@ public class UserTest {
             System.out.println(user.getKey().hashCode());
         }
         System.out.println(hmap);
+        System.out.println(hmap.size());
     }
 
 }

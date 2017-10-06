@@ -97,6 +97,9 @@ public class LinkedContainer<E> implements SimpleContainer<E> {
         Node<E> node = firstNode;
         int nodeCount = 0;
         while (nodeCount <= size) {
+            if (node == null) {
+                break;
+            }
             if (node.getValue().equals(value)) {
                 return node;
             } else {
@@ -105,6 +108,15 @@ public class LinkedContainer<E> implements SimpleContainer<E> {
             }
         }
         return null;
+    }
+
+    /**
+     * Check the presence of element in collection.
+     * @param value - value.
+     * @return boolean.
+     */
+    public boolean contains(E value) {
+        return get(value) != null;
     }
 
     /**

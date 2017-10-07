@@ -15,11 +15,26 @@ public class ArrayContainer<E> implements SimpleContainer<E> {
     /**
      * Elements storage.
      */
-    private Object[] container = new Object[5];
+    private Object[] container;
     /**
      * Current empty element position.
      */
     private int position = 0;
+
+    /**
+     * Constructor for ArrayContainer with default size = 5.
+     */
+    public ArrayContainer() {
+        this.container  = new Object[5];
+    }
+
+    /**
+     * Constructor for ArrayContainer with specified size.
+     * @param size - specified size.
+     */
+    public ArrayContainer(int size) {
+        this.container  = new Object[size];
+    }
 
     /**
      * Add new element to array.
@@ -30,12 +45,25 @@ public class ArrayContainer<E> implements SimpleContainer<E> {
         if (this.container.length > this.position) {
             this.container[position++] = e;
         } else {
-            this.container = Arrays.copyOf(this.container, this.container.length * 3 / 2);
+            this.container = Arrays.copyOf(this.container, this.container.length * 3 / 2 + 1);
             this.container[position++] = e;
         }
 
     }
 
+    /**
+     * Check that container contains specified element.
+     * @param e - specified element.
+     * @return boolean.
+     */
+    public boolean contains(E e) {
+        for (Object elem : container) {
+            if (e.equals((E) elem)) {
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * Get element from array.
      * @param index - element index.

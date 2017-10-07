@@ -18,7 +18,7 @@ public class SetArrayContainerTest {
      */
     @Test
     public void whenAddNewElementThenItAdded() {
-        SetArrayContainer<Integer> container = new SetArrayContainer<>(1);
+        ArrayContainer<Integer> container = new SetArrayContainer<>(1);
         container.add(1);
         container.add(2);
         container.add(3);

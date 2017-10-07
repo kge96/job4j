@@ -22,11 +22,8 @@ public class QueueContainer<E> extends LinkedContainer<E> {
      * @return E - element.
      */
     public E poll() {
-        E result = get(0);
-        if (remove(result)) {
-            return result;
-        } else {
-            return null;
-        }
+        E result = this.get(0);
+        this.remove(result);
+        return result;
     }
 }

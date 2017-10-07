@@ -22,10 +22,7 @@ public class StackContainer<E> extends LinkedContainer<E> {
      */
     public E poll() {
        E result = get(getSize() - 1);
-       if (remove(result)) {
-           return result;
-       } else {
-           return null;
-       }
+       this.remove(result);
+       return result;
     }
 }

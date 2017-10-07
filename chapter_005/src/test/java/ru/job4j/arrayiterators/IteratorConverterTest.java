@@ -71,5 +71,78 @@ public class IteratorConverterTest {
         int result = resultIterator.next();
         assertThat(result, is(9));
     }
+    /**
+     * Testing iterator converter.
+     */
+    @Test
+    public void whenItHasThreeInnerIt32() {
+        Iterator it1 = new IntegerIt(new int[]{1, 2, 3});
+        Iterator it2 = new IntegerIt(new int[]{4, 5, 6});
+        Iterator it3 = new IntegerIt(new int[]{7, 8, 9});
+        Iterator[] its = {it1, it2, it3};
+
+        Iterator<Iterator<Integer>> itStorage = new IteratorsStorage(its);
+
+        Iterator<Integer> it = new IteratorConverter().convert(itStorage);
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(1));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(2));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(3));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(4));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(5));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(6));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(7));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(8));
+        assertThat(it.hasNext(), is(true));
+        int result = it.next();
+        assertThat(result, is(9));
+        assertThat(it.hasNext(), is(false));
+    }
+    /**
+     * Testing iterator converter.
+     */
+    @Test
+    public void whenItHasThreeInnerIt33() {
+        Iterator it1 = new IntegerIt(new int[]{1, 2, 3});
+        Iterator it2 = new IntegerIt(new int[]{4, 5, 6});
+        Iterator it3 = new IntegerIt(new int[]{7, 8, 9});
+        Iterator[] its = {it1, it2, it3};
+
+        Iterator<Iterator<Integer>> itStorage = new IteratorsStorage(its);
+
+        Iterator<Integer> it = new IteratorConverter().convert(itStorage);
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(3));
+        assertThat(it.next(), is(4));
+        assertThat(it.next(), is(5));
+        assertThat(it.next(), is(6));
+        assertThat(it.next(), is(7));
+        assertThat(it.next(), is(8));
+        assertThat(it.next(), is(9));
+
+    }
+    /**
+     * Testing iterator converter.
+     */
+    @Test
+    public void whenItHasOneInnerIt() {
+        Iterator it1 = new IntegerIt(new int[]{1});
+        Iterator[] its = {it1};
+
+        Iterator<Iterator<Integer>> itStorage = new IteratorsStorage(its);
+
+        Iterator<Integer> it = new IteratorConverter().convert(itStorage);
+        assertThat(it.next(), is(1));
+        assertThat(it.hasNext(), is(false));
+
+    }
 }
 

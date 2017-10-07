@@ -12,12 +12,12 @@ import java.util.Iterator;
 public class IteratorConverter {
     /**
      * The iterator for integer values from Iterator<Iterator<Integer>>.
-     * @param it - transferred iterator.
+     * @param itStoreage - transferred iterator.
      * @return Iterator.
      */
-    public Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
+    public Iterator<Integer> convert(Iterator<Iterator<Integer>> itStoreage) {
         return new Iterator<Integer>() {
-            private Iterator<Integer> currentIt = it.next();
+            private Iterator<Integer> itInteger = itStoreage.next();
 
             /**
              * Return true if next element form array is exist.
@@ -25,7 +25,7 @@ public class IteratorConverter {
              */
             @Override
             public boolean hasNext() {
-                return currentIt.hasNext();
+                return itInteger.hasNext() || itStoreage.hasNext();
             }
 
             /**
@@ -34,12 +34,12 @@ public class IteratorConverter {
              */
             @Override
             public Integer next() {
-                if (it.hasNext() && currentIt.hasNext()) {
-                    return currentIt.next();
+                if (itStoreage.hasNext() && itInteger.hasNext()) {
+                    return itInteger.next();
                 }
-                if (!currentIt.hasNext() && it.hasNext()) {
-                    currentIt = it.next();
-                    return currentIt.next();
+                if (!itInteger.hasNext() && itStoreage.hasNext()) {
+                    itInteger = itStoreage.next();
+                    return itInteger.next();
                 }
                 return null;
             }

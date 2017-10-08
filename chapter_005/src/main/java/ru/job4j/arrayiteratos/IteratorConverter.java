@@ -1,6 +1,7 @@
 package ru.job4j.arrayiteratos;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Class for creating iterator convert.
@@ -12,12 +13,12 @@ import java.util.Iterator;
 public class IteratorConverter {
     /**
      * The iterator for integer values from Iterator<Iterator<Integer>>.
-     * @param itStoreage - transferred iterator.
+     * @param it - transferred iterator.
      * @return Iterator.
      */
-    public Iterator<Integer> convert(Iterator<Iterator<Integer>> itStoreage) {
+    public Iterator<Integer> convert(Iterator<Iterator<Integer>> it) {
         return new Iterator<Integer>() {
-            private Iterator<Integer> itInteger = itStoreage.next();
+            private Iterator<Integer> integerIt = it.next();
 
             /**
              * Return true if next element form array is exist.
@@ -25,23 +26,24 @@ public class IteratorConverter {
              */
             @Override
             public boolean hasNext() {
-                return itInteger.hasNext() || itStoreage.hasNext();
+                return integerIt.hasNext() || it.hasNext();
             }
 
             /**
              * Return next element.
-             * @return
+             * @return Integer.
              */
             @Override
             public Integer next() {
-                if (itStoreage.hasNext() && itInteger.hasNext()) {
-                    return itInteger.next();
+                if (integerIt.hasNext()) {
+                    return integerIt.next();
+                } else if (!integerIt.hasNext() && it.hasNext()) {
+                    integerIt = it.next();
+                    return integerIt.next();
+
+                } else {
+                    throw new NoSuchElementException();
                 }
-                if (!itInteger.hasNext() && itStoreage.hasNext()) {
-                    itInteger = itStoreage.next();
-                    return itInteger.next();
-                }
-                return null;
             }
         };
 

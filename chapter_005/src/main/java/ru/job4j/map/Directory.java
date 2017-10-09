@@ -31,6 +31,11 @@ public class Directory<K, V> implements Iterable {
     }
 
     /**
+     * Element position at iterator.
+     */
+    private int itrPosition = 0;
+
+    /**
      * Directory constructor. Initialize new array with the specified size;
      * @param size - size of Directory.
      */
@@ -46,6 +51,8 @@ public class Directory<K, V> implements Iterable {
      */
     public boolean insert(K key, V value) {
         int position;
+        boolean result = false;
+
         if (key == null) {
             return false;
         }
@@ -58,14 +65,15 @@ public class Directory<K, V> implements Iterable {
 
         if (table[position] != null && table[position].getDirKey().equals(key)) {
             table[position].setDirValue(value);
-            return true;
+            result = true;
         } else if (table[position] != null && !table[position].getDirKey().equals(key)) {
-            return false;
+            result = false;
         } else {
             table[position] = new Dir<>(key, value);
             size++;
-            return true;
+            result = true;
         }
+        return result;
     }
 
     /**
@@ -88,12 +96,12 @@ public class Directory<K, V> implements Iterable {
      * @return boolean true - if element was deleted, false - if it wasn't deleted.
      */
     public boolean delete(K key) {
+        boolean result = false;
         if (table[getPosition(key, table.length)] != null) {
             table[getPosition(key, table.length)] = null;
-            return true;
-        } else {
-            throw new NoSuchElementException();
+            result = true;
         }
+        return result;
     }
 
     /**
@@ -122,7 +130,6 @@ public class Directory<K, V> implements Iterable {
     private void resizeTable() {
         Dir<K, V>[] newTable = new Dir[table.length * 2];
         transfer(newTable);
-        table = newTable;
     }
 
     /**
@@ -145,17 +152,23 @@ public class Directory<K, V> implements Iterable {
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            private int itrPosition = 0;
+
             @Override
             public boolean hasNext() {
-                return table.length - 1 > itrPosition;
+                int nextIndex = itrPosition;
+                while (table[nextIndex] == null && nextIndex < table.length - 1) {
+                    nextIndex++;
+                }
+
+                return table[nextIndex] != null;
             }
+
             @Override
-            public K next() {
+            public V next() {
                while (table[itrPosition] == null) {
                    itrPosition++;
                }
-               return table[itrPosition++].getDirKey();
+               return table[itrPosition++].getDirValue();
             }
         };
     }

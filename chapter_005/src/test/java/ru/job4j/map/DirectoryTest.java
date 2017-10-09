@@ -55,8 +55,8 @@ public class DirectoryTest {
         directory.insert("Vladimir", 28);
         directory.insert("Olga", 21);
         String result = null;
-        for (Iterator<String> it = directory.iterator(); it.hasNext();) {
-           if (it.next().equals("Vladimir")) {
+        for (Iterator<Integer> it = directory.iterator(); it.hasNext();) {
+           if (it.next().equals(28)) {
                result = "Yes";
            }
         }
@@ -77,6 +77,23 @@ public class DirectoryTest {
 
         int result = directory.get("Oleg");
         assertThat(result, is(15));
+    }
+    /**
+     * Testing insert same elements into Directory collection.
+     */
+    @Test
+    public void whenAddTwoElementsAndCallHasNextThenOnThirdAttemptReturnFalse() {
+        Directory<String, Integer> directory = new Directory<>();
+        directory.insert("Ivan", 24);
+        directory.insert("Vladimir", 28);
+
+        directory.iterator().hasNext();
+        directory.iterator().next();
+        directory.iterator().hasNext();
+        directory.iterator().next();
+
+        assertThat(directory.iterator().hasNext(), is(false));
+
     }
 
 }

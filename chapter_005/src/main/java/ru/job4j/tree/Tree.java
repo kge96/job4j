@@ -1,9 +1,11 @@
 package ru.job4j.tree;
 
-import java.util.Comparator;
-import java.util.Iterator;
+
 import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Iterator;
 
 /**
  * Class for creating Tree.
@@ -17,7 +19,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Comparator<
     /**
      *Collection with all elements from Tree for Iterator.
      */
-    private List<Node<E>> allElements = new LinkedList<>();
+    private List<Node<E>> allElements = new ArrayList<>();
     /**
      * Node for storage values and collection of children.
      */
@@ -41,6 +43,9 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Comparator<
             List<Node<E>> children = node.getChildren();
             if (children.size() > 0) {
                 for (Node<E> itm : children) {
+                    if (itm == null) {
+                        continue;
+                    }
                     result = findParent(parent, itm);
                     if (result != null) {
                         break;
@@ -62,18 +67,71 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Comparator<
         boolean result = false;
         if (root == null) {
             root = new Node<>(parent);
-            root.getChildren().add(new Node<>(child));
+            if (child != null) {
+                root.getChildren().add(new Node<>(child));
+            }
+
             allElements.add(root);
         } else {
             Node<E> parentNode = findParent(parent, root);
             Node<E> childNode = new Node<>(child);
+
             if (parentNode != null && findParent(child, parentNode) == null) {
+
+
                 parentNode.getChildren().add(childNode);
                 allElements.add(childNode);
                 result = true;
             }
         }
         return result;
+    }
+
+    /**
+     * Add new element into collection.
+     * @param e - element.
+     * @return boolean.
+     */
+    public boolean add(E e) {
+        boolean result = true;
+        if (root == null) {
+            root = new Node<>(e, null);
+            allElements.add(root);
+        } else {
+
+            Node<E> parentNode = getNode(e, root);
+
+            if (parentNode != null) {
+                int index = (parentNode.value.compareTo(e) < 0) ? 1 : 0;
+                parentNode.getChildren().set(index, new Node<>(e, null));
+                allElements.add(parentNode.getChildren().get(index));
+            } else {
+                result = false;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Search Node by value.
+     * @param e - node value
+     * @param node - start node.
+     * @return Node.
+     */
+    private Node<E> getNode(E e, Node<E> node) {
+
+        int result = e.compareTo(node.value);
+        if (result == 0) {
+            return null;
+        }
+        int index = (result < 0) ? 0 : 1;
+
+        Node<E> currentNode = node;
+
+        if (currentNode.getChildren().get(index) != null) {
+            currentNode = getNode(e, currentNode.getChildren().get(index));
+        }
+        return currentNode;
     }
 
     /**
@@ -89,7 +147,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Comparator<
      * @param root - start position for check.
      * @return boolean.
      */
-    public boolean getAround(Node<E> root) {
+    private boolean getAround(Node<E> root) {
         boolean result = true;
         List<Node<E>> children = root.getChildren();
         if (children.size() > 0 && children.size() < 3 || children.size() == 0) {
@@ -104,13 +162,14 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Comparator<
         }
         return result;
     }
+
     /**
      * Return patent child with indexValue.
      * @param parent - parent value.
      * @param indexValue - index of a child in the parent collection.
      * @return E - value.
      */
-    public E getValue(E parent, int indexValue) {
+    public E getChildValue(E parent, int indexValue) {
         return findParent(parent, root).getChildren().get(indexValue).value;
     }
 
@@ -182,6 +241,17 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Comparator<
          */
         Node(E value) {
             this.value = value;
+        }
+
+        /**
+         * Constructor for Node.
+         * @param value - value.
+         * @param childValue - child value.
+         */
+        Node(E value, E childValue) {
+            this.value = value;
+            children.add(0, (Node<E>) childValue);
+            children.add(1, (Node<E>) childValue);
         }
 
         /**

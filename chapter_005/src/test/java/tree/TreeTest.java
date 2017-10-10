@@ -65,7 +65,7 @@ public class TreeTest {
         tree.add(2, 9);
         tree.add(3, 8);
 
-        int result = tree.getValue(3, 0);
+        int result = tree.getChildValue(3, 0);
         assertThat(result, is(8));
     }
     /**
@@ -104,5 +104,28 @@ public class TreeTest {
 
         boolean result = tree.isBinary();
         assertThat(result, is(true));
+    }
+    /**
+     * Testing binary.
+     */
+    @Test
+    public void whenAddElementsAtTreeThenTheyAdded() {
+        Tree<Integer> tree = new Tree<>();
+        tree.add(1);
+        tree.add(5);
+        tree.add(2);
+        tree.add(0);
+        tree.add(3);
+        tree.add(7);
+        tree.add(9);
+        tree.add(6);
+        tree.add(6);
+
+        tree.iterator().next();
+        tree.iterator().next();
+        tree.iterator().next();
+
+        int result = tree.getChildValue(7, 0);
+        assertThat(result, is(6));
     }
 }

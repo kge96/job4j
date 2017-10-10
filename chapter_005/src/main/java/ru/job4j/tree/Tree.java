@@ -77,6 +77,34 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Comparator<
     }
 
     /**
+     * Check that this collection is binary.
+     * @return boolean.
+     */
+    public boolean isBinary() {
+        return getAround(root);
+    }
+
+    /**
+     * Get around this collection and check that each parent has not more 2 children.
+     * @param root - start position for check.
+     * @return boolean.
+     */
+    public boolean getAround(Node<E> root) {
+        boolean result = true;
+        List<Node<E>> children = root.getChildren();
+        if (children.size() > 0 && children.size() < 3 || children.size() == 0) {
+            for (Node<E> node : root.getChildren()) {
+                result = getAround(node);
+                if (!result) {
+                    break;
+                }
+            }
+        } else {
+            result = false;
+        }
+        return result;
+    }
+    /**
      * Return patent child with indexValue.
      * @param parent - parent value.
      * @param indexValue - index of a child in the parent collection.

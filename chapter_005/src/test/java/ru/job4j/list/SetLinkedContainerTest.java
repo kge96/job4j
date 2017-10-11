@@ -63,4 +63,28 @@ public class SetLinkedContainerTest {
         container.add(3);
         assertThat(container.get(1), is(3));
     }
+
+    /**
+     * Testing speed adding.
+     */
+    @Test
+    public void testAdditionSpeed() {
+        SetLinkedContainer<Integer> container1 = new SetLinkedContainer<>();
+        long start1 = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            container1.add((int) (Math.random() * 100));
+        }
+        long total1 = System.currentTimeMillis() - start1;
+
+        SetLinkedContainer<Integer> container2 = new SetLinkedContainer<>();
+        long start2 = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            container2.fastAdd((int) (Math.random() * 100));
+        }
+        long total2 = System.currentTimeMillis() - start2;
+
+        System.out.println("Add with searching duplicate by foreach  - " + total1 + " ms");
+        System.out.println("Add with searching duplicate by hashCode  - " + total2 + " ms");
+
+    }
 }

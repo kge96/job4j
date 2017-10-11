@@ -12,6 +12,7 @@ import java.util.NoSuchElementException;
  * @param <E> - type of an element.
  */
 public class LinkedContainer<E> implements SimpleContainer<E> {
+
     /**
      * The first element in collection.
      */
@@ -126,6 +127,7 @@ public class LinkedContainer<E> implements SimpleContainer<E> {
     public int getSize() {
         return size;
     }
+
     /**
      * Iterator for this collection.
      * @return Iterator.

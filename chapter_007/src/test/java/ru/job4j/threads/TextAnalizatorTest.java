@@ -1,0 +1,23 @@
+package ru.job4j.threads;
+
+import org.junit.Test;
+
+/**
+ * Class for testing text analizator.
+ *
+ * @author gkuznetsov.
+ * @version 0.1.
+ * @since 13.10.2017.
+ */
+public class TextAnalizatorTest {
+    /**
+     * Testing threads.
+     * @throws InterruptedException - exception.
+     */
+    @Test
+    public void whenStartAnalizeThenReturnCountOfSpacesAndLetters() throws InterruptedException {
+        TextAnalizator analizator = new TextAnalizator("Мама мыла раму ");
+        analizator.analizeText();
+        Thread.currentThread().sleep(100);
+    }
+}

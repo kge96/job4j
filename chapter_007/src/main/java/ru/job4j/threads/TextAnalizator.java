@@ -1,5 +1,6 @@
 package ru.job4j.threads;
 
+
 /**
  * Class for start analize.
  *
@@ -23,16 +24,18 @@ public class TextAnalizator {
 
     /**
      * Start analize.
+     * @throws InterruptedException - exception.
      */
-    public void analizeText() {
+    public void analizeText() throws InterruptedException {
+        System.out.println("Start analizing text");
         Thread t1 = new Thread(new LetterCounter(text));
         Thread t2 = new Thread(new SpacesCounter(text));
-        try {
-            t1.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         t1.start();
+        t1.join();
+
         t2.start();
+        t2.join();
+
+        System.out.println("Finish analizing text");
     }
 }

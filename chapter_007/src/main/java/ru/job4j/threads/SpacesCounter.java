@@ -35,6 +35,14 @@ public class SpacesCounter implements Runnable {
                 spaces++;
             }
         }
-        System.out.println(String.format("Count of spaces - %s", spaces));
+        try {
+            Thread.currentThread().sleep(1500);
+            if (Thread.currentThread().isInterrupted()) {
+                System.out.println(String.format("Count of spaces - %s", spaces));
+            }
+        } catch (InterruptedException e) {
+            System.err.println("Count spaces system timeout");
+        }
+
     }
 }

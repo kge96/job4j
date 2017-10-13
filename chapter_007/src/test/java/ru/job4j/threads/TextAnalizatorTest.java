@@ -3,7 +3,7 @@ package ru.job4j.threads;
 import org.junit.Test;
 
 /**
- * Class for testing text analizator.
+ * Class for testing threads.
  *
  * @author gkuznetsov.
  * @version 0.1.
@@ -11,13 +11,15 @@ import org.junit.Test;
  */
 public class TextAnalizatorTest {
     /**
-     * Testing threads.
+     * Testing timeout.
      * @throws InterruptedException - exception.
      */
     @Test
-    public void whenStartAnalizeThenReturnCountOfSpacesAndLetters() throws InterruptedException {
+    public void whenThereIstimeOutInOneOfMethodsThanGetTimeOutMessage() throws InterruptedException {
         TextAnalizator analizator = new TextAnalizator("Мама мыла раму ");
         analizator.analizeText();
         Thread.currentThread().sleep(100);
+
     }
+
 }

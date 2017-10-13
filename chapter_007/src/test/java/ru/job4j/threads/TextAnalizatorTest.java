@@ -18,7 +18,7 @@ public class TextAnalizatorTest {
     public void whenThereIstimeOutInOneOfMethodsThanGetTimeOutMessage() throws InterruptedException {
         TextAnalizator analizator = new TextAnalizator("Мама мыла раму ");
         analizator.analizeText();
-        Thread.currentThread().sleep(100);
+        Thread.currentThread().sleep(1000);
 
     }
 

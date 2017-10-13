@@ -30,7 +30,9 @@ public class TextAnalizator {
         System.out.println("Start analizing text");
         Thread t1 = new Thread(new LetterCounter(text));
         Thread t2 = new Thread(new SpacesCounter(text));
+
         t1.start();
+        t1.interrupt();
         t1.join();
 
         t2.start();

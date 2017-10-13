@@ -30,18 +30,17 @@ public class LetterCounter implements Runnable {
      */
     @Override
     public void run() {
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) != 32) {
-                letters++;
-            }
-            try {
-                Thread.currentThread().sleep(1500);
-                if (!Thread.currentThread().isInterrupted()) {
-                    System.out.println(String.format("Count of spaces - %s", letters));
+        if (!Thread.currentThread().isInterrupted()) {
+            for (int i = 0; i < text.length(); i++) {
+                if (text.charAt(i) != 32) {
+                    letters++;
                 }
-            } catch (InterruptedException e) {
-                System.err.println("Count spaces system timeout" + '\n');
             }
+            System.out.println(String.format("Count of spaces - %s", letters));
+
+        } else {
+            System.err.println("System timeout from spaces counter");
+            return;
         }
 
     }

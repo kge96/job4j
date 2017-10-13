@@ -1,7 +1,6 @@
-package tree;
+package ru.job4j.tree;
 
 import org.junit.Test;
-import ru.job4j.tree.Tree;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -15,7 +14,7 @@ import static org.junit.Assert.assertThat;
  */
 public class TreeTest {
     /**
-     * Testing when add element which this tree contains.
+     * Testing when add element which this ru.job4j.tree contains.
      */
     @Test
     public void whenAddTheSameElementThenItDidNotAdd() {

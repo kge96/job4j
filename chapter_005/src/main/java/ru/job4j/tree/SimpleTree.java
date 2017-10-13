@@ -10,7 +10,7 @@ package ru.job4j.tree;
  */
 public interface SimpleTree<E extends Comparable<E>> extends Iterable<E> {
     /**
-     * Add new element to tree structure.
+     * Add new element to ru.job4j.tree structure.
      * @param parent - parent.
      * @param child - child.
      * @return boolean.

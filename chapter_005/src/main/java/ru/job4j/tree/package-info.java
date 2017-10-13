@@ -1,5 +1,5 @@
 /**
- * Package for tree tasks.
+ * Package for ru.job4j.tree tasks.
  *
  * @author gkuznetsov.
  * @version 0.1.

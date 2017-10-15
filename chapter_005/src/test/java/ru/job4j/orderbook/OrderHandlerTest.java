@@ -17,8 +17,7 @@ public class OrderHandlerTest {
     public void whenParsingDataFromXmlThenTotalTimeIsLessSevenSeconds() {
         long start = System.currentTimeMillis();
         OrderHandler orderHandler = new OrderHandler();
-        orderHandler.distributeOrderBook(orderHandler.doHandle());
-        orderHandler.doMuch();
+        orderHandler.getFinalOrderBook();
         long total = System.currentTimeMillis() - start;
         System.out.println("Total time is - " + total);
     }

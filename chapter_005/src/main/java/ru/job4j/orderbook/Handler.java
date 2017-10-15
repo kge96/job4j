@@ -16,6 +16,34 @@ import java.util.Map;
  */
 public class Handler extends DefaultHandler {
     /**
+     * Xml tag for addition order.
+     */
+    private final String addOrder = "AddOrder";
+    /**
+     * Xml tag for removing order.
+     */
+    private final String deleteOrder = "DeleteOrder";
+    /**
+     * Tag attribute.
+     */
+    private final String book = "book";
+    /**
+     * Tag attribute.
+     */
+    private final String operation = "operation";
+    /**
+     * Tag attribute.
+     */
+    private final String price = "price";
+    /**
+     * Tag attribute.
+     */
+    private final String volume = "volume";
+    /**
+     * Tag attribute.
+     */
+    private final String orderId = "orderId";
+    /**
      * Total parsing time.
      */
     private long total;
@@ -23,6 +51,7 @@ public class Handler extends DefaultHandler {
      * Parsing time.
      */
     private Map<Integer, Order> data = new LinkedHashMap<>();
+
 
     /***
      * Action when parsing starting.
@@ -54,19 +83,18 @@ public class Handler extends DefaultHandler {
      */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attr) throws SAXException {
-        if (qName.equals("AddOrder")) {
-            data.put(Integer.parseInt(attr.getValue(4)),
-                    new Order(attr.getValue(0),
-                    attr.getValue(1),
-                    Integer.parseInt(attr.getValue(4)),
-                    Integer.parseInt(attr.getValue(3)),
-                    Double.parseDouble(attr.getValue(2))));
-        } else if (qName.equals("DeleteOrder")) {
-            int id = Integer.parseInt(attr.getValue(1));
+        if (addOrder.equals(qName)) {
+            data.put(Integer.parseInt(attr.getValue(orderId)),
+                    new Order(attr.getValue(book),
+                    attr.getValue(operation),
+                    Integer.parseInt(attr.getValue(orderId)),
+                    Integer.parseInt(attr.getValue(volume)),
+                    Double.parseDouble(attr.getValue(price))));
+        } else if (deleteOrder.equals(qName)) {
+            int id = Integer.parseInt(attr.getValue(orderId));
             data.remove(id);
         }
     }
-
     /**
      * Return parsing result.
      * @return Map.

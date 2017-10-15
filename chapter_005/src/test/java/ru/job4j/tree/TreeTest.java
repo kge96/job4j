@@ -94,13 +94,15 @@ public class TreeTest {
         Tree<Integer> tree = new Tree<>();
         tree.add(0, 1);
         tree.add(0, 2);
+        tree.add(0, 0);
 
         tree.add(1, 9);
-        tree.add(1, 10);
+        tree.add(2, 2);
+        tree.add(1, 5);
 
         tree.add(2, 11);
         tree.add(2, 12);
-
+        System.out.println(tree.getChildValue(2, 0));
         boolean result = tree.isBinary();
         assertThat(result, is(true));
     }

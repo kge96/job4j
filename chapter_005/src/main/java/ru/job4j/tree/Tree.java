@@ -65,23 +65,22 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Comparator<
     @Override
     public boolean add(E parent, E child) {
         boolean result = false;
-        if (root == null) {
-            root = new Node<>(parent);
-            if (child != null) {
-                root.getChildren().add(new Node<>(child));
-            }
 
+        if (root == null && child != null) {
+            root = new Node<>(parent);
+            root.getChildren().add(new Node<>(child));
             allElements.add(root);
         } else {
-            Node<E> parentNode = findParent(parent, root);
-            Node<E> childNode = new Node<>(child);
+            if (!isContains(child, root)) {
 
-            if (parentNode != null && findParent(child, parentNode) == null) {
+                Node<E> parentNode = findParent(parent, root);
+                Node<E> childNode = new Node<>(child);
 
-
-                parentNode.getChildren().add(childNode);
-                allElements.add(childNode);
-                result = true;
+                if (parentNode != null && findParent(child, parentNode) == null) {
+                    parentNode.getChildren().add(childNode);
+                    allElements.add(childNode);
+                    result = true;
+                }
             }
         }
         return result;
@@ -98,15 +97,16 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Comparator<
             root = new Node<>(e, null);
             allElements.add(root);
         } else {
+            if (!isContains(e, root)) {
+                Node<E> parentNode = getNode(e, root);
 
-            Node<E> parentNode = getNode(e, root);
-
-            if (parentNode != null) {
-                int index = (parentNode.value.compareTo(e) < 0) ? 1 : 0;
-                parentNode.getChildren().set(index, new Node<>(e, null));
-                allElements.add(parentNode.getChildren().get(index));
-            } else {
-                result = false;
+                if (parentNode != null) {
+                    int index = (parentNode.value.compareTo(e) < 0) ? 1 : 0;
+                    parentNode.getChildren().set(index, new Node<>(e, null));
+                    allElements.add(parentNode.getChildren().get(index));
+                } else {
+                    result = false;
+                }
             }
         }
         return result;
@@ -220,6 +220,34 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E>, Comparator<
     public int hashCode() {
         return super.hashCode();
     }
+
+    /**
+     * Check that specified element doesn't exist at collection.
+     * @param value - checking value.
+     * @param node - start node.
+     * @return boolean.
+     */
+    private boolean isContains(E value, Node<E> node) {
+        Node<E> currentNode = node;
+        E currentValue = node.value;
+        E checkingValue = value;
+        boolean result = false;
+
+        if (node.value != null && node.value.equals(value)) {
+            return true;
+        }
+        if (node.children == null) {
+            result = (compare(currentValue, checkingValue) == 0) ? true : false;
+        } else {
+            for (Node<E> childNode : node.children) {
+                if (childNode != null) {
+                    result = isContains(value, childNode);
+                }
+            }
+        }
+        return result;
+    }
+
 
     /**
      * Class for storage value and children.

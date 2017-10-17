@@ -1,6 +1,7 @@
 package ru.job4j.threads;
 
 import org.junit.Test;
+import ru.job4j.threads.analizator.ProgramTimeControl;
 
 /**
  * Class for testing ProgramTimeControl.

@@ -23,6 +23,8 @@ public class Count {
      * @return int.
      */
     public int incremant() {
-        return this.value++;
+        synchronized (Count.class) {
+            return this.value++;
+        }
     }
 }

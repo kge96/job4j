@@ -14,24 +14,12 @@ import java.util.Iterator;
  */
 public class ThreadSafe<E> extends LinkedContainer<E> {
     /**
-     * Lock object.
-     */
-    private Object read = new Object();
-    /**
-     * Lock object.
-     */
-    private Object write = new Object();
-
-    /**
      * Add new element.
      * @param o - element.
      */
     @Override
-    public void add(E o) {
-        synchronized (write) {
-            super.add(o);
-        }
-
+    public synchronized void add(E o) {
+        super.add(o);
     }
 
     /**
@@ -40,10 +28,8 @@ public class ThreadSafe<E> extends LinkedContainer<E> {
      * @return E.
      */
     @Override
-    public E get(int index) {
-        synchronized (read) {
-            return super.get(index);
-        }
+    public synchronized E get(int index) {
+        return super.get(index);
     }
 
     /**
@@ -52,10 +38,8 @@ public class ThreadSafe<E> extends LinkedContainer<E> {
      * @return boolean.
      */
     @Override
-    public boolean remove(E value) {
-        synchronized (write) {
-            return super.remove(value);
-        }
+    public  synchronized boolean remove(E value) {
+        return super.remove(value);
     }
 
     /**
@@ -64,10 +48,8 @@ public class ThreadSafe<E> extends LinkedContainer<E> {
      * @return Node.
      */
     @Override
-    public Node get(E value) {
-        synchronized (read) {
-            return super.get(value);
-        }
+    public synchronized Node get(E value) {
+        return super.get(value);
     }
 
     /**
@@ -86,10 +68,8 @@ public class ThreadSafe<E> extends LinkedContainer<E> {
      * @return int.
      */
     @Override
-    public int getSize() {
-        synchronized (read) {
-            return super.getSize();
-        }
+    public synchronized int getSize() {
+        return super.getSize();
     }
 
     /**

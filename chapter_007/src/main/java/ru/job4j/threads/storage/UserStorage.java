@@ -2,7 +2,8 @@ package ru.job4j.threads.storage;
 
 import net.jcip.annotations.ThreadSafe;
 
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Class for creating user storage.
@@ -16,13 +17,13 @@ public class UserStorage {
     /**
      * User storages.
      */
-    private ConcurrentHashMap<Integer, User> storage = new ConcurrentHashMap<>();
+    private Map<Integer, User> storage = new HashMap<>();
 
     /**
      * Add new User.
      * @param user - user.
      */
-    public void add(User user) {
+    public synchronized void add(User user) {
         storage.put(user.getId(), user);
     }
 
@@ -30,8 +31,8 @@ public class UserStorage {
      * Update user in the storage.
      * @param user - user.
      */
-    public void update(User user) {
-        if (storage.contains(user)) {
+    public synchronized void update(User user) {
+        if (storage.containsKey(user.getId())) {
             storage.get(user.getId()).setAmount(user.getAmount());
         }
     }
@@ -44,7 +45,6 @@ public class UserStorage {
         if (storage.containsKey(id)) {
             storage.remove(id);
         }
-
     }
 
     /**
@@ -52,7 +52,7 @@ public class UserStorage {
      * @param id - user id.
      * @return User.
      */
-    public User getUser(int id) {
+    public synchronized User getUser(int id) {
         return storage.get(id);
     }
 
@@ -60,7 +60,7 @@ public class UserStorage {
      * Return storage size.
      * @return int.
      */
-    public int getStorageSize() {
+    public synchronized int getStorageSize() {
         return storage.size();
     }
 

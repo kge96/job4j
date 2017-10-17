@@ -26,7 +26,6 @@ public class ProblemIllustratorTest {
             e.printStackTrace();
         }
         System.out.println(d.getA());
-        System.out.println(d.b);
     }
 
 }

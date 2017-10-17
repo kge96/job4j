@@ -85,7 +85,7 @@ public class ArrayContainer<E> implements SimpleContainer<E> {
             private int itr = 0;
             @Override
             public boolean hasNext() {
-                return container.length > itr;
+                return container.length  > itr && container[itr] != null;
             }
 
             @Override

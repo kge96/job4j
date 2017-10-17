@@ -11,7 +11,7 @@ public class ProblemIllustrator implements Runnable {
     /**
      * Object for demonstrate thread problems.
      */
-    Demonstrate d;
+    private Demonstrate d;
 
     /**
      * Constructor.
@@ -34,7 +34,6 @@ public class ProblemIllustrator implements Runnable {
                 e.printStackTrace();
             }
         }
-        d.b += 2;
 
     }
 }

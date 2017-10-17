@@ -12,10 +12,6 @@ public class Demonstrate {
      * Variable a.
      */
     private int a = 0;
-    /**
-     * Variable b.
-     */
-    public int b = 0;
 
     /**
      * Return a.

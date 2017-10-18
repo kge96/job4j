@@ -13,7 +13,7 @@ import ru.job4j.threads.analizator.ProgramTimeControl;
 
 public class ProgramTimeControlTest {
     /**
-     * Test when program work faster then specified time.
+     * Increment when program work faster then specified time.
      */
     @Test
     public void whenTimeProgramIsOkThenGetResult() {
@@ -22,7 +22,7 @@ public class ProgramTimeControlTest {
     }
 
     /**
-     * Test when program work slowly then specified time.
+     * Increment when program work slowly then specified time.
      */
     @Test
     public void whenTimeProgramIsOutThenThreadStop() {

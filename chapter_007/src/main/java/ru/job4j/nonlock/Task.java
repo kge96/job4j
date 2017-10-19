@@ -19,7 +19,7 @@ public class Task implements Comparable<Task> {
     /**
      * Task version.
      */
-    private int version = 0;
+    private volatile int version = 0;
 
     /**
      * Task constructor.

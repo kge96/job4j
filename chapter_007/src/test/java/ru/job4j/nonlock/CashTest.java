@@ -27,6 +27,7 @@ public class CashTest {
             @Override
             public void run() {
                 Task newTask = new Task(1, "User-1");
+
                 cash.update(newTask);
                 System.out.println(Thread.currentThread().getName() + " is finished");
             }
@@ -39,11 +40,10 @@ public class CashTest {
                 System.out.println(Thread.currentThread().getName() + " is finished");
             }
         });
-
         t1.start();
         t2.start();
 
-        Thread.sleep(300);
+        Thread.sleep(600);
         System.out.println(cash.getTask(1).getName());
     }
 }

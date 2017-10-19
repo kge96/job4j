@@ -30,14 +30,11 @@ public class Cash {
     * @param task - task.
     */
    public void update(Task task) {
-      Task currentTask = taskMap.get(task.getTaskID());
-      if (currentTask != null) {
-         if (task.compareTo(taskMap.get(task.getTaskID())) == -1) {
-            throw new RuntimeException("OplimisticException");
-         } else {
-            taskMap.get(task.getTaskID()).upVersion();
-            taskMap.computeIfPresent(task.getTaskID(), (k, v) -> task);
-         }
+      if (task.compareTo(taskMap.get(task.getTaskID())) == -1) {
+         throw new RuntimeException("OplimisticException");
+      } else {
+         taskMap.get(task.getTaskID()).upVersion();
+         taskMap.computeIfPresent(task.getTaskID(), (k, v) -> task);
       }
    }
 

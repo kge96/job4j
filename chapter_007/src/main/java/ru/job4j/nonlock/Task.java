@@ -59,7 +59,7 @@ public class Task implements Comparable<Task> {
      * Set name.
      * @param name - new name.
      */
-    public void  setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

@@ -26,8 +26,7 @@ public class CashTest {
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                Task newTask = new Task(1, "User-1");
-
+                Task newTask = new Task(1, "User-0");
                 cash.update(newTask);
                 System.out.println(Thread.currentThread().getName() + " is finished");
             }
@@ -35,7 +34,7 @@ public class CashTest {
         Thread t2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                Task newTask = new Task(1, "User-2");
+                Task newTask = new Task(1, "User-1");
                 cash.update(newTask);
                 System.out.println(Thread.currentThread().getName() + " is finished");
             }

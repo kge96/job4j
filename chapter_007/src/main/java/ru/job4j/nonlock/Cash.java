@@ -13,7 +13,7 @@ public class Cash {
    /**
     * Task storage.
     */
-   private ConcurrentHashMap<Integer, Task> taskMap = new ConcurrentHashMap();
+   private volatile ConcurrentHashMap<Integer, Task> taskMap = new ConcurrentHashMap();
 
    /**
     * Add new task to storage.
@@ -30,12 +30,14 @@ public class Cash {
     * @param task - task.
     */
    public void update(Task task) {
-      if (task.compareTo(taskMap.get(task.getTaskID())) == -1) {
-         throw new RuntimeException("OplimisticException");
-      } else {
-         taskMap.get(task.getTaskID()).upVersion();
-         taskMap.computeIfPresent(task.getTaskID(), (k, v) -> task);
-      }
+
+      taskMap.computeIfPresent(task.getTaskID(), (Integer, Task) -> {
+         if (taskMap.get(task.getTaskID()).compareTo(task) != 0){
+            throw new RuntimeException("OplimisticException");
+         }
+         task.upVersion();
+         return task;
+      });
    }
 
    /**

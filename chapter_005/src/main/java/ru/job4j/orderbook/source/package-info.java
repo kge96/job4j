@@ -1,5 +1,5 @@
 /**
- * Source package for parsing.
+ * source package for parsing.
  *
  * @author gkuznetsov.
  * @version 0.1.

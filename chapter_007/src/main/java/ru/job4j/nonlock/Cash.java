@@ -13,7 +13,7 @@ public class Cash {
    /**
     * Task storage.
     */
-   private volatile ConcurrentHashMap<Integer, Task> taskMap = new ConcurrentHashMap();
+   private ConcurrentHashMap<Integer, Task> taskMap = new ConcurrentHashMap();
 
    /**
     * Add new task to storage.

@@ -31,8 +31,8 @@ public class Cash {
     */
    public void update(Task task) {
 
-      taskMap.computeIfPresent(task.getTaskID(), (Integer, Task) -> {
-         if (taskMap.get(task.getTaskID()).compareTo(task) != 0){
+      taskMap.computeIfPresent(task.getTaskID(), (k, v) -> {
+         if (taskMap.get(task.getTaskID()).compareTo(task) != 0) {
             throw new RuntimeException("OplimisticException");
          }
          task.upVersion();

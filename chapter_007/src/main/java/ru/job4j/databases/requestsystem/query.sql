@@ -1,49 +1,48 @@
 create database request_system;
 
-create table public.users
-(
-    id serial not null,
+create table public.users(
+	  id serial not null,
     name character(100),
-    age integer,
-    login character(100),
-    password character(100),
+    surname character(100),
+    phone integer,
     primary key(id)
 );
 
-create table public.role (
+create table role(
     id serial,
     name character(100),
-    access character(100),
-     primary key(id)
-);
-
-create table public.request(
-	id serial not null,
-    level character(100),
-    comment character(100),
+    level_access integer,
     primary key(id)
 );
 
-create table public.files(
-	id serial not null,
-   	name character(100),
-    path character(100),
-    type character(100),
-    primary key(id)
+create table orders(
+    id serial not null,
+    status character(100),
+    category character(100),
+    comments character(100)
 );
 
-insert into users(name, age, login, password) values('Ivan', 25, 'ivan26', '1234');
-insert into users(name, age, login, password) values('John', 22, 'john22', 'dsfsef');
-insert into users(name, age, login, password) values('Pet', 27, 'pet27', 'rge45fdh');
+create table files(
+    id serial not null,
+    name character(100),
+    extention character(100),
+    path character(100)
+);
 
-insert into role(name, access) values('user', 'user');
-insert into role(name, access) values('admin', 'admin');
-insert into role(name, access) values('guest', 'guest');
+ insert into orders(status, category, comments) values('ready', 'type-1', 'comments-1');
+ insert into orders(status, category, comments) values('ready', 'type-2', 'comments-2');
+ insert into orders(status, category, comments) values('ready', 'type-3', 'comments-3');
 
-insert into request(level, comment) values('1', 'higher level access');
-insert into request(level, comment) values('5', 'middle level access');
-insert into request(level, comment) values('10', 'lower level access');
+insert into users(name, surname, phone) values('Ivan', 'Petrov', '123443');
+insert into users(name, surname, phone) values('John', 'Smith', '33232');
+insert into users(name, surname, phone) values('Mike', 'Padesky', '97456');
+insert into users(name, surname, phone) values('Igor', 'Krust', '13424');
 
-insert into files(name, path, type) values('Description', 'C:\user', 'docx');
-insert into files(name, path, type) values('Task', 'C:\user\tasks', 'pdf');
-insert into files(name, path, type) values('Sources', 'C:\user\sources', 'java');
+
+insert into role(name, level_access) values('user', 5);
+insert into role(name, level_access) values('admin', 1);
+insert into role(name, level_access) values('guest', 10);
+
+insert into files(name, path, extention) values('Description', 'C:\user', 'docx');
+insert into files(name, path, extention) values('Task', 'C:\user\tasks', 'pdf');
+insert into files(name, path, extention) values('Sources', 'C:\user\sources', 'java');

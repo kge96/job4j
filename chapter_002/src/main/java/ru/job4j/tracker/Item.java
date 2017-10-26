@@ -35,16 +35,33 @@ public class Item {
      * Random number.
      */
     private static final Random RN = new Random();
+
     /**
      * Constructor.
-     * @param desc - application id.
      * @param name - application name.
+     * @param desc - application description.
+     * @param comments - comments.
      */
-    public Item(String name, String desc) {
+    public Item(String name, String desc, String[] comments) {
         this.name = name;
         this.desc = desc;
+        this.comments = comments;
         this.created = System.currentTimeMillis();
         this.id = String.valueOf(this.generateId());
+    }
+
+    /**
+     * Constructor.
+     * @param id - id.
+     * @param name - name.
+     * @param desc - desc.
+     * @param comments - comments.
+     * @param created - created date.
+     */
+    public Item(String id, String name, String desc, String[] comments, long created) {
+        this(name, desc, comments);
+        this.created = created;
+        this.id = id;
     }
     /**
      * This method set description.
@@ -68,6 +85,14 @@ public class Item {
      */
     public void setComments(String[] comments) {
         this.comments = comments;
+    }
+
+    /**
+     * This method set new task name.
+     * @param name - name.
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -106,8 +131,13 @@ public class Item {
      * This method return application comments.
      * @return String[].
      */
-    public String[] getComments() {
-        return this.comments;
+    public String getComments() {
+        StringBuilder sb = new StringBuilder();
+        for (String comment : this.comments) {
+            sb.append(comment);
+            sb.append('\n');
+        }
+        return sb.toString();
     }
     /**
      * Generate ID for item.

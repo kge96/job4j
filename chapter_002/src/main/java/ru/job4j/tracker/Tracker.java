@@ -1,7 +1,6 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Class for created Tracker.
@@ -13,9 +12,7 @@ public class Tracker {
     /**
      * Items of application.
      */
-    private ArrayList<Item> items = new ArrayList<>();
-
-
+     private ItemStorage items = new ItemStorage();
     /**
      * This method add new element in array Items.
      * @param item - element.
@@ -31,22 +28,7 @@ public class Tracker {
      * @param item - element.
      */
     public void update(Item item) {
-        String id = item.getId();
-        for (int i = 0; i < items.size(); i++) {
-            if (this.items.get(i).getId().equals(id)) {
-                items.set(i, item);
-                break;
-            }
-        }
-
-//        for (int i = 0; i < position; i++) {
-////            if (this.items[i].getId().equals(id)) {
-////                this.items[i] = item;
-////            }
-//            if (this.items.get(i).getId().equals(id)) {
-//                this.items.add(i, item);
-//            }
-//        }
+        this.items.update(item);
     }
 
     /**
@@ -54,13 +36,7 @@ public class Tracker {
      * @param item - element.
      */
     public void delete(Item item) {
-        Iterator<Item> it = items.iterator();
-        while (it.hasNext()) {
-            if (it.next().getId().equals(item.getId())) {
-                it.remove();
-                break;
-            }
-        }
+       this.items.delete(item);
     }
 
     /**
@@ -68,13 +44,7 @@ public class Tracker {
      * @return Item[].
      */
     public ArrayList<Item> findAll() {
-        ArrayList<Item> result = new ArrayList<>();
-        for (Item itm : items) {
-            if (itm != null) {
-                result.add(itm);
-            }
-        }
-        return result;
+        return this.items.findAll();
     }
 
     /**
@@ -83,13 +53,7 @@ public class Tracker {
      * @return Item[].
      */
     public ArrayList<Item> findByName(String key) {
-        ArrayList<Item> result = new ArrayList<>();
-        for (Item itm : items) {
-            if (itm.getName().equals(key)) {
-                result.add(itm);
-            }
-        }
-        return result;
+        return this.items.findByName(key);
     }
 
     /**
@@ -98,13 +62,13 @@ public class Tracker {
      * @return Item.
      */
     public Item findById(String id) {
-        Item result = null;
-        for (Item itm : items) {
-            if (itm != null && itm.getId().equals(id)) {
-                result = itm;
-                break;
-            }
-        }
-        return result;
+        return this.items.findByID(id);
+    }
+
+    /**
+     * Delete all items from table.
+     */
+    public void clearTable() {
+        this.items.clearTable();
     }
 }

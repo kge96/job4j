@@ -1,6 +1,9 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -16,16 +19,21 @@ public class TrackerTest {
      */
     @Test
     public void whenAddNewItemThenHasSameItem() {
-       Item item0 = new Item("test0", "testMethods1");
-       Item item1 = new Item("test1", "testMethods2");
-       Item item2 = new Item("test2", "testMethods1");
-       Item item3 = new Item("test3", "testMethods2");
-        Tracker tracker = new Tracker();
-        tracker.add(item0);
-        tracker.add(item1);
-        tracker.add(item2);
-        tracker.add(item3);
-        assertThat(tracker.findAll().get(1), is(item1));
+       Item item0 = new Item("Tes-1", "Description-1", new String[]{"comment - 1", "comment - 1"});
+       Item item1 = new Item("Tes-2", "Description-2", new String[]{"comment - 2", "comment - 2"});
+       Item item2 = new Item("Tes-3", "Description-3", new String[]{"comment - 3", "comment - 3"});
+       Item item3 = new Item("Tes-4", "Description-4", new String[]{"comment - 4", "comment - 4"});
+       Tracker tracker = new Tracker();
+
+       tracker.add(item0);
+       tracker.add(item1);
+       tracker.add(item2);
+       tracker.add(item3);
+
+        ArrayList<Item> result = tracker.findAll();
+        assertThat(result.get(1).getName(), is("Tes-2"));
+        tracker.clearTable();
+
     }
 
     /**
@@ -33,16 +41,22 @@ public class TrackerTest {
      */
     @Test
     public void whenUpdateNameThenReturnNewName() {
-        Item item0 = new Item("test0", "testMethods1");
-        Item item1 = new Item("test1", "testMethods2");
-        Item item2 = new Item("test2", "testMethods1");
+        Item item0 = new Item("Tes-1", "Description-1", new String[]{"comment - 1", "comment - 1"});
+        Item item1 = new Item("Tes-2", "Description-2", new String[]{"comment - 2", "comment - 2"});
+        Item item2 = new Item("Tes-3", "Description-3", new String[]{"comment - 3", "comment - 3"});
         Tracker tracker = new Tracker();
+
         tracker.add(item0);
         tracker.add(item1);
         tracker.add(item2);
-        item1.setId("task777");
+
+        item1.setName("task777");
         tracker.update(item1);
-        assertThat(tracker.findAll().get(1).getId(), is(item1.getId()));
+
+        String result = tracker.findById(item1.getId()).getName();
+
+        assertThat(result, is("task777"));
+        tracker.clearTable();
     }
 
     /**
@@ -50,17 +64,19 @@ public class TrackerTest {
      */
     @Test
     public void whenDeleteItemThenLeftDisplacementItems() {
-        Item item0 = new Item("test0", "testMethods1");
-        Item item1 = new Item("test1", "testMethods2");
-        Item item2 = new Item("test2", "testMethods1");
-        Item item3 = new Item("test3", "testMethods2");
+        Item item0 = new Item("Tes-1", "Description-1", new String[]{"comment - 1", "comment - 1"});
+        Item item1 = new Item("Tes-2", "Description-2", new String[]{"comment - 2", "comment - 2"});
+        Item item2 = new Item("Tes-3", "Description-3", new String[]{"comment - 3", "comment - 3"});
+        Item item3 = new Item("Tes-4", "Description-4", new String[]{"comment - 4", "comment - 4"});
         Tracker tracker = new Tracker();
+
         tracker.add(item0);
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
         tracker.delete(item2);
-        assertThat(tracker.findAll().get(2).getName() + "", is("test3"));
+        assertThat(tracker.findAll().get(2).getName(), is("Tes-4"));
+        tracker.clearTable();
     }
 
     /**
@@ -68,43 +84,45 @@ public class TrackerTest {
      */
     @Test
     public void whenSearchElementByNameThenReturnArrayElementsWithNames() {
-        Item item0 = new Item("test0", "testMethods1");
-        Item item1 = new Item("test1", "testMethods2");
-        Item item2 = new Item("test0", "testMethods1");
-        Item item3 = new Item("test3", "testMethods2");
-        Item item5 = new Item("test0", "testMethods2");
+        Item item0 = new Item("Test-0", "Description-1", new String[]{"comment - 1", "comment - 1"});
+        Item item1 = new Item("Test-2", "Description-2", new String[]{"comment - 2", "comment - 2"});
+        Item item2 = new Item("Test-0", "Description-3", new String[]{"comment - 3", "comment - 3"});
+        Item item3 = new Item("Test-4", "Description-4", new String[]{"comment - 4", "comment - 4"});
+        Item item4 = new Item("Test-0", "Description-5", new String[]{"comment - 5", "comment - 5"});
         Tracker tracker = new Tracker();
+
         tracker.add(item0);
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        tracker.add(item5);
-        int result = tracker.findByName("test0").size();
+        tracker.add(item4);
+        int result = tracker.findByName("Test-0").size();
         assertThat(result, is(3));
+        tracker.clearTable();
     }
 
     /**
      * Testing getting all elements from Track.
      */
     @Test
-    public void whenAllElemensThenReturnArraysWithoutNull() {
-        Item item0 = new Item("test0", "testMethods1");
-        Item item1 = new Item("test1", "testMethods2");
-        Item item2 = new Item("test2", "testMethods1");
-        Item item3 = new Item("test3", "testMethods2");
-        Item item4 = new Item("test4", "testMethods3");
-        Item item5 = new Item("test5", "testMethods2");
+    public void whenAllElementsThenReturnArraysWithoutNull() {
+        Item item0 = new Item("Tes-1", "Description-1", new String[]{"comment - 1", "comment - 1"});
+        Item item1 = new Item("Tes-2", "Description-2", new String[]{"comment - 2", "comment - 2"});
+        Item item2 = new Item("Tes-3", "Description-3", new String[]{"comment - 3", "comment - 3"});
+        Item item3 = new Item("Tes-4", "Description-4", new String[]{"comment - 4", "comment - 4"});
+        Item item4 = new Item("Tes-5", "Description-5", new String[]{"comment - 5", "comment - 5"});
         Tracker tracker = new Tracker();
+
         tracker.add(item0);
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
         tracker.add(item4);
-        tracker.add(item5);
         tracker.delete(item1);
         tracker.delete(item3);
         tracker.delete(item4);
-        assertThat(tracker.findAll().size(), is(3));
+        assertThat(tracker.findAll().size(), is(2));
+        tracker.clearTable();
     }
 
     /**
@@ -112,20 +130,23 @@ public class TrackerTest {
      */
     @Test
     public void whenSearchElementByIDThenReturnElementWithId() {
-        Item item0 = new Item("test0", "testMethods1");
-        Item item1 = new Item("test1", "testMethods2");
-        Item item2 = new Item("test2", "testMethods1");
-        Item item3 = new Item("test3", "testMethods2");
-        Item item4 = new Item("test4", "testMethods3");
-        Item item5 = new Item("test5", "testMethods2");
+        Item item0 = new Item("Tes-1", "Description-1", new String[]{"comment - 1", "comment - 1"});
+        Item item1 = new Item("Tes-2", "Description-2", new String[]{"comment - 2", "comment - 2"});
+        Item item2 = new Item("Tes-3", "Description-3", new String[]{"comment - 3", "comment - 3"});
+        Item item3 = new Item("Tes-4", "Description-4", new String[]{"comment - 4", "comment - 4"});
+        Item item4 = new Item("Tes-5", "Description-5", new String[]{"comment - 5", "comment - 5"});
+        Item item5 = new Item("Tes-6", "Description-6", new String[]{"comment - 6", "comment - 6"});
         Tracker tracker = new Tracker();
+
         tracker.add(item0);
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
         tracker.add(item4);
         tracker.add(item5);
-        String result = item3.getId();
-        assertThat(tracker.findById(result), is(item3));
+        String result = tracker.findById(item3.getId()).getId();
+        assertThat(result, is(item3.getId()));
+        tracker.clearTable();
     }
+
 }

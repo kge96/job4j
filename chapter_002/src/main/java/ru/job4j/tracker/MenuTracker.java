@@ -126,7 +126,8 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Pleas enter user name");
             String description = input.ask("Pleas enter item description");
-            Item item = tracker.add(new Item(name, description));
+            String[] comments = input.ask("Pleas enter item comments").split(";");
+            Item item = tracker.add(new Item(name, description, comments));
             if (item != null) {
                 input.print("Item " + item.getName() + " was added\n");
             } else {
@@ -238,7 +239,8 @@ public class MenuTracker {
             } else {
                 String newName = input.ask("Enter new user name");
                 String newDesc = input.ask("Enter new item description");
-                Item newItem = new Item(newName, newDesc);
+                String[] comments = input.ask("Enter new item comments").split(";");
+                Item newItem = new Item(newName, newDesc, comments);
                 newItem.setId(item.getId());
                 tracker.update(newItem);
             }

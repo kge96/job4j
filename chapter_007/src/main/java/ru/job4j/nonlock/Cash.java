@@ -21,7 +21,7 @@ public class Cash {
     */
    public void add(Task task) {
       if (!taskMap.containsKey(task)) {
-         taskMap.put(task.getTaskID(), task);
+         taskMap.putIfAbsent(task.getTaskID(), task);
       }
    }
 

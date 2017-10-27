@@ -1,6 +1,5 @@
 package ru.job4j.bomberman;
 
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -14,12 +13,20 @@ public class Board {
     /**
      * Game board.
      */
-    private final ReentrantLock[][] board = new ReentrantLock[5][5];
+    private final ReentrantLock[][] board;
+    /**
+     * Count of monsters.
+     */
+    private final int monsters;
 
     /**
      * Board constructor.
+     * @param size - field size.
+     * @param monsters - count of monsters.
      */
-    public Board() {
+    public Board(int size, int monsters) {
+        this.board = new ReentrantLock[size][size];
+        this.monsters = monsters;
         fillBoard();
     }
 
@@ -40,7 +47,8 @@ public class Board {
      */
     public void startGame() throws InterruptedException {
         Thread hero = new Thread(() -> {
-            moveHero();
+//           movePersonage(0, 0, "Hero");
+            this.board[0][0].lock();
         });
         Thread barrier = new Thread(() -> {
             this.board[2][0].lock();
@@ -50,43 +58,122 @@ public class Board {
 
         barrier.start();
         hero.start();
-        hero.join();
+
+        for (int i = 0; i < monsters; i++) {
+            try {
+                Thread.sleep(1001);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            int finalI = i + 1;
+            Thread monster = new Thread(()-> {
+                String name = "Monster-" + finalI;
+                movePersonage(board.length - 1, board.length - 1, name);
+            });
+            monster.start();
+        }
+        Thread.sleep(10000);
     }
 
     /**
-     * Moving of hero.
+     * Moving personage.
+     * @param startX - start position x.
+     * @param startY - start position y.
+     * @param name - personage name.
      */
-    public void moveHero() {
-        int currentX = 0;
-        int currentY = 0;
-        int newX = 0;
-        int newY = 0;
+    public void movePersonage(int startX, int startY, String name) {
+        int prevX = -1;
+        int prevY = -1;
 
         while (true) {
+            boolean locked = false;
+            long waitingTime = 0;
+
             try {
-                if (board[newX][newY].tryLock(500, TimeUnit.MILLISECONDS)) {
+                long startTryLock = System.currentTimeMillis();
+                System.out.println(String.format("%s : I'm try go to [%s][%s]", name, startX, startY));
+                while (waitingTime < 5001) {
+                    if (!board[startX][startY].isLocked()) {
+                        board[startX][startY].lock();
+                        locked = true;
+                        System.out.println(name + " visit cell[" + startX + "][" + startY + "]");
 
-                    currentX = newX;
-                    currentY = newY;
-                    board[currentX][currentY].lock();
-                    Thread.sleep(1000);
-                    System.out.println("Hero visit cell[" + newX + "][" + newY + "]");
-
-                } else {
-                    System.out.println("Cell(" + newX + ", " + newY + ") is locked!");
+                        Thread.sleep(1000);
+                        prevX = startX;
+                        prevY = startY;
+                        break;
+                    }
+                    waitingTime = System.currentTimeMillis() - startTryLock;
                 }
+                if (!locked) {
+                    System.out.println(name + ": Cell(" + startX + ", " + startY + ") is locked!");
+                }
+
             } catch (InterruptedException e) {
-                System.out.println("Cell(" + newX + ", " + newY + ") is locked!");
+                e.printStackTrace();
                 continue;
             } finally {
-                board[currentX][currentY].unlock();
-                int[] position = calculateNextPosition(currentX, currentY);
-                newX = position[0];
-                newY = position[1];
+                int[] position = calculateNextPosition(startX, startY);
+                startX = position[0];
+                startY = position[1];
+
+                if (prevX >= 0 && prevY >= 0 && locked) {
+                    board[prevX][prevY].unlock();
+                    System.out.println(name + " leave cell[" + prevX + "][" + prevY + "]");
+                }
             }
         }
     }
 
+    /**
+     * Moving hero.
+     * @param startX - start position x.
+     * @param startY - start position y.
+     * @param name - personage name.
+     */
+    public void moveHero(int startX, int startY, String name) {
+        int prevX = -1;
+        int prevY = -1;
+
+        while (true) {
+            boolean locked = false;
+            long waitingTime = 0;
+
+            try {
+                long startTryLock = System.currentTimeMillis();
+                System.out.println(String.format("%s : I'm try go to [%s][%s]", name, startX, startY));
+                while (waitingTime < 5001) {
+                    if (!board[startX][startY].isLocked()) {
+                        board[startX][startY].lock();
+                        locked = true;
+                        System.out.println(name + " visit cell[" + startX + "][" + startY + "]");
+
+                        Thread.sleep(1000);
+                        prevX = startX;
+                        prevY = startY;
+                        break;
+                    }
+                    waitingTime = System.currentTimeMillis() - startTryLock;
+                }
+                if (!locked) {
+                    System.out.println(name + ": Cell(" + startX + ", " + startY + ") is locked!");
+                }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                continue;
+            } finally {
+                //todo: ask user new position.
+                startX = 0;
+                startY = 0;
+
+                if (prevX >= 0 && prevY >= 0 && locked) {
+                    board[prevX][prevY].unlock();
+                    System.out.println(name + " leave cell[" + prevX + "][" + prevY + "]");
+                }
+            }
+        }
+    }
     /**
      * Calculate new position from hero.
      * @param currX - current x position.

@@ -16,7 +16,7 @@ public class BoardTest {
      */
     @Test
     public void testBombermanMoving() throws InterruptedException {
-        Board board = new Board();
+        Board board = new Board(10, 2);
         board.startGame();
     }
 }

@@ -20,9 +20,7 @@ public class Cash {
     * @param task - task.
     */
    public void add(Task task) {
-      if (!taskMap.containsKey(task)) {
-         taskMap.putIfAbsent(task.getTaskID(), task);
-      }
+      taskMap.putIfAbsent(task.getTaskID(), task);
    }
 
    /**

@@ -54,11 +54,6 @@ insert into orders(status, category, comments) values('in_work', 'type-3', 'comm
 insert into orders(status, category, comments) values('ready', 'type-1', 'comments-3');
 
 
-
-
-
-
-
 select * from users as u where u.surname = 'Krust';
 select * from role as r where r.level_access < 6;
 select count(*) from users;

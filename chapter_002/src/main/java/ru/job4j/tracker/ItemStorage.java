@@ -70,11 +70,10 @@ public class ItemStorage {
      * Initialization. If table does not exist, this code create table into db.
      */
     public void initStorage() {
-        Statement statement = null;
         try {
             conn = DriverManager.getConnection(url, username, password);
-            statement = conn.createStatement();
-            statement.execute("CREATE TABLE IF NOT EXISTS tracker("
+            st = conn.createStatement();
+            st.execute("CREATE TABLE IF NOT EXISTS tracker("
                     + "id serial primary key not null, "
                     + "tracker_id VARCHAR(100), "
                     + "name VARCHAR(100),"
@@ -85,8 +84,6 @@ public class ItemStorage {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
     }
 
@@ -96,7 +93,6 @@ public class ItemStorage {
      */
     public void add(Item item) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
             ps = conn.prepareStatement("INSERT INTO tracker(tracker_id, name, description, created, comments) values(?, ?, ?, ?, ?)");
             ps.setString(1, item.getId());
             ps.setString(2, item.getName());
@@ -106,8 +102,6 @@ public class ItemStorage {
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
     }
 
@@ -123,8 +117,6 @@ public class ItemStorage {
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
     }
 
@@ -134,25 +126,16 @@ public class ItemStorage {
      */
     public void update(Item item) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            PreparedStatement st = conn.prepareStatement("UPDATE tracker SET name = ?, description = ?, created = ?, comments = ? where tracker_id = ?");
+            ps = conn.prepareStatement("UPDATE tracker SET name = ?, description = ?, created = ?, comments = ? where tracker_id = ?");
 
-            st.setString(1, item.getName());
-            st.setString(2, item.getDesc());
-            st.setLong(3, item.getCreated());
-            st.setString(4, item.getComments());
-            st.setString(5, item.getId());
-            st.executeUpdate();
+            ps.setString(1, item.getName());
+            ps.setString(2, item.getDesc());
+            ps.setLong(3, item.getCreated());
+            ps.setString(4, item.getComments());
+            ps.setString(5, item.getId());
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -163,15 +146,11 @@ public class ItemStorage {
     public ArrayList<Item> findAll() {
         ArrayList<Item> result = new ArrayList<>();
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            Statement st = conn.createStatement();
             rs = st.executeQuery("SELECT  * FROM tracker");
             getResults(rs, result);
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
         return result;
     }
@@ -184,7 +163,6 @@ public class ItemStorage {
     private ArrayList<Item> findByParam(String param) {
         ArrayList<Item> result = new ArrayList<>();
         try {
-            conn = DriverManager.getConnection(url, username, password);
             ps = conn.prepareStatement("SELECT  * FROM tracker WHERE NAME  = ? OR tracker_id = ?");
             ps.setString(1, param);
             ps.setString(2, param);
@@ -193,8 +171,6 @@ public class ItemStorage {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
         return result;
     }
@@ -226,22 +202,17 @@ public class ItemStorage {
      * Delete all items from table.
      */
     public void clearTable() {
-        Statement statement = null;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            statement = conn.createStatement();
-            statement.execute("delete from tracker");
+            st.execute("delete from tracker");
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
     }
 
     /**
      * Close all connections if they running.
      */
-    private void closeConnection() {
+    public void closeConnection() {
         if (conn != null) {
             try {
                 conn.close();
@@ -292,4 +263,5 @@ public class ItemStorage {
             e.printStackTrace();
         }
     }
+
 }

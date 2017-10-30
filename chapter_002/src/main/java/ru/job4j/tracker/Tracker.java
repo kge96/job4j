@@ -70,5 +70,8 @@ public class Tracker {
      */
     public void clearTable() {
         this.items.clearTable();
+        this.items.closeConnection();
     }
+
+
 }

@@ -31,7 +31,7 @@ public class EchoServlet extends HttpServlet {
     private List<String> users = new CopyOnWriteArrayList<>();
 
     /**
-     * Get connection.
+     * Getting connection.
      * @param req - request.
      * @param resp - resp.
      * @throws ServletException - exception.
@@ -42,7 +42,7 @@ public class EchoServlet extends HttpServlet {
         resp.setContentType("text/html");
         String login = req.getParameter("login");
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        writer.append("hellow world, " + this.users);
+        writer.append("hello world, " + this.users);
         writer.flush();
     }
 

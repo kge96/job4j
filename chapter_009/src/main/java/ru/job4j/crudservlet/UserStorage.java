@@ -1,11 +1,16 @@
 package ru.job4j.crudservlet;
 
+
+import javax.naming.InitialContext;
+import javax.servlet.http.HttpServlet;
+import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
+
 
 /**
  * Class for connecting to database.
@@ -14,7 +19,7 @@ import java.sql.PreparedStatement;
  * @version 0.1.
  * @since 31.10.2017.
  */
-public class UsersDBConnector {
+public class UserStorage extends HttpServlet {
     /**
      * URL.
      */
@@ -43,12 +48,31 @@ public class UsersDBConnector {
      * Result set.
      */
     private ResultSet rs;
+    /**
+     * Instance of user storage database.
+     */
+    private static volatile UserStorage instanse;
 
     /**
      * UserDBConnector constructor.
      */
-    public UsersDBConnector() {
+    private UserStorage() {
         initStorage();
+    }
+
+    /**
+     * Return instance of user storage database.
+     * @return UserStorage.
+     */
+    public static UserStorage getInstance() {
+        if (instanse == null) {
+            synchronized (UserStorage.class) {
+                if (instanse == null) {
+                    instanse = new UserStorage();
+                }
+            }
+        }
+        return instanse;
     }
 
     /**
@@ -56,8 +80,12 @@ public class UsersDBConnector {
      */
     public void initStorage() {
         try {
-            Class.forName("org.postgresql.Driver");
-            cn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
+
+            InitialContext initContext = new InitialContext();
+            DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/users");
+            cn = ds.getConnection();
+
+
             st = cn.createStatement();
             st.execute("CREATE TABLE IF NOT EXISTS personal_data(name VARCHAR(100),login VARCHAR(100)primary key not null, email VARCHAR(100),created bigint)");
         } catch (Exception e) {
@@ -140,6 +168,28 @@ public class UsersDBConnector {
     }
 
     /**
+     * Get all users from storage.
+     * @return ArrayList.
+     */
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> result = new ArrayList<>();
+        try {
+            pst = cn.prepareStatement("SELECT * FROM personal_data");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String userLogin = rs.getString("login");
+                String email = rs.getString("email");
+                long created = rs.getLong("created");
+                result.add(new User(name, userLogin, email, created));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
      * Close all connections.
      */
     public void closeConnections() {
@@ -172,6 +222,7 @@ public class UsersDBConnector {
             }
         }
     }
+
     /**
      * Delete all items from table.
      */

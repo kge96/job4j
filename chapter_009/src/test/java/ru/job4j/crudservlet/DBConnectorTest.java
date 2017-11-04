@@ -19,7 +19,7 @@ public class DBConnectorTest {
      */
     @Test
     public void testingConnectionToDb() {
-        UsersDBConnector connector = new UsersDBConnector();
+        UserStorage connector = UserStorage.getInstance();
         User user1 = new User("Ivan", "Ivan1", "Ivan@rambler.ru");
         User user2 = new User("Ivan", "Ivan2", "Ivan@mail.ru");
         User user3 = new User("Ivan", "Ivan3", "Ivan@yandex.ru");

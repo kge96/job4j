@@ -53,7 +53,7 @@ public class ParserToXML {
             String value = String.valueOf(numbers[i]);
             entries.appendChild(getEntry(doc, "field", value));
         }
-        File xmlFile = new File("C:\\Projects\\gkuznetsov\\chapter_007\\src\\main\\java\\ru\\job4j\\databases\\optimize\\dbsource\\1.xml");
+        File xmlFile = new File("src\\main\\java\\\\ru\\job4j\\databases\\optimize\\dbsource\\1.xml");
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.transform(new DOMSource(doc), new StreamResult(xmlFile));

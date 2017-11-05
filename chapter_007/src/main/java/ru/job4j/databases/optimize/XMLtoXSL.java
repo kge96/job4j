@@ -13,16 +13,16 @@ import java.io.File;
  * @version 0.1.
  * @since 28.10.2017.
  */
-public class XMLConverter {
+public class XMLtoXSL {
     /**
      * Convert xml file.
      */
     public void convertXML() {
         try {
             TransformerFactory ttf = TransformerFactory.newInstance();
-            Transformer tf = ttf.newTransformer(new StreamSource(new File("C:\\Projects\\gkuznetsov\\chapter_007\\src\\main\\java\\ru\\job4j\\databases\\optimize\\dbsource\\converter.xsl")));
-            StreamSource ss = new StreamSource(new File("C:\\Projects\\gkuznetsov\\chapter_007\\src\\main\\java\\ru\\job4j\\databases\\optimize\\dbsource\\1.xml"));
-            StreamResult sr = new StreamResult(new File("C:\\Projects\\gkuznetsov\\chapter_007\\src\\main\\java\\ru\\job4j\\databases\\optimize\\dbsource\\2.xml"));
+            Transformer tf = ttf.newTransformer(new StreamSource(new File("src\\main\\java\\ru\\job4j\\databases\\optimize\\dbsource\\converter.xsl")));
+            StreamSource ss = new StreamSource(new File("src\\main\\java\\ru\\job4j\\databases\\optimize\\dbsource\\1.xml"));
+            StreamResult sr = new StreamResult(new File("src\\main\\java\\ru\\job4j\\databases\\optimize\\dbsource\\2.xml"));
             tf.transform(ss, sr);
         } catch (Exception e) {
             e.printStackTrace();

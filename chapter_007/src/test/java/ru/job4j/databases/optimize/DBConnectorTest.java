@@ -22,7 +22,7 @@ public class DBConnectorTest {
     public void whenSetOneMillionThenReturnSummFromOneToMillion() throws TransformerException, ParserConfigurationException {
         long startTime = System.currentTimeMillis();
         ProgramRunner runner = new ProgramRunner();
-        runner.startProgram(1_000_000);
+        runner.startProgram(1_000);
         long finishTime = System.currentTimeMillis() - startTime;
 
         if (finishTime < 300_000) {

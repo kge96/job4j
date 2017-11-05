@@ -19,10 +19,10 @@ public class ProgramRunner {
      */
     public void startProgram(int countOfNumbers) throws TransformerException, ParserConfigurationException {
         DBConnector connector = new DBConnector();
-        XMLConverter converter = new XMLConverter();
+        XMLtoXSL converter = new XMLtoXSL();
         Summator summator = new Summator();
 
-        connector.setURL("jdbc:sqlite:C:\\Projects\\gkuznetsov\\chapter_007\\src\\main\\java\\ru\\job4j\\databases\\optimize\\dbsource\\numbers.db");
+        connector.setURL("jdbc:sqlite:src\\main\\java\\\\ru\\job4j\\databases\\optimize\\dbsource\\numbers.db");
         connector.openConnections();
         connector.initTable();
         connector.setN(countOfNumbers);

@@ -1,9 +1,7 @@
 package ru.job4j.crudservlet;
 
-
-import javax.naming.InitialContext;
+import org.postgresql.ds.PGPoolingDataSource;
 import javax.servlet.http.HttpServlet;
-import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Connection;
@@ -23,7 +21,7 @@ public class UserStorage extends HttpServlet {
     /**
      * URL.
      */
-    private static final String URL = "jdbc:postgresql://localhost:5432/users";
+    private static final String URL = "localhost:5432";
     /**
      * User name for db.
      */
@@ -32,6 +30,14 @@ public class UserStorage extends HttpServlet {
      * Password for db.
      */
     private static final String PASSWORD = "qazar";
+    /**
+     * Database name.
+     */
+    private static final String DB_NAME = "users";
+    /**
+     * Connection pool.
+     */
+    private PGPoolingDataSource source;
     /**
      * Connection.
      */
@@ -80,12 +86,15 @@ public class UserStorage extends HttpServlet {
      */
     public void initStorage() {
         try {
-
-            InitialContext initContext = new InitialContext();
-            DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/users");
-            cn = ds.getConnection();
-
-
+            source = new PGPoolingDataSource();
+            source.setDataSourceName(DB_NAME);
+            source.setServerName(URL);
+            source.setDatabaseName(DB_NAME);
+            source.setUser(USER_NAME);
+            source.setPassword(PASSWORD);
+            source.setMaxConnections(20);
+            source.setInitialConnections(20);
+            cn = source.getConnection();
             st = cn.createStatement();
             st.execute("CREATE TABLE IF NOT EXISTS personal_data(name VARCHAR(100),login VARCHAR(100)primary key not null, email VARCHAR(100),created bigint)");
         } catch (Exception e) {

@@ -1,5 +1,7 @@
 <%@ page import="ru.job4j.crudservlet.User" %>
 <%@ page import="ru.job4j.crudservlet.UserStorage" %>
+<%@ page import="java.util.List" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: g.kuznetsov
@@ -20,17 +22,17 @@
             <th>login</th>
             <th>e-mail</th>
         </tr>
-            <% for (User usr : UserStorage.getInstance().getAllUsers()) {%>
+            <c:forEach items="${users}" var="users">
         <tr>
-            <td><%= usr.getName()%></td>
-            <td><%= usr.getLogin()%></td>
-            <td><%= usr.getEmail()%></td>
+            <td><c:out value="${users.name}"></c:out></td>
+            <td><c:out value="${users.login}"></c:out></td>
+            <td><c:out value="${users.email}"></c:out></td>
         </tr>
-            <% } %>
+            </c:forEach>
     </table>
     </br>
     <input type="submit" value="edit">
     <input type="submit" value="delete">
-    <a href="user/add">add user</a>
+    <a href="add">add user</a>
 </body>
 </html>

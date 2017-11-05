@@ -21,7 +21,7 @@ public class User {
      */
     private String email;
     /**
-     * Creation date.
+     * UsersAddController date.
      */
     private long createDate;
 

@@ -11,12 +11,12 @@
         <servlet-class>ru.job4j.servlets.EchoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Getting</servlet-name>
-        <servlet-class>ru.job4j.crudservlet.servlets.Getting</servlet-class>
+        <servlet-name>Users Controller Servlet</servlet-name>
+        <servlet-class>ru.job4j.crudservlet.servlets.UserGetController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Creation</servlet-name>
-        <servlet-class>ru.job4j.crudservlet.servlets.Creation</servlet-class>
+        <servlet-name>Users Add Controller</servlet-name>
+        <servlet-class>ru.job4j.crudservlet.servlets.UsersAddController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Removal</servlet-name>
@@ -27,15 +27,13 @@
         <servlet-class>ru.job4j.crudservlet.servlets.Editing</servlet-class>
     </servlet>
 
-
-
     <servlet-mapping>
-        <servlet-name>Getting</servlet-name>
-        <url-pattern>/user</url-pattern>
+        <servlet-name>Users Controller Servlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Creation</servlet-name>
-        <url-pattern>/user/add</url-pattern>
+        <servlet-name>Users Add Controller</servlet-name>
+        <url-pattern>/add</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Removal</servlet-name>

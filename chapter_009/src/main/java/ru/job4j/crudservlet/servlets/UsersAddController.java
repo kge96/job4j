@@ -16,7 +16,7 @@ import java.io.IOException;
  * @version 0.1.
  * @since 03.11.2017.
  */
-public class Creation extends HttpServlet {
+public class UsersAddController extends HttpServlet {
     /**
      * Users database.
      */
@@ -47,7 +47,7 @@ public class Creation extends HttpServlet {
         String email = req.getParameter("email");
         User user = new User(name, login, email);
         this.database.add(user);
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 
     /**
@@ -59,8 +59,8 @@ public class Creation extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.sendRedirect(String.format("%s/add.jsp", req.getContextPath()));
+        req.getRequestDispatcher("/WEB-INF/views/UsersAddView.jsp").forward(req, resp);
+
     }
 
     /**

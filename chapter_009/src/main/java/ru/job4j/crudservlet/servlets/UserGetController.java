@@ -15,7 +15,7 @@ import java.io.IOException;
  * @version 0.1.
  * @since 03.11.2017.
  */
-public class Getting extends HttpServlet {
+public class UserGetController extends HttpServlet {
     /**
      * Database.
      */
@@ -40,9 +40,10 @@ public class Getting extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        req.setAttribute("users", UserStorage.getInstance().getAllUsers());
+        req.getRequestDispatcher("/WEB-INF/views/UsersView.jsp").forward(req, resp);
     }
+
 
     /**
      * Destroy method. Exicute before servlet finishing.

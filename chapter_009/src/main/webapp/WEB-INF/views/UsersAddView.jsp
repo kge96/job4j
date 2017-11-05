@@ -11,8 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action ="<%=request.getContextPath()%>/user/add" method="post">
-    <h2><%=request.getContextPath()%></h2>
+<form action ="${pageContext.servletContext.contextPath}/add" method="post">
     <h3>Name:</h3>
     <input type="text" name="name"/>
     <h3>login:</h3>
@@ -20,7 +19,7 @@
     <h3>email:</h3>
     <input type="text" name = "email"/></br>
     <input type = "submit" value = add">
-    <a href="index.jsp">back</a>
+    <a href="${pageContext.servletContext.contextPath}">back</a>
 </form>
 </body>
 </html>

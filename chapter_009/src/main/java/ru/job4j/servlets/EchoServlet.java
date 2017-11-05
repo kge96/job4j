@@ -31,7 +31,7 @@ public class EchoServlet extends HttpServlet {
     private List<String> users = new CopyOnWriteArrayList<>();
 
     /**
-     * Getting connection.
+     * UserGetController connection.
      * @param req - request.
      * @param resp - resp.
      * @throws ServletException - exception.

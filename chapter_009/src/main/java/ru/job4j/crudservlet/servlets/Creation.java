@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Class - servlet for adding new user to database.
@@ -48,7 +47,7 @@ public class Creation extends HttpServlet {
         String email = req.getParameter("email");
         User user = new User(name, login, email);
         this.database.add(user);
-        doGet(req, resp);
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 
     /**
@@ -61,26 +60,7 @@ public class Creation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        PrintWriter printWriter = new PrintWriter(resp.getOutputStream());
-        StringBuilder sb = new StringBuilder("<table>");
-
-        printWriter.append("<!DOCTYPE html>\n"
-                + "<html lang=\"en\">\n"
-                + "<head>\n"
-                + "    <meta charset=\"UTF-8\">\n"
-                + "    <title>Title</title>\n"
-                + "</head>\n"
-                + "<body>\n"
-                + "    <form action= '" + req.getContextPath() + "/user/add' method=\"post\">\n"
-                + "        <h3>Name:</h3><input type=\"text\" name=\"name\"/>\n"
-                + "        <h3>login:</h3> <input type=\"text\" name = \"login\"/>\n"
-                + "        <h3>email:</h3> <input type=\"text\" name = \"email\"/></br></br>\n"
-                + "        <input type = \"submit\" value = \"add user\">\n"
-                +        "<a href=\"../user\">back</a>\n"
-                + "    </form>\n"
-                + "</body>\n"
-                + "</html>");
-        printWriter.flush();
+        resp.sendRedirect(String.format("%s/add.jsp", req.getContextPath()));
     }
 
     /**

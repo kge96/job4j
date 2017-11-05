@@ -111,7 +111,6 @@ public class ItemStorage {
      */
     public void delete(Item item) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
             ps = conn.prepareStatement("DELETE FROM tracker where tracker_id = ?");
             ps.setString(1, item.getId());
             ps.executeUpdate();
@@ -127,7 +126,6 @@ public class ItemStorage {
     public void update(Item item) {
         try {
             ps = conn.prepareStatement("UPDATE tracker SET name = ?, description = ?, created = ?, comments = ? where tracker_id = ?");
-
             ps.setString(1, item.getName());
             ps.setString(2, item.getDesc());
             ps.setLong(3, item.getCreated());

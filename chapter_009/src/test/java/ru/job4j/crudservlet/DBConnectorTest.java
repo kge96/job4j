@@ -20,10 +20,10 @@ public class DBConnectorTest {
     @Test
     public void testingConnectionToDb() {
         UserStorage connector = UserStorage.getInstance();
-        User user1 = new User("Ivan", "Ivan1", "Ivan@rambler.ru");
-        User user2 = new User("Ivan", "Ivan2", "Ivan@mail.ru");
-        User user3 = new User("Ivan", "Ivan3", "Ivan@yandex.ru");
-        User user4 = new User("Ivan", "Ivan4", "Ivan@gmail.ru");
+        User user1 = new User("Ivan", "Ivan1", "1234", "Ivan@rambler.ru", "user");
+        User user2 = new User("Ivan", "Ivan2", "1234", "Ivan@mail.ru", "user");
+        User user3 = new User("Ivan", "Ivan3", "1234", "Ivan@yandex.ru", "user");
+        User user4 = new User("Ivan", "Ivan4", "1234", "Ivan@gmail.ru", "user");
         connector.add(user1);
         connector.add(user2);
         connector.add(user3);

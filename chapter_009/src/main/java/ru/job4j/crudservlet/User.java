@@ -24,17 +24,29 @@ public class User {
      * UsersAddController date.
      */
     private long createDate;
+    /**
+     *User password.
+     */
+    private String password;
+    /**
+     * User role.
+     */
+    private String role;
 
     /**
      * User constructor.
      * @param name - user name.
      * @param login - user login.
+     * @param password - user password.
      * @param email - user email.
+     * @param role - user role.
      */
-    public User(String name, String login, String email) {
+    public User(String name, String login, String password, String email, String role) {
         this.name = name;
         this.login = login;
+        this.password = password;
         this.email = email;
+        this.role = role;
         this.createDate = System.currentTimeMillis();
     }
 
@@ -42,13 +54,13 @@ public class User {
      * User constructor.
      * @param name - user name.
      * @param login - user login.
+     * @param password - user password.
      * @param email - user email.
      * @param createDate - creation date.
+     * @param role - usr role.
      */
-    public User(String name, String login, String email, long createDate) {
-        this.name = name;
-        this.login = login;
-        this.email = email;
+    public User(String name, String login, String password, String email, String role, long createDate) {
+        this(name, login, password, email, role);
         this.createDate = createDate;
     }
 
@@ -69,6 +81,14 @@ public class User {
     }
 
     /**
+     * Get user password.
+     * @return String.
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
      * Getter for email.
      * @return String.
      */
@@ -85,6 +105,14 @@ public class User {
     }
 
     /**
+     * Get user Role.
+     * @return String.
+     */
+    public String getRole() {
+        return this.role;
+    }
+
+    /**
      * Setter for name.
      * @param name - user name.
      */
@@ -98,6 +126,14 @@ public class User {
      */
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    /**
+     * Set user password.
+     * @param password - password.
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**

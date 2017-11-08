@@ -16,9 +16,21 @@
         <servlet-class>ru.job4j.crudservlet.servlets.Removal</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Editing</servlet-name>
-        <servlet-class>ru.job4j.crudservlet.servlets.Editing</servlet-class>
+        <servlet-name>User Edit Controller</servlet-name>
+        <servlet-class>ru.job4j.crudservlet.servlets.UserEditController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Signin</servlet-name>
+        <servlet-class>ru.job4j.crudservlet.servlets.SigninController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Signout</servlet-name>
+        <servlet-class>ru.job4j.crudservlet.servlets.SignoutController</servlet-class>
+    </servlet>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>ru.job4j.crudservlet.servlets.AuthFilter</filter-class>
+    </filter>
 
     <servlet-mapping>
         <servlet-name>Users Controller Servlet</servlet-name>
@@ -33,11 +45,23 @@
         <url-pattern>/user/remove</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Editing</servlet-name>
-        <url-pattern>/user/edit</url-pattern>
+        <servlet-name>User Edit Controller</servlet-name>
+        <url-pattern>/edit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EchoServlet</servlet-name>
         <url-pattern>/echo</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Signin</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Signout</servlet-name>
+        <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
 </web-app>

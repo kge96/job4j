@@ -122,7 +122,7 @@ public class UserStorage extends HttpServlet {
         int result = 2;
         try {
             String userRole = user.getRole();
-            pst = cn.prepareStatement("SELECT users_roles.id FROM users_roles WHERE role_name  = ?");
+            pst = cn.prepareStatement("SELECT id FROM users_roles WHERE role_name  = ?");
             pst.setString(1, userRole);
             rs = pst.executeQuery();
             while (rs.next()) {

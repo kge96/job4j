@@ -36,7 +36,7 @@
     <c:if test="${role == 'admin'}">
         <select name="role" id="role" style="width: 147px; height: 23px;">
             <c:forEach items="${roles}" var="roles">
-                <option value="user"><c:out value="${roles}"></c:out></option>
+                <option value="<c:out value="${roles}"></c:out>"><c:out value="${roles}"></c:out></option>
             </c:forEach>
         </select>
     </c:if>

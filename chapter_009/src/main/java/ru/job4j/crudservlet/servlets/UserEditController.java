@@ -51,16 +51,15 @@ public class UserEditController extends HttpServlet {
 
         User user = new User(name, login, password, email, role);
         this.database.update(user, oldLogin);
-
-        if (session.getAttribute("role").equals("admin")) {
-            resp.sendRedirect(String.format("%s/", req.getContextPath()));
-        } else {
-            synchronized (session) {
-                session.invalidate();
-            }
-            resp.sendRedirect(String.format("%s/signin", req.getContextPath()));
-        }
-
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
+//        if (session.getAttribute("role").equals("admin")) {
+//            resp.sendRedirect(String.format("%s/", req.getContextPath()));
+//        } else {
+//            synchronized (session) {
+//                session.invalidate();
+//            }
+//            resp.sendRedirect(String.format("%s/signin", req.getContextPath()));
+//        }
     }
 
     @Override

@@ -36,10 +36,8 @@ public class SigninController extends HttpServlet {
 
         if (UserStorage.getInstance().isCoincided(login, password)) {
             HttpSession session = req.getSession();
-            synchronized (session) {
-                session.setAttribute("login", login);
-                session.setAttribute("role", UserStorage.getInstance().getUser(login).getRole());
-            }
+            session.setAttribute("login", login);
+            session.setAttribute("role", UserStorage.getInstance().getUser(login).getRole());
             resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
             req.setAttribute("error", "Invalid login or password");

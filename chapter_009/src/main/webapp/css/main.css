@@ -120,7 +120,6 @@ body {
 
 button {
     margin-top: 10px;
-
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
@@ -132,9 +131,15 @@ button {
     font-size: 14px;
     cursor: pointer;
 }
+input.button {
+    background: #a4bdfc;
+    color: #FFFFFF;
+}
 button:hover,
 .button:hover {
     background: #0073e5;
+    color: #fff;
+    cursor: pointer;
 }
 table {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;

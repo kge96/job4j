@@ -65,17 +65,11 @@ public class User {
 
     /**
      * User constructor.
-     * @param name - user name.
-     * @param login - user login.
-     * @param password - user password.
-     * @param email - user email.
-     * @param city - usr city.
-     * @param country - usr country.
-     * @param role - usr role.
+     * @param data - user parameters.
      * @param createDate - creation date.
      */
-    public User(String name, String login, String password, String email, String city, String country, String role, long createDate) {
-        this(name, login, password, email, city, country, role);
+    public User(long createDate, String... data) {
+        this(data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
         this.createDate = createDate;
     }
 

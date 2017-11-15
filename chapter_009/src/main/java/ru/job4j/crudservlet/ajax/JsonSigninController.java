@@ -38,7 +38,6 @@ public class JsonSigninController extends HttpServlet {
            accessAllowed = false;
         }
         doGet(req, resp);
-
     }
 
     @Override

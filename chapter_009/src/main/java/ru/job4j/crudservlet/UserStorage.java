@@ -70,14 +70,10 @@ public class UserStorage extends HttpServlet {
      * Return instance of user storage database.
      * @return UserStorage.
      */
-    public static UserStorage getInstance() {
-        if (instanse == null) {
-            synchronized (UserStorage.class) {
-                if (instanse == null) {
-                    instanse = new UserStorage();
-                }
-            }
-        }
+    public static synchronized UserStorage getInstance() {
+       if (instanse == null) {
+           instanse = new UserStorage();
+       }
         return instanse;
     }
 
@@ -327,13 +323,13 @@ public class UserStorage extends HttpServlet {
     public ArrayList<User> getAllUsers() {
         ArrayList<User> result = new ArrayList<>();
         try {
-            pst = cn.prepareStatement(
-                    "SELECT pd.name, pd.login, pd.password, pd.email, cy.city, co.country, pd.created, ur.role_name"
-                            + "FROM  personal_data AS pd "
-                            + "LEFT OUTER JOIN users_roles AS ur ON pd.role_id = ur.id"
-                            + "LEFT OUTER JOIN cities AS cy on pd.city_id = cy.id"
-                            + "LEFT OUTER JOIN countries AS co on pd.country_id = co.id");
+            pst = cn.prepareStatement("SELECT pd.name, pd.login, pd.password, pd.email, cy.city, co.country, pd.created, ur.role_name"
+                            + " FROM  personal_data AS pd"
+                            + " LEFT OUTER JOIN users_roles AS ur ON pd.role_id = ur.id"
+                            + " LEFT OUTER JOIN cities AS cy ON pd.city_id = cy.id"
+                            + " LEFT OUTER JOIN countries AS co On pd.country_id = co.id");
             rs = pst.executeQuery();
+
             while (rs.next()) {
                 String name = rs.getString("name");
                 String userLogin = rs.getString("login");

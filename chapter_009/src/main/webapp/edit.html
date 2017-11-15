@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/handle.js"></script>
+</head>
+<body>
+<div class="login-page">
+    <div class="form additional-form">
+        <form class="login-form" action="/items/edit.html" method="post" onsubmit="return false">
+            <input class ="user-data" type="text" autocomplete="off" name = "name" id="oldLogin" placeholder="oldLogin"/>
+            <input class ="user-data" type="text" autocomplete="off" name = "name" id="name" placeholder="username"/>
+            <input class ="user-data" type="text" autocomplete="off" name = "login" id="login" placeholder="login" />
+            <input class ="user-data" type="password" autocomplete="off" name = "password" id="password" placeholder="password"/>
+            <input class ="user-data" type="text" autocomplete="off" name = "email" id="email" placeholder="email"/>
+            <select class ="user-data-select" name="country" id="country" onchange="getCities()">
+                <option selected value="">choose country</option>
+            </select>
+            <select class ="user-data-select" name="city" id="city"></select>
+            <select class ="user-data-select" name="role" id="role">
+                <option value="user">user</option>
+                <option value="admin">admin</option>
+            </select>
+
+            <input type="button" value="Add" onclick="addUser()"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -29,17 +29,31 @@ public class AuthFilter implements Filter {
      */
     private static Logger log = LoggerFactory.getLogger(AuthFilter.class);
 
+    /**
+     * Init method.
+     * @param filterConfig - filter config.
+     * @throws ServletException - exception.
+     */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+
     }
 
+    /**
+     * Start do filter.
+     * @param req - request.
+     * @param resp - response.
+     * @param chain - chain.
+     * @throws IOException - exception.
+     * @throws ServletException - exception.
+     */
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         if (request.getRequestURI().contains("/signin")) {
             chain.doFilter(req, resp);
         } else {
-            HttpSession session = request.getSession();
+            HttpSession session =  request.getSession();
             synchronized (session) {
                 if (session.getAttribute("login") == null) {
                     ((HttpServletResponse) resp).sendRedirect(String.format("%s/signin", request.getContextPath()));
@@ -50,6 +64,11 @@ public class AuthFilter implements Filter {
         }
     }
 
+    /**
+     *
+     */
     @Override
-    public void destroy() { }
+    public void destroy() {
+
+    }
 }

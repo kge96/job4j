@@ -32,6 +32,15 @@ public class User {
      * User role.
      */
     private String role;
+    /**
+     * Country.
+     */
+    private String country;
+    /**
+     * City.
+     */
+    private String city;
+
 
     /**
      * User constructor.
@@ -40,12 +49,16 @@ public class User {
      * @param password - user password.
      * @param email - user email.
      * @param role - user role.
+     * @param city - city.
+     * @param country - country.
      */
-    public User(String name, String login, String password, String email, String role) {
+    public User(String name, String login, String password, String email, String city, String country, String role) {
         this.name = name;
         this.login = login;
         this.password = password;
         this.email = email;
+        this.city = city;
+        this.country = country;
         this.role = role;
         this.createDate = System.currentTimeMillis();
     }
@@ -56,11 +69,13 @@ public class User {
      * @param login - user login.
      * @param password - user password.
      * @param email - user email.
-     * @param createDate - creation date.
+     * @param city - usr city.
+     * @param country - usr country.
      * @param role - usr role.
+     * @param createDate - creation date.
      */
-    public User(String name, String login, String password, String email, String role, long createDate) {
-        this(name, login, password, email, role);
+    public User(String name, String login, String password, String email, String city, String country, String role, long createDate) {
+        this(name, login, password, email, city, country, role);
         this.createDate = createDate;
     }
 
@@ -94,6 +109,22 @@ public class User {
      */
     public String getEmail() {
         return email;
+    }
+
+    /**
+     * Getter for user country.
+     * @return String.
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * Getter for user city.
+     * @return String.
+     */
+    public String getCity() {
+        return city;
     }
 
     /**
@@ -151,4 +182,5 @@ public class User {
     public void setCreateDate(long createDate) {
         this.createDate = createDate;
     }
+
 }

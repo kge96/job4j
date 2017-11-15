@@ -27,6 +27,8 @@
             <th>user name</th>
             <th>login</th>
             <th>e-mail</th>
+            <th>city</th>
+            <th>country</th>
             <th>role</th>
             <th>edit</th>
 
@@ -36,6 +38,8 @@
             <td><c:out value="${users.name}"></c:out></td>
             <td><c:out value="${users.login}"></c:out></td>
             <td><c:out value="${users.email}"></c:out></td>
+            <td><c:out value="${users.city}"></c:out></td>
+            <td><c:out value="${users.country}"></c:out></td>
             <td><c:out value="${users.role}"></c:out></td>
 
             <c:if test="${role == 'admin' || role != 'admin' && login == users.login}">

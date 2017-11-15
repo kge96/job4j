@@ -1,67 +1,110 @@
 <web-app>
+
     <servlet>
         <servlet-name>EchoServlet</servlet-name>
         <servlet-class>ru.job4j.servlets.EchoServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>Users Controller Servlet</servlet-name>
-        <servlet-class>ru.job4j.crudservlet.servlets.UserGetController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Users Add Controller</servlet-name>
-        <servlet-class>ru.job4j.crudservlet.servlets.UsersAddController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Removal</servlet-name>
-        <servlet-class>ru.job4j.crudservlet.servlets.Removal</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>User Edit Controller</servlet-name>
-        <servlet-class>ru.job4j.crudservlet.servlets.UserEditController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Signin</servlet-name>
-        <servlet-class>ru.job4j.crudservlet.servlets.SigninController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Signout</servlet-name>
-        <servlet-class>ru.job4j.crudservlet.servlets.SignoutController</servlet-class>
-    </servlet>
-    <filter>
-        <filter-name>AuthFilter</filter-name>
-        <filter-class>ru.job4j.crudservlet.servlets.AuthFilter</filter-class>
-    </filter>
-
-    <servlet-mapping>
-        <servlet-name>Users Controller Servlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Users Add Controller</servlet-name>
-        <url-pattern>/add</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Removal</servlet-name>
-        <url-pattern>/user/remove</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>User Edit Controller</servlet-name>
-        <url-pattern>/edit</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EchoServlet</servlet-name>
         <url-pattern>/echo</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Signin</servlet-name>
-        <url-pattern>/signin</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Signout</servlet-name>
-        <url-pattern>/signout</url-pattern>
-    </servlet-mapping>
+
+    <!--<servlet>-->
+        <!--<servlet-name>Users Controller Servlet</servlet-name>-->
+        <!--<servlet-class>ru.job4j.crudservlet.servlets.UserGetController</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Users Controller Servlet</servlet-name>-->
+        <!--<url-pattern>/</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+        <!--<servlet-name>Users Add Controller</servlet-name>-->
+        <!--<servlet-class>ru.job4j.crudservlet.servlets.UsersAddController</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Users Add Controller</servlet-name>-->
+        <!--<url-pattern>/add</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+        <!--<servlet-name>User Edit Controller</servlet-name>-->
+        <!--<servlet-class>ru.job4j.crudservlet.servlets.UserEditController</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>User Edit Controller</servlet-name>-->
+        <!--<url-pattern>/edit</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+        <!--<servlet-name>Signin</servlet-name>-->
+        <!--<servlet-class>ru.job4j.crudservlet.servlets.SigninController</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Signin</servlet-name>-->
+        <!--<url-pattern>/signin</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+        <!--<servlet-name>Signout</servlet-name>-->
+        <!--<servlet-class>ru.job4j.crudservlet.servlets.SignoutController</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Signout</servlet-name>-->
+        <!--<url-pattern>/signout</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>ru.job4j.crudservlet.ajax.JsonAuthFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
-        <url-pattern>*</url-pattern>
+        <url-pattern>*.html</url-pattern>
     </filter-mapping>
+
+    <servlet>
+        <servlet-name>JsonShow</servlet-name>
+        <servlet-class>ru.job4j.crudservlet.ajax.JsonShowController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JsonShow</servlet-name>
+        <url-pattern>/homepage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JsonSignin</servlet-name>
+        <servlet-class>ru.job4j.crudservlet.ajax.JsonSigninController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JsonSignin</servlet-name>
+        <url-pattern>/auth</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JsonSignout</servlet-name>
+        <servlet-class>ru.job4j.crudservlet.ajax.JsonSignoutController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JsonSignout</servlet-name>
+        <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JsonAdd</servlet-name>
+        <servlet-class>ru.job4j.crudservlet.ajax.JsonAddController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JsonAdd</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JsonGetCities</servlet-name>
+        <servlet-class>ru.job4j.crudservlet.ajax.JsonRefreshCities</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JsonGetCities</servlet-name>
+        <url-pattern>/refresh</url-pattern>
+    </servlet-mapping>
 </web-app>

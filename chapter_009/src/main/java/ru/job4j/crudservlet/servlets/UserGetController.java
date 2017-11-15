@@ -27,12 +27,23 @@ public class UserGetController extends HttpServlet {
         database = UserStorage.getInstance();
     }
 
+    /**
+     * Get method.
+     * @param req - request.
+     * @param resp - response.
+     * @throws ServletException - exception.
+     * @throws IOException - exception.
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        req.setAttribute("users", UserStorage.getInstance().getAllUsers());
        req.getRequestDispatcher("/WEB-INF/views/UsersView.jsp").forward(req, resp);
     }
 
+
+    /**
+     * Destroy method. Exicute before servlet finishing.
+     */
     @Override
     public void destroy() {
         super.destroy();

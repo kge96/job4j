@@ -32,6 +32,8 @@ public class UserEditController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("roles", UserStorage.getInstance().getAllRoles());
+        req.setAttribute("countries", UserStorage.getInstance().getAllCountries());
+        req.setAttribute("cities", UserStorage.getInstance().getAllCities("Russia"));
         String login = req.getParameter("name");
         User user = UserStorage.getInstance().getUser(login);
         req.setAttribute("user", user);
@@ -48,8 +50,10 @@ public class UserEditController extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String role = req.getParameter("role");
+        String city = req.getParameter("city");
+        String country = req.getParameter("country");
 
-        User user = new User(name, login, password, email, role);
+        User user = new User(name, login, password, email, city, country, role);
         this.database.update(user, oldLogin);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
 //        if (session.getAttribute("role").equals("admin")) {

@@ -36,8 +36,10 @@ public class UsersAddController extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String role = req.getParameter("role");
+        String country = req.getParameter("country");
+        String city = req.getParameter("city");
 
-        User user = new User(name, login, password, email, role);
+        User user = new User(name, login, password, email, city, country, role);
         this.database.add(user);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
@@ -45,6 +47,8 @@ public class UsersAddController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("roles", UserStorage.getInstance().getAllRoles());
+        req.setAttribute("cities", UserStorage.getInstance().getAllCities("Russia"));
+        req.setAttribute("countries", UserStorage.getInstance().getAllCountries());
         req.getRequestDispatcher("/WEB-INF/views/UsersAddView.jsp").forward(req, resp);
     }
 

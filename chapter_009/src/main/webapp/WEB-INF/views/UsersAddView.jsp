@@ -22,6 +22,19 @@
     <h3>email:</h3>
     <input type="text" autocomplete="off" name = "email"/></br>
 
+    <h3>country</h3>
+    <select name="country" id="country" style="width: 147px; height: 23px;">
+        <c:forEach items="${countries}" var="countries">
+            <option value="<c:out value="${countries}"></c:out>"><c:out value="${countries}"></c:out></option>
+        </c:forEach>
+    </select>
+    <h3>city</h3>
+    <select name="city" id="city" style="width: 147px; height: 23px;">
+        <c:forEach items="${cities}" var="cities">
+            <option value="<c:out value="${cities}"></c:out>"><c:out value="${cities}"></c:out></option>
+        </c:forEach>
+    </select>
+
     <c:if test="${role == 'admin'}">
     <h3>role:</h3>
     <select name="role" id="role" style="width: 147px; height: 23px;">

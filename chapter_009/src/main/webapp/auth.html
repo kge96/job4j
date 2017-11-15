@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="js/handle.js"></script>
+
+
+
+</head>
+<body>
+<div class="login-page">
+    <div class="form">
+        <form class="login-form auth-form" action="/items/auth" method="post">
+            <input class = "signin" type="text" placeholder="username" id="username"/>
+            <input class = "signin" type="password" placeholder="password" id="password"/>
+            <input class="button" type="button" value="Signin" onclick="checkAccess();">
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

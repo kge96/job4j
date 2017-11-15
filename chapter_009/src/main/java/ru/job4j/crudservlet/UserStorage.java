@@ -242,7 +242,7 @@ public class UserStorage extends HttpServlet {
                 long created = rs.getLong("created");
                 String city = rs.getString("city");
                 String country = rs.getString("country");
-                result = new User(name, userLogin, null, email, city, country, role, created);
+                result = new User(created,name, userLogin, null, email, city, country, role);
             }
 
         } catch (Exception e) {
@@ -339,7 +339,7 @@ public class UserStorage extends HttpServlet {
                 String role = rs.getString("role_name");
                 String city = rs.getString("city");
                 String country = rs.getString("country");
-                result.add(new User(name, userLogin, password, email, city, country, role, created));
+                result.add(new User(created, name, userLogin, password, email, city, country, role));
             }
         } catch (SQLException e) {
             e.printStackTrace();

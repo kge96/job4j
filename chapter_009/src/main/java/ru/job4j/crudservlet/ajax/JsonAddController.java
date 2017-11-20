@@ -1,5 +1,8 @@
 package ru.job4j.crudservlet.ajax;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import ru.job4j.crudservlet.Country;
 import ru.job4j.crudservlet.User;
 import ru.job4j.crudservlet.UserStorage;
 
@@ -19,12 +22,17 @@ import java.util.ArrayList;
  * @since 10.11.2017.
  */
 public class JsonAddController extends HttpServlet {
+    /**
+     * Gson object.
+     */
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/json");
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
-
-        writer.append(buildJSON());
+        ArrayList<Country> countries = UserStorage.getInstance().getAllCountries();
+        String countriesJson = GSON.toJson(countries);
+        writer.append(countriesJson);
         writer.flush();
     }
 
@@ -44,26 +52,5 @@ public class JsonAddController extends HttpServlet {
         }
     }
 
-    /**
-     * Build json object.
-     * @return String.
-     */
-    public String buildJSON() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        ArrayList<String> countries = UserStorage.getInstance().getAllCountries();
-        int counter = countries.size();
-        for (String country : countries) {
-            counter--;
-            sb.append("{");
-            sb.append(String.format("\"country\":\"%s\"", country));
-            if (counter == 0) {
-                sb.append("}");
-            } else {
-                sb.append("},");
-            }
-        }
-        sb.append("]");
-        return sb.toString();
-    }
+
 }

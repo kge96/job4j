@@ -41,7 +41,12 @@ public class User {
      */
     private String city;
 
+    /**
+     * Constructor for Jackson.
+     */
+    public User() {
 
+    }
     /**
      * User constructor.
      * @param name - user name.

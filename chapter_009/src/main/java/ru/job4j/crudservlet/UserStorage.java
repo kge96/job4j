@@ -54,10 +54,6 @@ public class UserStorage extends HttpServlet {
      * Result set.
      */
     private ResultSet rs;
-    /**
-     * Instance of user storage database.
-     */
-    private static volatile UserStorage instanse;
 
     /**
      * UserDBConnector constructor.
@@ -70,11 +66,18 @@ public class UserStorage extends HttpServlet {
      * Return instance of user storage database.
      * @return UserStorage.
      */
-    public static synchronized UserStorage getInstance() {
-       if (instanse == null) {
-           instanse = new UserStorage();
-       }
-        return instanse;
+    public static UserStorage getInstance() {
+       return StorageInstance.INSTANCE;
+    }
+
+    /**
+     * Static class for singleton instance.
+     */
+    private static class StorageInstance {
+        /**
+         * User storage instance.
+         */
+        private static final UserStorage INSTANCE = new UserStorage();
     }
 
     /**
@@ -242,7 +245,7 @@ public class UserStorage extends HttpServlet {
                 long created = rs.getLong("created");
                 String city = rs.getString("city");
                 String country = rs.getString("country");
-                result = new User(created,name, userLogin, null, email, city, country, role);
+                result = new User(created, name, userLogin, null, email, city, country, role);
             }
 
         } catch (Exception e) {
@@ -371,8 +374,8 @@ public class UserStorage extends HttpServlet {
      * @param country - country from which need find cities.
      * @return ArrayList.
      */
-    public ArrayList<String> getAllCities(String country) {
-        ArrayList<String> results = new ArrayList<>();
+    public ArrayList<City> getAllCities(String country) {
+        ArrayList<City> results = new ArrayList<>();
         int countryId = getCountryId(country);
         try {
             pst = cn.prepareStatement("SELECT city FROM cities WHERE country_id = ?");
@@ -380,7 +383,7 @@ public class UserStorage extends HttpServlet {
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                results.add(rs.getString("city"));
+                results.add(new City(rs.getString("city")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -392,14 +395,14 @@ public class UserStorage extends HttpServlet {
      * Return all countries.
      * @return ArrayList.
      */
-    public ArrayList<String> getAllCountries() {
-        ArrayList<String> results = new ArrayList<>();
+    public ArrayList<Country> getAllCountries() {
+        ArrayList<Country> results = new ArrayList<>();
         try {
             pst = cn.prepareStatement("SELECT country FROM countries");
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                results.add(rs.getString("country"));
+                results.add(new Country(rs.getString("country")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

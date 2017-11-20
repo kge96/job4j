@@ -1,5 +1,8 @@
 package ru.job4j.crudservlet.ajax;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import ru.job4j.crudservlet.City;
 import ru.job4j.crudservlet.UserStorage;
 
 import javax.servlet.ServletException;
@@ -19,6 +22,10 @@ import java.util.ArrayList;
  */
 public class JsonRefreshCities extends HttpServlet {
     /**
+     * Gson object.
+     */
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    /**
      * Country which choosed user.
      */
     private String country;
@@ -27,9 +34,9 @@ public class JsonRefreshCities extends HttpServlet {
         resp.setContentType("text/json");
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
 
-        ArrayList<String> cities = UserStorage.getInstance().getAllCities(country);
-
-        writer.append(buildJSON(cities));
+        ArrayList<City> cities = UserStorage.getInstance().getAllCities(country);
+        String json = GSON.toJson(cities);
+        writer.append(json);
         writer.flush();
     }
 
@@ -39,28 +46,4 @@ public class JsonRefreshCities extends HttpServlet {
         doGet(req, resp);
     }
 
-    /**
-     * Build json object.
-     * @param cities - cities.
-     * @return String.
-     */
-    public String buildJSON(ArrayList<String> cities) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-
-        int counter = cities.size();
-        for (String city : cities) {
-            counter--;
-            sb.append("{");
-            sb.append(String.format("\"city\":\"%s\"", city));
-            if (counter == 0) {
-                sb.append("}");
-            } else {
-                sb.append("},");
-            }
-
-        }
-        sb.append("]");
-        return sb.toString();
-    }
 }

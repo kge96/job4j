@@ -40,9 +40,9 @@ public class DBConnectorTest {
     @Test
     public void testGettingCities() {
         UserStorage storage = UserStorage.getInstance();
-        ArrayList<String> cities = storage.getAllCities("Russia");
-        for (String city : cities) {
-            System.out.println(city);
+        ArrayList<City> cities = storage.getAllCities("Russia");
+        for (City city : cities) {
+            System.out.println(city.getCity());
         }
     }
 
@@ -52,9 +52,9 @@ public class DBConnectorTest {
     @Test
     public void testGettingCountries() {
         UserStorage storage = UserStorage.getInstance();
-        ArrayList<String> countries = storage.getAllCountries();
-        for (String city : countries) {
-            System.out.println(city);
+        ArrayList<Country> countries = storage.getAllCountries();
+        for (Country country : countries) {
+            System.out.println(country.getCounty());
         }
     }
 }

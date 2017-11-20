@@ -1,5 +1,7 @@
 package ru.job4j.crudservlet.ajax;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ru.job4j.crudservlet.User;
 import ru.job4j.crudservlet.UserStorage;
 
@@ -19,39 +21,17 @@ import java.util.ArrayList;
  * @since 10.11.2017.
  */
 public class JsonShowController extends HttpServlet {
+    /**
+     * Gson object.
+     */
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/json");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        writer.append(buildJSON());
-        writer.flush();
-    }
-
-    /**
-     * Build json object.
-     * @return String.
-     */
-    public String buildJSON() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
         ArrayList<User> users = UserStorage.getInstance().getAllUsers();
-        int counter = users.size();
-        for (User usr : users) {
-            counter--;
-            sb.append("{");
-            sb.append("\"name\":\"" + usr.getName() + "\",");
-            sb.append("\"login\":\"" + usr.getLogin() + "\",");
-            sb.append("\"email\":\"" + usr.getEmail() + "\",");
-            sb.append("\"city\":\"" + usr.getCity() + "\",");
-            sb.append("\"country\":\"" + usr.getCountry() + "\",");
-            sb.append("\"role\":\"" + usr.getRole() + "\"");
-            if (counter == 0) {
-                sb.append("}");
-            } else {
-                sb.append("},");
-            }
-        }
-        sb.append("]");
-        return sb.toString();
+        PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        String json = GSON.toJson(users);
+        writer.append(json);
+        writer.flush();
     }
 }

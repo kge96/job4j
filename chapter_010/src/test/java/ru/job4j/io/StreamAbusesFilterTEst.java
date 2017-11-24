@@ -28,7 +28,7 @@ public class StreamAbusesFilterTEst {
     public void test() {
         StreamAbusesFilter filter = new StreamAbusesFilter();
         String str = "Hello my world again!";
-        String[] abuses = {"my", "again"};
+        String[] abuses = {"my", "again!"};
         InputStream in = new ByteArrayInputStream(str.getBytes());
         OutputStream out = new ByteArrayOutputStream();
 

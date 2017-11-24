@@ -1,8 +1,9 @@
 package ru.job4j.io;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Scanner;
+import java.io.IOException;
 
 /**
  * Class for creating stream filter.
@@ -21,46 +22,31 @@ public class StreamAbusesFilter {
      */
     public String dropAbuses(InputStream in, OutputStream out, String[] abuse) {
         StringBuffer result = new StringBuffer();
-        StringBuffer buffer = new StringBuffer();
+        Scanner sc = new Scanner(in);
+        String word;
+        boolean equals = false;
+
         try {
-            while (in.available() > 0) {
-                char symb = (char) in.read();
-                if (symb != ' ') {
-                    buffer.append(symb);
-                } else {
-                    if (!checkWord(buffer.toString(), abuse)) {
-                        buffer.append(symb);
-                        out.write(buffer.toString().getBytes());
-
-                        result.append(buffer.toString());
+            while (sc.hasNext()) {
+                word = sc.next().toString();
+                for (String abuses : abuse) {
+                    if (word.equals(abuses) || word.endsWith(abuses) || word.startsWith(abuses)) {
+                       equals = true;
+                       break;
                     }
-
-                    buffer.setLength(0);
                 }
+                if (!equals) {
+                    result.append(word);
+                    result.append(" ");
+                }
+                equals = false;
             }
+            out.write(result.toString().getBytes());
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return result.toString().trim();
     }
-
-    /**
-     * Check word.
-     * @param word - word.
-     * @param abuses - Array.
-     * @return boolean.
-     */
-    public boolean checkWord(String word, String[] abuses) {
-        boolean result = false;
-        for (String s : abuses) {
-            if (s.equals(word)) {
-                result = true;
-                break;
-            }
-        }
-    return result;
-    }
-
 }
 

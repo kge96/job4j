@@ -1,0 +1,15 @@
+client:2 server: -
+client:3 server: - 
+client:start server:Hi
+client:fsdf server:Be happy
+client:rgerg server:Hello
+client:stop server: - 
+client:sdf server: - 
+client:start server:Whats up
+client:rg server:Don't worry
+client:dger server:Don't worry
+client:stop server: - 
+client:ee server: - 
+client:rr server: - 
+client:tt server: - 
+client:finish server: - 

@@ -1,0 +1,24 @@
+
+
+.
+.
+n
+It
+cce
+rray of
+ss file beh
+ n (which is
+aves like a large a
+is generally true of all the
+   and advance the file pointe
+bytes stored in the file system. There is
+   inter method and set by the seek method
+ reading routines in this class that if end-of-f
+ a kind of cursor, or index into the implied array, called the
+ ticular, an IOException may be thrown if the stream has been closed.
+ ile is reached before the desired number of bytes has been read, an EOFExceptio
+stances of this class support both reading and writing to a random access file. A random a
+  file pointer; input operations read bytes starting at the file pointer and advance the file pointer past the bytes read
+ a kind of IOException) is thrown. If any byte cannot be read for any reason other than end-of-file, an IOException other than EOFException is thrown. In par
+  If the random access file is created in read/write mode, then output operations are also available; output operations write bytes starting at the file pointer
+   r past the bytes written. Output operations that write past the current end of the implied array cause the array to be extended. The file pointer can be read by the getFilePo

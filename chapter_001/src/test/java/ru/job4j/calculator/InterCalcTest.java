@@ -55,8 +55,21 @@ public class InterCalcTest {
     @Test
     public void whenAddMAndFiveThenGetFifteenPointO() {
         InteractCalc calc = new InteractCalc();
+        calc.getMenuShower().showCalcMenu();
+
         calc.startCalc("5", "5", 1);
         double result = calc.startCalc("M", "5", 1);
         assertThat(result, is(15.0));
+    }
+
+    /**
+     * Test cos(45).
+     */
+    @Test
+    public void whenAdd45And6ThenGetCosOf45() {
+        EngineeringCalculator calc = new EngineeringCalculator();
+        calc.getMenuShower().showCalcMenu();
+        double result2 = calc.startCalc("45", 6);
+        assertThat(result2, is(0.8509035245341184));
     }
 }

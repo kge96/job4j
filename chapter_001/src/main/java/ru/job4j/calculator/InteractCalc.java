@@ -1,9 +1,5 @@
 package ru.job4j.calculator;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 /**
  * Class for creating interuct calc.
  *
@@ -15,57 +11,57 @@ public class InteractCalc {
     /**
      * Object with calc methods.
      */
-    private final Calculator calc = new Calculator();
+    private Calculator calc = new Calculator();
     /**
      * Calculation result.
      */
     private double result;
     /**
-     * Reader for getting data from user.
-     */
-    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    /**
      * Calculator menu.
      */
-    private String menu = "1)add\n2)subtract\n3)div\n4)Multiple\n5) Quit\n*For using old result enter M";
+    private MenuShower menuShower = new MenuShower(calc.getMenuList());
+    /**
+     * User input handler.
+     */
+    private UserInputHandler handler = new UserInputHandler();
 
     /**
      * Method for starting calculator.
+     * @param menu menu.
      */
-    public void startCalc() {
+    public void startCalc(MenuShower menu) {
         while (true) {
             try {
-                showCalcMenu();
-
+                String[] answer;
+                menu.showCalcMenu();
                 showDialog("Choose operation: ");
-                String answer = reader.readLine();
-                int operation = Integer.parseInt(answer);
-                if (operation == 5) {
+                answer = handler.readUserAnswer();
+                int operation = Integer.parseInt(answer[0]);
+
+                if (operation == menu.getList().size() + 1) {
                     break;
                 }
-                showDialog("Enter two numbers");
-                String[] numbers = reader.readLine().split(" ");
-                doOperation(numbers[0], numbers[1], operation);
+                showDialog("Enter two values");
+                answer = handler.readUserAnswer();
+                doOperation(answer[0], answer[1], operation);
                 showDialog("Result is : " + this.result);
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
     }
 
     /**
      * Start calc with param. Method for testing.
-     * @param arg1 - first argument.
-     * @param arg2 - second argument.
+     *
+     * @param arg1      - first argument.
+     * @param arg2      - second argument.
      * @param operation - number of operation.
      * @return double.
      */
     public double startCalc(String arg1, String arg2, int operation) {
-
-        showDialog("Was choosed operation: " + operation);
-        if (operation == 5) {
+        if (operation == menuShower.getList().size() + 1) {
             showDialog("By");
         }
         this.result = doOperation(arg1, arg2, operation);
@@ -73,26 +69,21 @@ public class InteractCalc {
     }
 
     /**
-     * Show calculator menu.
-     */
-    private void showCalcMenu() {
-        System.out.println(menu);
-    }
-
-    /**
      * Method for showing dialog.
+     *
      * @param question - question or phrase.
      */
-    private void showDialog(String question) {
+    protected void showDialog(String question) {
         System.out.println(question);
     }
 
     /**
      * Parse string to double.
+     *
      * @param str - string.
      * @return double.
      */
-    private double parseStringToFloat(String str) {
+    protected double parseStringToFloat(String str) {
         double result = 0;
         if (str.equals("M")) {
             result = this.result;
@@ -103,17 +94,18 @@ public class InteractCalc {
                 e.printStackTrace();
             }
         }
-      return result;
+        return result;
     }
 
     /**
      * Method for running choosen operation.
-     * @param arg1 - first argument.
-     * @param arg2 - second argument.
+     *
+     * @param arg1      - first argument.
+     * @param arg2      - second argument.
      * @param operation - operation.
      * @return double.
      */
-    private double doOperation(String arg1, String arg2, int operation) {
+    protected double doOperation(String arg1, String arg2, int operation) {
         double firstArg = parseStringToFloat(arg1);
         double secondArg = parseStringToFloat(arg2);
 
@@ -127,5 +119,13 @@ public class InteractCalc {
             calc.multiple(firstArg, secondArg);
         }
         return calc.getResult();
+    }
+
+    /**
+     * Return menu shower.
+     * @return MenuShower.
+     */
+    protected MenuShower getMenuShower() {
+        return this.menuShower;
     }
 }

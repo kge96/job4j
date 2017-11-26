@@ -1,5 +1,8 @@
 package ru.job4j.calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *Class Класс-калькулятор.
  * @author gkuznetsov.
@@ -7,6 +10,20 @@ package ru.job4j.calculator;
  * @version 0.1.
  */
 public class Calculator {
+    /**
+     * List operation.
+     */
+    private List<String> operations = new ArrayList<>();
+
+    /**
+     * Calculator constructor.
+     */
+    public Calculator() {
+        operations.add("add");
+        operations.add("sub");
+        operations.add("div");
+        operations.add("mult");
+    }
     /**
      * @param result - Результат вычисления.
      */
@@ -49,5 +66,12 @@ public class Calculator {
      */
     public double getResult() {
         return result;
+    }
+    /**
+     * Return List of operation.
+     * @return List.
+     */
+    public List getMenuList() {
+        return this.operations;
     }
 }

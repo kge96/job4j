@@ -46,15 +46,21 @@ public class EngineeringCalculator extends InteractCalc {
      */
     protected double doOperation(String arg, int operation) {
         double firstArg = parseStringToFloat(arg);
-
-        if (operation == 5) {
-            trig.sin(firstArg);
-        } else if (operation == 6) {
-            trig.cos(firstArg);
-        } else if (operation == 7) {
-            trig.log(firstArg);
-        } else if (operation == 8) {
-            trig.log10(firstArg);
+        switch (operation) {
+            case 5:
+                trig.sin(firstArg);
+                break;
+            case 6:
+                trig.cos(firstArg);
+                break;
+            case 7:
+                trig.log(firstArg);
+                break;
+            case 8:
+                trig.log10(firstArg);
+                break;
+            default:
+                break;
         }
         return trig.getResult();
     }

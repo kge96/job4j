@@ -45,6 +45,7 @@ public class ChatClientTest {
 
             when(socket.getInputStream()).thenReturn(in);
             when(socket.getOutputStream()).thenReturn(out);
+            when(System.in).thenReturn(in);
 
 
             ChatClient client = new ChatClient(socket);

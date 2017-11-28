@@ -108,16 +108,23 @@ public class InteractCalc {
     protected double doOperation(String arg1, String arg2, int operation) {
         double firstArg = parseStringToFloat(arg1);
         double secondArg = parseStringToFloat(arg2);
-
-        if (operation == 1) {
-            calc.add(firstArg, secondArg);
-        } else if (operation == 2) {
-            calc.subtract(firstArg, secondArg);
-        } else if (operation == 3) {
-            calc.div(firstArg, secondArg);
-        } else if (operation == 4) {
-            calc.multiple(firstArg, secondArg);
+        switch (operation) {
+            case 1:
+                calc.add(firstArg, secondArg);
+                break;
+            case 2:
+                calc.subtract(firstArg, secondArg);
+                break;
+            case 3:
+                calc.div(firstArg, secondArg);
+                break;
+            case 4:
+                calc.multiple(firstArg, secondArg);
+                break;
+            default:
+                break;
         }
+
         return calc.getResult();
     }
 

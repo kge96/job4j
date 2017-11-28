@@ -1,12 +1,11 @@
 package ru.job4j.chat;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.Socket;
+
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
 
 /**
  * Class for creating client.
@@ -17,45 +16,61 @@ import java.io.InputStreamReader;
  */
 public class ChatClient {
     /**
-     * Port for connection.
+     * Socket.
      */
-    private static final int PORT = 5555;
-    /**
-     * Ip for connection.
-     */
-    private static final String IP = "127.0.0.1";
+    private final Socket socket;
 
     /**
-     * Main class.
+     * Constructor.
+     * @param socket - socket.
+     */
+    public ChatClient(Socket socket) {
+        this.socket = socket;
+    }
+
+    /**
+     * Main method.
      * @param args - args.
      */
     public static void main(String[] args) {
+        try (Socket socket = new Socket("127.0.0.1", 5555)) {
+            new ChatClient(socket).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Main class.
+     */
+    public void start() {
         try {
-            System.out.println("Try connecting to " + IP);
-            Socket socket = new Socket(IP, PORT);
+            System.out.println("Try connecting");
 
-            InputStream socketIS = socket.getInputStream();
-            OutputStream socketOS = socket.getOutputStream();
-
-            DataInputStream in = new DataInputStream(socketIS);
-            DataOutputStream out = new DataOutputStream(socketOS);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
             String message = "";
             String answer = "";
             boolean waitAnswer = false;
 
-            while (!message.equals("finish")) {
+            while (!("finish".equals(message))) {
                 System.out.println("Enter message for server: ");
                 message = reader.readLine();
-                out.writeUTF(message);
+                out.write(message);
+                out.newLine();
                 out.flush();
                 waitAnswer = checkAnswer(message, waitAnswer);
                 if (waitAnswer) {
-                    answer = in.readUTF();
+                    answer = in.readLine();
                     System.out.println("ChatServer answer: " + answer);
                 }
             }
+            out.write("bye!");
+            out.newLine();
+            out.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }

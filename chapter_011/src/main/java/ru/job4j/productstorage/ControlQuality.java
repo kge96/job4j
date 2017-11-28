@@ -36,7 +36,6 @@ public class ControlQuality {
         long expiration = food.getExpirationDate() - food.getCreationDate();
         long today = System.currentTimeMillis() - food.getCreationDate();
         double consumption = 100 - (((double) expiration - today) / expiration) * 100;
-
         if (consumption < 25) {
             warehouse.putProduct(food);
         } else if (consumption > 25 && consumption < 75) {

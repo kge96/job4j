@@ -1,0 +1,20 @@
+
+client:1 server: - 
+client:2 server: - 
+client:3 server: - 
+client:4 server: - 
+client:start server:Hello
+client:ergdg server:Don't worry
+client:dgerg server:Hello
+client:fwefew server:Hello
+client:stop server: - 
+client:sdf server: - 
+client:sdfs server: - 
+client:finish server: - 
+client:f server: - 
+client:start server:Hello
+client:sdfg server:Hi
+client:erghrsg server:Hello
+client:erh server:My congratulations
+client:stop server: - 
+client:finish server: - 

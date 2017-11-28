@@ -1,15 +1,17 @@
 package ru.job4j.chat;
 
-import java.io.File;
+
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.Socket;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * Class for creating server.
@@ -20,9 +22,9 @@ import java.net.ServerSocket;
  */
 public class ChatServer {
     /**
-     * Port number for connection to server.
+     * Socket.
      */
-    private static final int PORT = 5555;
+    private final Socket socket;
     /**
      * Set of answers.
      */
@@ -37,28 +39,42 @@ public class ChatServer {
     };
 
     /**
+     * Constructor.
+     * @param socket - socket.
+     */
+    public ChatServer(Socket socket) {
+        this.socket = socket;
+    }
+
+    /**
      * Main method.
      * @param args - args.
      */
     public static void main(String[] args) {
+
+        try (Socket socket = new ServerSocket(5555).accept()) {
+            new ChatServer(socket).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * Main method.
+     */
+    public void start() {
         try {
-            ServerSocket serverSocket = new ServerSocket(PORT);
             System.out.println("wait connecting");
-            Socket socket = serverSocket.accept();
             System.out.println("Connected!");
 
-            InputStream socketIS = socket.getInputStream();
-            OutputStream socketOS = socket.getOutputStream();
-
-            DataInputStream in = new DataInputStream(socketIS);
-            DataOutputStream out = new DataOutputStream(socketOS);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             String message = "";
             String answer = "";
             boolean canAnswer = false;
 
-            while (!message.equals("finish")) {
-                message = in.readUTF();
+            while (!("finish".equals(message))) {
+                message = in.readLine();
                 System.out.println(message);
                 canAnswer = setRecorder(message, canAnswer);
                 if (canAnswer) {
@@ -68,6 +84,8 @@ public class ChatServer {
                     writeLog(String.format("client:%s server: - ", message));
                 }
             }
+            out.write("Bye!");
+            out.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,10 +97,11 @@ public class ChatServer {
      * @return String.
      * @throws IOException - exception.
      */
-    public static String sendAnswer(DataOutputStream out) throws IOException {
+    public static String sendAnswer(BufferedWriter out) throws IOException {
         int position = (int) (Math.random() * answers.length - 1);
-        System.out.println("ChatServer answer: " + answers[0]);
-        out.writeUTF(answers[position]);
+        out.write(answers[position]);
+        out.write(System.getProperty("line.separator"));
+        out.newLine();
         out.flush();
 
         return answers[position];
@@ -111,7 +130,9 @@ public class ChatServer {
      * @throws IOException - exception.
      */
     private static void writeLog(String mesg) throws IOException {
-        OutputStream out = new BufferedOutputStream(new FileOutputStream(new File("chapter_010\\src\\main\\java\\ru\\job4j\\chat\\chatlog\\chatog.txt"), true));
+
+        OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(".\\chatlog.txt"), true));
+
         String text = mesg;
         out.write(mesg.getBytes());
         out.write('\n');

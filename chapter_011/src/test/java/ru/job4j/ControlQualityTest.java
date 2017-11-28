@@ -42,12 +42,12 @@ public class ControlQualityTest {
         Food apple = new Apple("Green", 1511714512701L + 824000000, 1511714512701L - 824000000, 56, 0);
         cq.putProductToStorage(apple);
 
-        assertThat(cq.getShopStorage().size(), is(1));
 
         SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy");
         System.out.print(format1.format(1511714512701L - 824000000));
         System.out.print(" - ");
         System.out.println(format1.format(1511714512701L + 824000000));
 
+        assertThat(cq.getShopStorage().size(), is(1));
     }
 }

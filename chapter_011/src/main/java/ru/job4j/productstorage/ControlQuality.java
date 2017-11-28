@@ -36,15 +36,33 @@ public class ControlQuality {
         long expiration = food.getExpirationDate() - food.getCreationDate();
         long today = System.currentTimeMillis() - food.getCreationDate();
         double consumption = 100 - (((double) expiration - today) / expiration) * 100;
-        if (consumption < 25) {
-            warehouse.putProduct(food);
-        } else if (consumption > 25 && consumption < 75) {
-            shop.putProduct(food);
-        } else if (consumption > 75 && consumption < 100) {
-            food.setDiscount(15);
-            shop.putProduct(food);
-        } else if (consumption >= 100) {
-            trash.putProduct(food);
+
+        int num = (consumption < 25) ? 1
+                : (consumption > 25 && consumption < 75) ? 2
+                : (consumption > 75 && consumption < 100) ? 3
+                : (consumption > 75 && consumption < 100) ? 4
+                : (consumption >= 100) ? 5 : -1;
+
+        switch (num) {
+            case 1:
+                warehouse.putProduct(food);
+                break;
+            case 2:
+                shop.putProduct(food);
+                break;
+            case 3:
+                food.setDiscount(15);
+                shop.putProduct(food);
+                break;
+            case 4:
+                food.setDiscount(15);
+                shop.putProduct(food);
+                break;
+            case 5:
+                trash.putProduct(food);
+                break;
+            default:
+                break;
         }
     }
 

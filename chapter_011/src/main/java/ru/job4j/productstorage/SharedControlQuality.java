@@ -39,7 +39,6 @@ public class SharedControlQuality {
             }
         }
     }
-
     private int chooseStorage(Food food) {
         int result = -1;
         long expiration = food.getExpirationDate() - food.getCreationDate();

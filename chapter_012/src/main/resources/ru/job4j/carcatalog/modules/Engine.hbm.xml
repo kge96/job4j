@@ -1,0 +1,11 @@
+<hibernate-mapping>
+    <class name="ru.job4j.carcatalog.modules.Engine" table="engine">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="volume" column="volume"/>
+        <many-to-one name="fuel"
+                     column="fuel_id"
+                     class="ru.job4j.carcatalog.modules.Fuel"/>
+    </class>
+</hibernate-mapping>

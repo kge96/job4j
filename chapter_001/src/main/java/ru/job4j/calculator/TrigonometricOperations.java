@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class for creation Trigonometric module.
+ * Class for creation Trigonometric modules.
  *
  * @author gkuznetsov.
  * @version 0.1.

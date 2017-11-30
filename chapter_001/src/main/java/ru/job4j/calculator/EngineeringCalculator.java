@@ -17,7 +17,7 @@ public class EngineeringCalculator extends InteractCalc {
      */
     private Calculator calc = new Calculator();
     /**
-     * Trigonometric module.
+     * Trigonometric modules.
      */
     private TrigonometricOperations trig = new TrigonometricOperations();
     /**

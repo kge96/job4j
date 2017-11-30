@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <hibernate-configuration>
+    <!--<session-factory>-->
+        <!--<property name="connection.url">jdbc:postgresql://localhost:5432/todolist</property>-->
+        <!--<property name="connection.driver_class">org.postgresql.Driver</property>-->
+        <!--<property name="connection.username">postgres</property>-->
+        <!--<property name="connection.password">qazar</property>-->
+        <!--<property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>-->
+
+        <!--<mapping resource="ru/job4j/todolist/Item.hbm.xml"></mapping>-->
+
+    <!--</session-factory>-->
+
     <session-factory>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/todolist</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/car_catalog</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">qazar</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
 
-        <mapping resource="ru/job4j/todolist/Item.hbm.xml"></mapping>
+        <mapping resource="ru/job4j/carcatalog/modules/Body.hbm.xml"/>
+        <mapping resource="ru/job4j/carcatalog/modules/Engine.hbm.xml"/>
+        <mapping resource="ru/job4j/carcatalog/modules/Fuel.hbm.xml"/>
+        <mapping resource="ru/job4j/carcatalog/modules/Producer.hbm.xml"/>
+        <mapping resource="ru/job4j/carcatalog/modules/Transmission.hbm.xml"/>
+        <mapping resource="ru/job4j/carcatalog/Car.hbm.xml"/>
     </session-factory>
+
 </hibernate-configuration>

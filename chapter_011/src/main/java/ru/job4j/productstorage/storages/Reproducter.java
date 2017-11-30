@@ -6,14 +6,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Class
+ * Class for creating Reproducer.
  *
  * @author gkuznetsov.
  * @version 0.1.
  * @since 28.11.2017.
  */
 public class Reproducter implements Storage {
-    List<Food> foodToReproduct = new LinkedList<>();
+    /**
+     * Storages.
+     */
+    private List<Food> foodToReproduct = new LinkedList<>();
 
     @Override
     public void putProduct(Food food) {

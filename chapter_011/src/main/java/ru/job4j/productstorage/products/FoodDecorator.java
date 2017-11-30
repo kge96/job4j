@@ -1,18 +1,32 @@
 package ru.job4j.productstorage.products;
 
 /**
- * Class
+ * Class for creating food decorator.
  *
  * @author gkuznetsov.
  * @version 0.1.
  * @since 28.11.2017.
  */
 public abstract class FoodDecorator implements Food {
-    protected Food food;
+    /**
+     * Food.
+     */
+    private Food food;
+    /**
+     * Type.
+     */
     private String type;
+    /**
+     * Flag.
+     */
     private boolean canReproduct;
 
-
+    /**
+     * Constructor.
+     * @param food - food.
+     * @param type - type.
+     * @param canReproduct - flag.
+     */
     public FoodDecorator(Food food, String type, boolean canReproduct) {
         this.food = food;
         this.type = type;
@@ -39,10 +53,18 @@ public abstract class FoodDecorator implements Food {
         return this.food.getPrice();
     }
 
+    /**
+     * Return if product can be reproduct.
+     * @return boolean.
+     */
     public boolean isReproducted() {
         return this.canReproduct;
     }
 
+    /**
+     * Get product type.
+     * @return String.
+     */
     public String getType() {
         return this.type;
     }

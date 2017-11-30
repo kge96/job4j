@@ -1,14 +1,19 @@
 package ru.job4j.productstorage.products;
 
 /**
- * Class
+ * Class for creating potato.
  *
  * @author gkuznetsov.
  * @version 0.1.
  * @since 28.11.2017.
  */
 public class Potato extends FoodDecorator {
-
+    /**
+     * Constructor.
+     * @param food - food.
+     * @param type - type.
+     * @param canReproduct - flag.
+     */
     public Potato(Food food, String type, boolean canReproduct) {
         super(food, type, canReproduct);
     }

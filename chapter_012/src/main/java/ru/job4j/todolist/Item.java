@@ -53,7 +53,7 @@ public class Item {
 
     /**
      * Setter for description item.
-     * @param desc
+     * @param desc - description.
      */
     public void setDesc(String desc) {
         this.desc = desc;

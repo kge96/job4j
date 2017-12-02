@@ -22,15 +22,46 @@ public class ItemManager {
      * Session.
      */
     private Session session = factory.openSession();
+    /**
+     * Interface for realize commander pattern.
+     * @param <T>
+     */
+    public interface Command<T> {
+        /**
+         * Method for action.
+         * @param session - session.
+         * @param object - object.
+         */
+        void process(Session session, T object);
+    }
+    /**
+     * Method for do transaction.
+     * @param command - command.
+     * @param obj - object.
+     * @param <T> - param.
+     */
+    private <T> void transaction(final Command<T> command, T obj) {
+        try {
+            beginTransaction();
+            command.process(session, obj);
+        } catch (Exception e) {
+            session.evict(obj);
+        } finally {
+            commitTransaction();
+        }
+    }
 
     /**
      * Add Item to DB.
      * @param item - item.
      */
     public void addItem(Item item) {
-        beginTransaction();
-        this.session.save(item);
-        commitTransaction();
+        transaction(new Command<Item>() {
+            @Override
+            public void process(Session session, Item item) {
+                session.save(item);
+            }
+        }, item);
     }
 
     /**
@@ -38,9 +69,13 @@ public class ItemManager {
      * @param item item.
      */
     public void addOrUpdate(Item item) {
-        beginTransaction();
-        this.session.saveOrUpdate(item);
-        commitTransaction();
+        transaction(new Command<Item>() {
+            @Override
+            public void process(Session session, Item item) {
+                session.saveOrUpdate(item);
+            }
+        }, item);
+
     }
 
     /**
@@ -48,19 +83,12 @@ public class ItemManager {
      * @param item item.
      */
     public void deleteItem(Item item) {
-        beginTransaction();
-        this.session.delete(item);
-        commitTransaction();
-    }
-
-    /**
-     * Delete item.
-     * @param query - item.
-     */
-    public void deleteItem(String query) {
-        beginTransaction();
-        this.session.delete(query);
-        commitTransaction();
+        transaction(new Command<Item>() {
+            @Override
+            public void process(Session session, Item item) {
+                session.delete(item);
+            }
+        }, item);
     }
 
     /**

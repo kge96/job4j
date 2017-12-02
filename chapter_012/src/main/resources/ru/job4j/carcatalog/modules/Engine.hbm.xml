@@ -6,6 +6,6 @@
         <property name="volume" column="volume"/>
         <many-to-one name="fuel"
                      column="fuel_id"
-                     class="ru.job4j.carcatalog.modules.Fuel"/>
+                     class="ru.job4j.carcatalog.modules.Fuel" fetch="join" lazy="false"/>
     </class>
 </hibernate-mapping>

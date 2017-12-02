@@ -5,15 +5,15 @@
         </id>
         <many-to-one name="body"
                      column="body_id"
-                     class="ru.job4j.carcatalog.modules.Body"/>
+                     class="ru.job4j.carcatalog.modules.Body" fetch="join" lazy="false"/>
         <many-to-one name="producer"
                      column="mark_id"
-                     class="ru.job4j.carcatalog.modules.Producer"/>
+                     class="ru.job4j.carcatalog.modules.Producer" fetch="join" lazy="false"/>
         <many-to-one name="engine"
                      column="engine_id"
-                     class="ru.job4j.carcatalog.modules.Engine"/>
+                     class="ru.job4j.carcatalog.modules.Engine" fetch="join" lazy="false"/>
         <many-to-one name="transmission"
                      column="transmission_id"
-                     class="ru.job4j.carcatalog.modules.Transmission"/>
+                     class="ru.job4j.carcatalog.modules.Transmission" fetch="join" lazy="false"/>
     </class>
 </hibernate-mapping>

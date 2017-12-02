@@ -135,8 +135,11 @@ public class CarManagerTest {
     @Test
     public void whenCarThenItAddedToDB() {
         Car car1 = new Car(new Body(13), new Producer(19), new Engine(8), new Transmission(13));
+        car1.setId(1);
         Car car2 = new Car(new Body(14), new Producer(21), new Engine(9), new Transmission(14));
+        car1.setId(2);
         Car car3 = new Car(new Body(13), new Producer(21), new Engine(10), new Transmission(13));
+        car1.setId(3);
 
         CarManager manager = new CarManager();
 

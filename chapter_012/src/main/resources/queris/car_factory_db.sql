@@ -72,3 +72,11 @@ select c.mark, e.volume, e.fuel_type, t.type, cb.form from car as c
 right outer join engine as e on c.engine_id = e.id
 right outer join transmission as t on c.transmission_id = t.id
 right outer join car_body as cb on c.carbody_id = cb.id where c.mark is null;
+
+
+
+ select c.id, b.type, e.volume, t.type, p.mark from car as c
+    inner join body as b on c.body_id = b.id
+    inner join producer as p on c.mark_id=p.id
+    inner join engine as e on c.engine_id=e.id
+    inner join transmission as t on c.transmission_id = t.id;

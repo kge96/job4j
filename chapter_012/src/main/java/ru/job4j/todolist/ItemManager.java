@@ -4,8 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.List;
-
 /**
  * Class for creating ItemManager.
  *
@@ -97,17 +95,11 @@ public class ItemManager {
      * @return Item.
      */
     public Item getItem(int id) {
+        Item item = null;
         beginTransaction();
-       Item result = null;
-        List<Item> items = session.createQuery("FROM Item").list();
-       for (Item item : items) {
-           if (item.getId() == id) {
-               result = item;
-               break;
-           }
-       }
+        item = session.get(Item.class, id);
         commitTransaction();
-        return result;
+        return item;
     }
 
     /**

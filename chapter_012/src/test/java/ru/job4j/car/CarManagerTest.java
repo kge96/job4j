@@ -26,17 +26,14 @@ public class CarManagerTest {
      */
     @Test
     public void whenAddFuelThenItAddedToDB() {
-        Fuel gasolin = new Fuel("Gasolin");
-        gasolin.setId(19);
-        Fuel disel = new Fuel("Disel");
-        disel.setId(20);
-
         CarManager manager = new CarManager();
+        Fuel gasolin = new Fuel("Gasolin");
+        Fuel disel = new Fuel("Disel");
 
         manager.addFuel(gasolin);
         manager.addFuel(disel);
 
-        String result = manager.getSession().get(Fuel.class, 19).getType();
+        String result = manager.getSession().get(Fuel.class, 1).getType();
         assertThat(result, is("Gasolin"));
 
         manager.closeSession();
@@ -48,17 +45,14 @@ public class CarManagerTest {
      */
     @Test
     public void whenTransmissionThenItAddedToDB() {
-        Transmission mechanics = new Transmission("Mechanics");
-        mechanics.setId(13);
-        Transmission automatic = new Transmission("Automatic");
-        automatic.setId(14);
-
         CarManager manager = new CarManager();
+        Transmission mechanics = new Transmission("Mechanics");
+        Transmission automatic = new Transmission("Automatic");
 
         manager.addTransmission(mechanics);
         manager.addTransmission(automatic);
 
-        String result = manager.getSession().get(Transmission.class, 14).getType();
+        String result = manager.getSession().get(Transmission.class, 2).getType();
         assertThat(result, is("Automatic"));
         manager.closeSession();
     }
@@ -68,17 +62,15 @@ public class CarManagerTest {
      */
     @Test
     public void whenBodyThenItAddedToDB() {
-        Body sedan = new Body("Sedan");
-        sedan.setId(13);
-        Body hatchback = new Body("Hatchback");
-        hatchback.setId(14);
-
         CarManager manager = new CarManager();
+
+        Body sedan = new Body("Sedan");
+        Body hatchback = new Body("Hatchback");
 
         manager.addBody(sedan);
         manager.addBody(hatchback);
 
-        String result = manager.getSession().get(Body.class, 14).getType();
+        String result = manager.getSession().get(Body.class, 2).getType();
         assertThat(result, is("Hatchback"));
         manager.closeSession();
     }
@@ -88,20 +80,16 @@ public class CarManagerTest {
      */
     @Test
     public void whenProducerThenItAddedToDB() {
-        Producer vw = new Producer("VW");
-        vw.setId(19);
-        Producer toyota = new Producer("Toyota");
-        toyota.setId(20);
-        Producer vaz = new Producer("VAZ");
-        vaz.setId(21);
-
         CarManager manager = new CarManager();
+        Producer vw = new Producer("VW");
+        Producer toyota = new Producer("Toyota");
+        Producer vaz = new Producer("VAZ");
 
         manager.addProducer(vw);
         manager.addProducer(vaz);
         manager.addProducer(toyota);
 
-        String result = manager.getSession().get(Producer.class, 20).getMark();
+        String result = manager.getSession().get(Producer.class, 3).getMark();
         assertThat(result, is("Toyota"));
         manager.closeSession();
     }
@@ -111,20 +99,22 @@ public class CarManagerTest {
      */
     @Test
     public void whenEngineThenItAddedToDB() {
-        Engine v8 = new Engine("1.8", new Fuel(19));
-        v8.setId(8);
-        Engine v6 = new Engine("1.6", new Fuel(19));
-        v6.setId(9);
-        Engine v4 = new Engine("1.4", new Fuel(20));
-        v4.setId(10);
-
         CarManager manager = new CarManager();
+
+        Fuel gasolin = new Fuel("Gasolin");
+        Fuel disel = new Fuel("Disel");
+        manager.addFuel(gasolin);
+        manager.addFuel(disel);
+
+        Engine v8 = new Engine("1.8", new Fuel(1));
+        Engine v6 = new Engine("1.6", new Fuel(1));
+        Engine v4 = new Engine("1.4", new Fuel(2));
 
         manager.addEngine(v8);
         manager.addEngine(v6);
         manager.addEngine(v4);
 
-        String result = manager.getSession().get(Engine.class, 8).getVolume();
+        String result = manager.getSession().get(Engine.class, 1).getVolume();
         assertThat(result, is("1.8"));
         manager.closeSession();
     }
@@ -134,20 +124,46 @@ public class CarManagerTest {
      */
     @Test
     public void whenCarThenItAddedToDB() {
-        Car car1 = new Car(new Body(13), new Producer(19), new Engine(8), new Transmission(13));
-        car1.setId(1);
-        Car car2 = new Car(new Body(14), new Producer(21), new Engine(9), new Transmission(14));
-        car1.setId(2);
-        Car car3 = new Car(new Body(13), new Producer(21), new Engine(10), new Transmission(13));
-        car1.setId(3);
-
         CarManager manager = new CarManager();
+
+        Fuel gasolin = new Fuel("Gasolin");
+        Fuel disel = new Fuel("Disel");
+        manager.addFuel(gasolin);
+        manager.addFuel(disel);
+
+        Body sedan = new Body("Sedan");
+        Body hatchback = new Body("Hatchback");
+        manager.addBody(sedan);
+        manager.addBody(hatchback);
+
+        Transmission mechanics = new Transmission("Mechanics");
+        Transmission automatic = new Transmission("Automatic");
+        manager.addTransmission(mechanics);
+        manager.addTransmission(automatic);
+
+        Producer vw = new Producer("VW");
+        Producer toyota = new Producer("Toyota");
+        Producer vaz = new Producer("VAZ");
+        manager.addProducer(vw);
+        manager.addProducer(vaz);
+        manager.addProducer(toyota);
+
+        Engine v8 = new Engine("1.8", new Fuel(1));
+        Engine v6 = new Engine("1.6", new Fuel(1));
+        Engine v4 = new Engine("1.4", new Fuel(2));
+        manager.addEngine(v8);
+        manager.addEngine(v6);
+        manager.addEngine(v4);
+
+        Car car1 = new Car(new Body(1), new Producer(2), new Engine(1), new Transmission(2));
+        Car car2 = new Car(new Body(2), new Producer(1), new Engine(1), new Transmission(2));
+        Car car3 = new Car(new Body(1), new Producer(3), new Engine(2), new Transmission(1));
 
         manager.addCar(car1);
         manager.addCar(car2);
         manager.addCar(car3);
-        String carBody = manager.getCar(1).getBody().getType();
-        assertThat(carBody, is("Sedan"));
+        Car result = manager.getCar(3);
+        assertThat(result, is(car3));
 
         manager.closeSession();
     }

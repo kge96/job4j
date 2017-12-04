@@ -37,6 +37,9 @@ public class ControlQuality {
         long today = System.currentTimeMillis() - food.getCreationDate();
         double consumption = 100 - (((double) expiration - today) / expiration) * 100;
 
+
+
+
         int num = (consumption < 25) ? 1
                 : (consumption > 25 && consumption < 75) ? 2
                 : (consumption > 75 && consumption < 100) ? 3

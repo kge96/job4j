@@ -1,6 +1,6 @@
-package ru.job4j.storages;
+package ru.job4j.ioc.storages;
 
-import ru.job4j.User;
+import ru.job4j.ioc.User;
 
 /**
  * Interface for creating storage instances.

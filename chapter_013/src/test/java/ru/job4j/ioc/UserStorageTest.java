@@ -3,9 +3,7 @@ package ru.job4j.ioc;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.job4j.User;
-import ru.job4j.UserStorage;
-import ru.job4j.storages.MemoryStorage;
+import ru.job4j.ioc.storages.MemoryStorage;
 
 import static org.junit.Assert.assertNotNull;
 

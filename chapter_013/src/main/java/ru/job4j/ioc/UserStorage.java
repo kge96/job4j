@@ -1,9 +1,9 @@
-package ru.job4j;
+package ru.job4j.ioc;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.job4j.storages.Storage;
+import ru.job4j.ioc.storages.Storage;
 
 /**
  * Class for creating user storage.

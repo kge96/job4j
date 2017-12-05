@@ -3,6 +3,7 @@ package ru.job4j.carcatalog;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import ru.job4j.carcatalog.models.Car;
 import ru.job4j.carcatalog.modules.Producer;
 import ru.job4j.carcatalog.modules.Body;
 import ru.job4j.carcatalog.modules.Engine;

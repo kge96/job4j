@@ -2,7 +2,7 @@ package ru.job4j.car;
 
 
 import org.junit.Test;
-import ru.job4j.carcatalog.Car;
+import ru.job4j.carcatalog.models.Car;
 import ru.job4j.carcatalog.CarManager;
 import ru.job4j.carcatalog.modules.Body;
 import ru.job4j.carcatalog.modules.Engine;

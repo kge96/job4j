@@ -1,4 +1,4 @@
-package ru.job4j.carcatalog;
+package ru.job4j.carcatalog.models;
 
 import ru.job4j.carcatalog.modules.Body;
 import ru.job4j.carcatalog.modules.Engine;

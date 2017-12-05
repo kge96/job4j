@@ -38,8 +38,8 @@ public class MemoryStorage implements Storage {
 
     /**
      * Remove user from storage.
-     * @param passport
-     * @return
+     * @param passport - pasport.
+     * @return User.
      */
     public User removeUser(long passport) {
         User user = getUser(passport);

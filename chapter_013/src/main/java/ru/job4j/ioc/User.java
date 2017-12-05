@@ -17,7 +17,7 @@ public class User {
      */
     private int age;
     /**
-     * User pasport;
+     * User passport.
      */
     private long passport;
 
@@ -91,13 +91,21 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         User user = (User) o;
 
-        if (age != user.age) return false;
-        if (passport != user.passport) return false;
+        if (age != user.age) {
+            return false;
+        }
+        if (passport != user.passport) {
+            return false;
+        }
         return name != null ? name.equals(user.name) : user.name == null;
     }
 

@@ -19,6 +19,11 @@ public class JdbcStorage implements Storage {
      */
     private final String driver;
 
+    /**
+     * Constructor.
+     * @param url - url.
+     * @param driver - driver name.
+     */
     public JdbcStorage(String url, String driver) {
         this.url = url;
         this.driver = driver;

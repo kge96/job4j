@@ -1,16 +1,21 @@
 package ru.job4j.carcatalog.modules;
 
+import javax.persistence.*;
+
 /**
- * Class for creating engine type for car.
+ * Class for creating engine type for carcatalog.
  *
  * @author gkuznetsov.
  * @version 0.1.
  * @since 30.11.2017.
  */
+@Entity(name = "engine")
 public class Engine {
     /**
      * Engine id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Engine volume.
@@ -19,6 +24,8 @@ public class Engine {
     /**
      * Fuel.
      */
+    @ManyToOne
+    @JoinColumn(name = "fuel_id")
     private Fuel fuel;
 
     /**
@@ -36,6 +43,14 @@ public class Engine {
         this.id = id;
     }
 
+    /**
+     * Constructor.
+     * @param id - id.
+     * @param fuel - fuel.
+     */
+    public Engine(int id, Fuel fuel) {
+        this.id = id;
+    }
     /**
      * Constructor.
      * @param volume - volume.

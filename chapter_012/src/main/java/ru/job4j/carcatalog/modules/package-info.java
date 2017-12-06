@@ -1,5 +1,5 @@
 /**
- * Package for car modules.
+ * Package for carcatalog modules.
  *
  * @author gkuznetsov.
  * @version 0.1.

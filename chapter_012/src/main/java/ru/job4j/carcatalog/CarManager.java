@@ -12,7 +12,7 @@ import ru.job4j.carcatalog.modules.Transmission;
 
 
 /**
- * Class creating car.
+ * Class creating carcatalog.
  *
  * @author gkuznetsov.
  * @version 0.1.
@@ -79,8 +79,8 @@ public class CarManager {
      }
 
     /**
-     * Add or update car to db.
-     * @param car car.
+     * Add or update carcatalog to db.
+     * @param car carcatalog.
      */
      public void addCar(Car car) {
          session.beginTransaction();
@@ -89,7 +89,7 @@ public class CarManager {
      }
 
     /**
-     * Return car from db.
+     * Return carcatalog from db.
      * @param id - id.
      * @return Car.
      */

@@ -1,5 +1,9 @@
 package ru.job4j.carcatalog.modules;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 /**
  * Class for creating fuel type for engine.
  *
@@ -7,10 +11,13 @@ package ru.job4j.carcatalog.modules;
  * @version 0.1.
  * @since 30.11.2017.
  */
+@Entity(name = "fuel")
 public class Fuel {
     /**
      * Fuel id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Fuel type.

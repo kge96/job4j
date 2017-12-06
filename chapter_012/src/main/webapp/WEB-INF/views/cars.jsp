@@ -22,7 +22,6 @@
                 <td>fuel</td>
                 <td>transmission</td>
                 <td>body</td>
-
             </tr>
             <c:forEach items="${cars}" var="car" varStatus="status">
                 <tr valign="top">

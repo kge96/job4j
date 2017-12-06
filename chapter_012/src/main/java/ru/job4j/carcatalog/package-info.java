@@ -1,5 +1,5 @@
 /**
- * Package for car task.
+ * Package for carcatalog task.
  *
  * @author gkuznetsov.
  * @version 0.1.

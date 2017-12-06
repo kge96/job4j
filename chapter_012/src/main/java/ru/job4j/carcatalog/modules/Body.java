@@ -1,16 +1,23 @@
 package ru.job4j.carcatalog.modules;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 /**
- * Class for creating car body type.
+ * Class for creating carcatalog body type.
  *
  * @author gkuznetsov.
  * @version 0.1.
  * @since 30.11.2017.
  */
+@Entity(name = "body")
 public class Body {
     /**
      * Body id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Body type.

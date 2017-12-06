@@ -1,9 +1,8 @@
-package ru.job4j.car;
+package ru.job4j.carcatalog;
 
 
 import org.junit.Test;
 import ru.job4j.carcatalog.models.Car;
-import ru.job4j.carcatalog.CarManager;
 import ru.job4j.carcatalog.modules.Body;
 import ru.job4j.carcatalog.modules.Engine;
 import ru.job4j.carcatalog.modules.Producer;
@@ -14,7 +13,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Class for testing car manager.
+ * Class for testing carcatalog manager.
  *
  * @author gkuznetsov.
  * @version 0.1.
@@ -120,7 +119,7 @@ public class CarManagerTest {
     }
 
     /**
-     * Get car test.
+     * Get carcatalog test.
      */
     @Test
     public void whenCarThenItAddedToDB() {

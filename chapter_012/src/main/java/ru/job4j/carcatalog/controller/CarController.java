@@ -10,7 +10,7 @@ import ru.job4j.carcatalog.CarFilter;
 import ru.job4j.carcatalog.CarManager;
 
 /**
- * Class for creating car controller.
+ * Class for creating carcatalog controller.
  *
  * @author gkuznetsov.
  * @version 0.1.
@@ -40,7 +40,7 @@ public class CarController {
 
     /**
      * Post method.
-     * @param car - car.
+     * @param car - carcatalog.
      * @return String.
      */
     @RequestMapping(value = "/cars", method = RequestMethod.POST)

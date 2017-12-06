@@ -1,9 +1,7 @@
-package ru.job4j.car;
+package ru.job4j.carcatalog;
 
 import org.junit.Test;
 import ru.job4j.carcatalog.models.Car;
-import ru.job4j.carcatalog.CarFilter;
-import ru.job4j.carcatalog.CarManager;
 import ru.job4j.carcatalog.modules.Body;
 import ru.job4j.carcatalog.modules.Engine;
 import ru.job4j.carcatalog.modules.Fuel;
@@ -16,7 +14,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Class for testing car filter.
+ * Class for testing carcatalog filter.
  *
  * @author gkuznetsov.
  * @version 0.1.
@@ -35,7 +33,7 @@ public class CarFilterTest {
     }
 
     /**
-     * Test when get car by id.
+     * Test when get carcatalog by id.
      */
     @Test
     public void whenGetCarById2ThenReturnVW() {
@@ -57,7 +55,7 @@ public class CarFilterTest {
     }
 
     /**
-     * Test when get car by producer name.
+     * Test when get carcatalog by producer name.
      */
     @Test
     public void whenGetCarsByProducerNameThenReturnVW() {
@@ -68,7 +66,7 @@ public class CarFilterTest {
     }
 
     /**
-     * Test when get car by parameters.
+     * Test when get carcatalog by parameters.
      */
     @Test
     public void whenGetCarsByParamThenReturnSameCarsList() {

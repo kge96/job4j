@@ -11,7 +11,7 @@ import java.util.List;
 
 
 /**
- * Class for creating car filter.
+ * Class for creating carcatalog filter.
  *
  * @author gkuznetsov.
  * @version 0.1.
@@ -69,7 +69,7 @@ public class CarFilter {
     }
 
     /**
-     * Return car.
+     * Return carcatalog.
      * @param id - id.
      * @return Car.
      */
@@ -79,7 +79,7 @@ public class CarFilter {
 
     /**
      * Find cars by body.
-     * @param body - car body.
+     * @param body - carcatalog body.
      * @return List.
      */
     public List<Car> getCarsByBody(String body) {
@@ -100,8 +100,8 @@ public class CarFilter {
     }
 
     /**
-     * Find car by producer.
-     * @param producer - car producer.
+     * Find carcatalog by producer.
+     * @param producer - carcatalog producer.
      * @return List.
      */
     public List<Car> findCarsByProducer(String producer) {
@@ -123,12 +123,12 @@ public class CarFilter {
     }
 
     /**
-     * Find car by params.
-     * @param body - car body.
-     * @param producer - car producer.
-     * @param engineVolume - car engine volume.
-     * @param engineFuel - car fuel.
-     * @param transmission - car transmission.
+     * Find carcatalog by params.
+     * @param body - carcatalog body.
+     * @param producer - carcatalog producer.
+     * @param engineVolume - carcatalog engine volume.
+     * @param engineFuel - carcatalog fuel.
+     * @param transmission - carcatalog transmission.
      * @return List.
      */
     public List<Car> getCarsByParam(String body, String producer, String engineVolume, String engineFuel, String transmission) {

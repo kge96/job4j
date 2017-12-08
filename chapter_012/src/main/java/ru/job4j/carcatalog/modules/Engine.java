@@ -1,6 +1,11 @@
 package ru.job4j.carcatalog.modules;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Class for creating engine type for carcatalog.
@@ -9,7 +14,7 @@ import javax.persistence.*;
  * @version 0.1.
  * @since 30.11.2017.
  */
-@Entity(name = "engine")
+@Entity
 public class Engine {
     /**
      * Engine id.
@@ -31,6 +36,7 @@ public class Engine {
     /**
      * Default constructor.
      */
+
     public Engine() {
 
     }
@@ -39,6 +45,7 @@ public class Engine {
      * Constructor.
      * @param id - id.
      */
+
     public Engine(int id) {
         this.id = id;
     }

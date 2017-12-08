@@ -12,7 +12,7 @@ import javax.persistence.Id;
  * @version 0.1.
  * @since 30.11.2017.
  */
-@Entity(name = "transmission")
+@Entity
 public class Transmission {
     /**
      * Transmission id.

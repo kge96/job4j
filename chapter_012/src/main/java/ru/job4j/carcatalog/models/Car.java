@@ -5,7 +5,12 @@ import ru.job4j.carcatalog.modules.Engine;
 import ru.job4j.carcatalog.modules.Producer;
 import ru.job4j.carcatalog.modules.Transmission;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 /**
@@ -15,7 +20,7 @@ import javax.persistence.*;
  * @version 0.1.
  * @since 30.11.2017.
  */
-@Entity(name = "car")
+@Entity
 public class Car {
     /**
      * Car id.

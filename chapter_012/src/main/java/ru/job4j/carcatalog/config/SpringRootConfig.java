@@ -11,6 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * @since 05.12.2017.
  */
 @Configuration
-@ComponentScan("ru.job4j.carcatalog")
+@ComponentScan("ru.job4j")
 public class SpringRootConfig {
 }

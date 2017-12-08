@@ -2,8 +2,8 @@ package ru.job4j.carcatalog.modules;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Class for creating carcatalog producer.
@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
  * @version 0.1.
  * @since 30.11.2017.
  */
-@Entity(name = "producer")
+@Entity
 public class Producer {
     /**
      * Producer id.

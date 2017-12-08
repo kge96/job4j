@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * @version 0.1.
  * @since 30.11.2017.
  */
-@Entity(name = "body")
+@Entity
 public class Body {
     /**
      * Body id.
@@ -19,6 +19,7 @@ public class Body {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     /**
      * Body type.
      */

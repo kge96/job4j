@@ -17,7 +17,7 @@
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">qazar</property>
-        <property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
         <mapping resource="ru/job4j/carcatalog/modules/Body.hbm.xml"/>
         <mapping resource="ru/job4j/carcatalog/modules/Engine.hbm.xml"/>

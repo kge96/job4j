@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/thymeleaf-extrats-springsecurity3">
+<head>
+    <title>Cars</title>
+</head>
+<body>
+    <form th:action="@{/cars}" method="post">
+        <h2>New Car</h2>
+        <div><label>Body : <input type="text" name="car body"/></label></div>
+        <div><label>Producer : <input type="text" name="car producer"/></label></div>
+        <div><label>Engine : <input type="text" name="car engine"/></label></div>
+        <div><label>Fuel : <input type="text" name="car fuel"/></label></div>
+        <div><label>Transmission : <input type="text" name="car transmission"/></label></div>
+        <div><input type="submit" value="add"/></div>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>body</th>
+                <th>producer</th>
+                <th>engine</th>
+                <th>fuel</th>
+                <th>transmission</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="car: ${cars}">
+                <td th:text="${car.body.type}"></td>
+                <td th:text="${car.producer.mark}"></td>
+                <td th:text="${car.engine.volume}"></td>
+                <td th:text="${car.engine.fuel.type}"></td>
+                <td th:text="${car.transmission.type}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

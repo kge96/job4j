@@ -13,6 +13,5 @@ import java.util.List;
  */
 public interface CarService {
     List<Car> getAll();
-
     Car add(Car car);
 }

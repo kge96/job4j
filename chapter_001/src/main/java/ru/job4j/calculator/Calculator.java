@@ -1,6 +1,7 @@
 package ru.job4j.calculator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -14,6 +15,10 @@ public class Calculator {
      * List operation.
      */
     private List<String> operations = new ArrayList<>();
+    /**
+     * Unmodified list operation.
+     */
+    private List<String> unmodifiedList;
 
     /**
      * Calculator constructor.
@@ -23,6 +28,7 @@ public class Calculator {
         operations.add("sub");
         operations.add("div");
         operations.add("mult");
+        unmodifiedList = Collections.unmodifiableList(operations);
     }
     /**
      * @param result - Результат вычисления.
@@ -72,6 +78,6 @@ public class Calculator {
      * @return List.
      */
     public List getMenuList() {
-        return this.operations;
+        return this.unmodifiedList;
     }
 }

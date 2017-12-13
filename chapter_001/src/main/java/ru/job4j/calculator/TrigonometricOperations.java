@@ -1,6 +1,7 @@
 package ru.job4j.calculator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,6 +20,10 @@ public class TrigonometricOperations {
      * Calc result.
      */
     private double result;
+    /**
+     * Unmodified list operation.
+     */
+    private List<String> unmodifiedList;
 
     /**
      * Constructor.
@@ -28,6 +33,8 @@ public class TrigonometricOperations {
         operations.add("cos");
         operations.add("log");
         operations.add("log10");
+
+        unmodifiedList = Collections.unmodifiableList(operations);
     }
 
     /**
@@ -75,6 +82,6 @@ public class TrigonometricOperations {
      * @return List.
      */
     public List getMenuList() {
-        return this.operations;
+        return this.unmodifiedList;
     }
 }

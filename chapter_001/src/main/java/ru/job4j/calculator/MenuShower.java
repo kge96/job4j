@@ -1,6 +1,7 @@
 package ru.job4j.calculator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,6 +16,10 @@ public class MenuShower {
      * List of operation.
      */
     private List<String> operations = new ArrayList<>();
+    /**
+     * Unmodified list operation.
+     */
+    private List<String> unmodifiedList;
 
     /**
      * Constructor.
@@ -24,16 +29,17 @@ public class MenuShower {
         for (List list : lists) {
             operations.addAll(list);
         }
+        unmodifiedList = Collections.unmodifiableList(operations);
     }
 
     /**
      * Method for print menu.
      */
     public void showCalcMenu() {
-        for (String item : operations) {
-            System.out.println(String.format("%s) %s", operations.indexOf(item) + 1, item));
+        for (String item : unmodifiedList) {
+            System.out.println(String.format("%s) %s", unmodifiedList.indexOf(item) + 1, item));
         }
-        System.out.println(String.format("%s) %s", operations.size() + 1, "Exit"));
+        System.out.println(String.format("%s) %s", unmodifiedList.size() + 1, "Exit"));
     }
 
     /**
@@ -41,6 +47,6 @@ public class MenuShower {
      * @return List.
      */
     public List<String> getList() {
-        return this.operations;
+        return this.unmodifiedList;
     }
 }

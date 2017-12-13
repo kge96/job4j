@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class for select action.
@@ -173,7 +174,7 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            ArrayList<Item> items = tracker.findAll();
+            List<Item> items = tracker.findAll();
             if (items.size() == 0) {
                 input.print("Does't find any items\n");
             } else {
@@ -349,7 +350,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Enter user name: ");
-            ArrayList<Item> items = tracker.findByName(name);
+            List<Item> items = tracker.findByName(name);
             if (items.size() == 0) {
                 input.print("Item not found\n");
             } else {

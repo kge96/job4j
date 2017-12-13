@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Class for created Tracker.
@@ -43,7 +44,7 @@ public class Tracker {
      * This method find all elements.
      * @return Item[].
      */
-    public ArrayList<Item> findAll() {
+    public List<Item> findAll() {
         return this.items.findAll();
     }
 
@@ -52,8 +53,8 @@ public class Tracker {
      * @param key - name of element.
      * @return Item[].
      */
-    public ArrayList<Item> findByName(String key) {
-        return this.items.findByName(key);
+    public List<Item> findByName(String key) {
+        return this.items.findAll().stream().filter(i -> i.getName().equals(key)).collect(Collectors.toList());
     }
 
     /**
@@ -62,7 +63,7 @@ public class Tracker {
      * @return Item.
      */
     public Item findById(String id) {
-        return this.items.findByID(id);
+        return this.items.findAll().stream().filter(i -> id.equals(i.getId())).findFirst().get();
     }
 
     /**

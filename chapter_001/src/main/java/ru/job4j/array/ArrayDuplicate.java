@@ -15,18 +15,20 @@ public class ArrayDuplicate {
      * @return String[].
      */
     public String[] remove(String[] array) {
-        int barrier = 0;
-        for (int i = 0; i < array.length - barrier; i++) {
-            for (int j = 0; j < array.length - barrier; j++) {
-                if (array[j].equals(array[i]) && j != i) {
-                    String tmp = array[array.length - 1 - barrier];
-                    array[array.length - 1 - barrier] = array[j];
-                    array[j] = tmp;
-                    barrier++;
-                }
-            }
-        }
+//        int barrier = 0;
+//        for (int i = 0; i < array.length - barrier; i++) {
+//            for (int j = 0; j < array.length - barrier; j++) {
+//                if (array[j].equals(array[i]) && j != i) {
+//                    String tmp = array[array.length - 1 - barrier];
+//                    array[array.length - 1 - barrier] = array[j];
+//                    array[j] = tmp;
+//                    barrier++;
+//                }
+//            }
+//        }
 
-        return Arrays.copyOf(array, array.length - barrier);
+//        return Arrays.copyOf(array, array.length - barrier);
+
+        return Arrays.stream(array).distinct().toArray(String[]::new);
     }
 }

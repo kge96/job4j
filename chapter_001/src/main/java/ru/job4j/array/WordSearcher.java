@@ -1,7 +1,6 @@
 package ru.job4j.array;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
 
 /**
  * Class for searching substring at string.
@@ -18,16 +17,19 @@ public class WordSearcher {
      * @return boolean.
      */
     public boolean contains(String origin, String sub) {
-        String[] array = origin.split(" ");
-        Pattern p = Pattern.compile("(" + sub.toLowerCase() + ")");
-        Matcher mt;
-        for (String s : array) {
-
-            mt = p.matcher(s.toLowerCase());
-            if (mt.find()) {
-                return true;
-            }
-        }
-        return false;
+//        String[] array = origin.split(" ");
+//        Pattern p = Pattern.compile("(" + sub.toLowerCase() + ")");
+//        Matcher mt;
+//        for (String s : array) {
+//
+//            mt = p.matcher(s.toLowerCase());
+//            if (mt.find()) {
+//                return true;
+//            }
+//        }
+//        return false;
+        return Arrays.stream(origin.split(" "))
+                .map(String::toLowerCase)
+                .anyMatch(s -> s.contains(sub.toLowerCase()));
     }
 }

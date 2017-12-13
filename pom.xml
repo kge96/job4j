@@ -26,6 +26,7 @@
         <module>chapter_013</module>
         <module>chapter_013_smvc</module>
         <module>chapter_013_sboot</module>
+        <module>chapter_014</module>
     </modules>
     <dependencies>
         <dependency>

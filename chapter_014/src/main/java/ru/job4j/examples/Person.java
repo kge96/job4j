@@ -1,5 +1,7 @@
 package ru.job4j.examples;
 
+import java.io.Serializable;
+
 /**
  * Class for examples.
  *
@@ -7,7 +9,7 @@ package ru.job4j.examples;
  * @version 0.1.
  * @since 12.12.2017.
  */
-public class Person {
+public class Person implements Serializable {
     /**
      * Person name.
      */
@@ -56,4 +58,13 @@ public class Person {
     public Sex getSex() {
         return sex;
     }
+
+    /**
+     * Setter for name.
+     * @param name - name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

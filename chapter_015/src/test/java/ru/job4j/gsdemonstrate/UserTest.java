@@ -15,24 +15,27 @@ public class UserTest {
      */
     @Test
     public void testGC() {
+        long start = System.currentTimeMillis();
         System.out.println("Start");
         User user = new User("Dima", 12, 1.78);
         System.out.println(user);
         user = null;
 
-        for (int i = 0; i < 1000; i++) {
-            if (i == 250 || i == 500 || i == 750) {
+        for (int i = 0; i < 10000; i++) {
+            if (i % 200 == 0) {
+                System.out.println("Was created " + i + " Users");
                 info();
             }
-            System.out.println(new User("Dima", i, 1.78));
+           new User("Dima", i, 1.78);
 
         }
 
         System.gc();
 
-        System.out.println("finish");
         info();
-
+        System.out.println("finish");
+        long total = System.currentTimeMillis() - start;
+        System.out.println("Total time is " + total + " ms");
     }
 
     /**
@@ -42,17 +45,17 @@ public class UserTest {
         /**
          * 1 Mb.
          */
-        int mb = 1024 * 1024;
+        int kb = 1024;
         Runtime runtime = Runtime.getRuntime();
 
-        System.out.println("Heap utilization statistics [Mb]");
+        System.out.println("Heap utilization statistics [kb]");
 
-        System.out.println("User Memory: " + (runtime.totalMemory() - runtime.freeMemory()) / mb);
+        System.out.println("User Memory: " + (runtime.totalMemory() - runtime.freeMemory()) / kb);
 
-        System.out.println("Free Memory: " + runtime.freeMemory() / mb);
+        System.out.println("Free Memory: " + runtime.freeMemory() / kb);
 
-        System.out.println("Total Memory: " + runtime.totalMemory() / mb);
+        System.out.println("Total Memory: " + runtime.totalMemory() / kb);
 
-        System.out.println("Max Memory: " + runtime.maxMemory() / mb);
+        System.out.println("Max Memory: " + runtime.maxMemory() / kb);
     }
 }
